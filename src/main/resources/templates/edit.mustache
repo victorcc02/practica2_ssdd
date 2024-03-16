@@ -19,6 +19,23 @@
         function goBackwards(){
             window.location.href = "/users/{{user.id}}";
         }
+        function validateForm(){
+            let username = document.getElementById("username").value;
+            let users = {{users}};
+            if(users.contains(username)){
+                alert("El nombre de usuario ya está cogido. Por favor elija otro.");
+                return false;
+            }
+            if(username === ""){
+                alert("Longitud en el nombre de usuario no válida (nombre vacío).");
+                return false;
+            }
+            if(username > 30){
+                alert("Longitud en el nombre de usuario no válida (muy largo).");
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 <body>
@@ -34,11 +51,11 @@
     <button class="editImageButton">Editar imagen</button>
 </div>
 <br>
-<form>
-    <label for="username" class="title">Username</label><br>
-    <input name="username" type="text" class="field"><!-- Revisar no esté cogido ya-->
+<form action="/users/edit/{{user.id}}" method="post">
+    <label for="username" class="title">Nombre de usuario</label><br>
+    <input id="usernmae" name="username" type="text" class="field"><!-- Revisar no esté cogido ya-->
     <br><br>
-    <label for="password" class="title">Password</label><br>
+    <label for="password" class="title">Contraseña</label><br>
     <span class="passwordContainer">
                 <input name="password" id="password" type="password" class="field">
                 <img class="eyeImage" src="/imagenes/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualizar contraseña"><!-- foto ojo y funcion-->
@@ -83,7 +100,7 @@
 </form>
 <span class="lowerButtonsContainer">
             <button class="cancelButton" onclick="goBackwards()">Cancelar</button>
-            <button class="saveButton">Guardar</button>
+            <button class="saveButton" onclick="validateForm()">Guardar</button>
         </span>
 </body>
 </html>
