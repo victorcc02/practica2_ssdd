@@ -10,7 +10,7 @@ import ssdd.ArandaLeonGerardo_1.entities.User;
 import ssdd.ArandaLeonGerardo_1.service.UserService;
 
 @Controller
-public class inicioSesionControlador {
+public class LoginController {
     @Autowired
     private UserService userService;
     @GetMapping("/Inicio")

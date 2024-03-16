@@ -10,7 +10,7 @@ import ssdd.ArandaLeonGerardo_1.entities.Nutricion;
 import ssdd.ArandaLeonGerardo_1.service.NutricionService;
 
 @Controller
-public class nutricionControlador {
+public class NutritionController {
 
     @Autowired
     private NutricionService nutricionService;

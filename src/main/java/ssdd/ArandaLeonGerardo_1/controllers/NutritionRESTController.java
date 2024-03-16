@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @Controller
 @RequestMapping("/api/nutricion")
-public class NutricionREStControlador {
+public class NutritionRESTController {
 
     @Autowired
     private NutricionService nutricionService;
