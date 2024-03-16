@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portada</title>
+    <link rel="stylesheet" href="css/estiloPortada.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h2 class="logo"></h2>
+            <ul>
+                <a href="/users/{{user.id}}"><li>USUARIO</li></a>
+                <a href="/Rutina"><li>RUTINA</li></a>
+                <a href="/Nutricion"><li>NUTRICION</li></a>
+                <a href="/Inicio"><li>SALIR</li></a>
+            </ul>
+        </nav>
+        <div class="banner">
+            <div class="intro">
+                <p>Descubre un gimnasio en línea único donde puedes</p>
+                <p>personalizar tus rutinas de entrenamiento con facilidad ¡Crea</p>
+                <p>sesiones adaptadas a tus objetivos y disfruta de una</p>
+                <p>experiencia de fitness a tu medida!</p>
+            </div>
+            <div>
+                <img src="../imagenes/fondoPortada.jpg" alt="deportista">
+            </div>
+        </div>
+    </header>
+    <div class="elegir">
+        <div class="card" style="background: #636e72;color: white">
+            <a href="/users/{{user.id}}" style="color: white"><li><h2>USUARIO</h2></li></a>
+            <p>Configura tu perfil</p>
+        </div>
+        <div class="card" style="color: #d63031;background: white">
+            <li><a href="/Rutina" style="color: #d63031"><h2>RUTINA</h2></a></li>
+            <p>Añade ejercicios a tu medida</p>
+        </div>
+        <div class="card" style="color: white;background: #d63031">
+            <li><a href="/Nutricion" style="color: white"><h2>NUTRICION</h2></a></li>
+            <p>Una buena alimentacion te ayudara</p>
+        </div>
+    </div>
+    <div class="sobreNosotros">
+        <div class="contactanos">
+            <h2>Contactanos</h2>
+            <li>Correo: GYMBros@gmail.com</li>
+            <br>
+            <li>Tlf: +34626889751</li>
+            <br>
+            <li>Arturo Soria (Madrid Centro)</li>
+        </div>
+        <div class="creadores">
+            <h2>Creadores</h2>
+            <li>Gerardo Aranda Leon</li>
+            <br>
+            <li>Alvaro dela Orden Jimenez</li>
+            <br>
+            <li>Victor Candel Casado</li>
+        </div>
+        <div class="redesSociales">
+            <h2>Redes Sociales</h2>
+            <li>Instagram</li>
+            <br>
+            <li>Twitter</li>
+            <br>
+            <li>Tiktok</li>
+        </div>
+    </div>
+</body>
+</html>

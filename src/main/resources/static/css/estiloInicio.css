@@ -1,0 +1,68 @@
+body{
+    background-color: black;
+}
+.paginaInicio{
+    display: grid;
+    grid-template-rows: 20% auto 20%;
+}
+.arribaInicio{}
+.contenedorInicio{
+    display: grid;
+    grid-template-columns: auto 20%;
+}
+.formularioContenedor{
+    display: grid;
+    grid-template-rows: 10% auto 10% 10%;
+    background: linear-gradient(to right,black,grey,black);
+}
+.formularioInicio{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.imagenesInicio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagenes{
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+.abajoInicio{
+    text-align: center;
+    color: white;
+    text-shadow: 30px 30px 2px lightskyblue;
+}
+.BotonIniciar{
+    cursor: pointer;
+}
+.titulo{
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.subtitulo{
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.textBox{
+    width: 200px;
+    font-size: 20px;
+    background: linear-gradient(to right, white,lightblue);
+}
+.BotonIniciar{
+    height: 30px;
+    width: 70px;
+    background: linear-gradient(to right, white,lightblue);
+}
+.imagenOjo{
+    height: 20px;
+    width: 20px;
+    transform: translateY(+3px);
+}

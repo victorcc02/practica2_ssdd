@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio de Sesion</title>
+    <link rel="stylesheet" href="css/estiloInicio.css">
+    <script>
+        function validarFormulario() {
+
+            var usuario = document.forms["formularioInicio"]["usuario"].value;
+            var password = document.forms["formularioInicio"]["password"].value;
+            if (usuario === "" || password === "") {
+                alert("Inserta un usuario y una contraseña");
+                return false;
+            }
+            return true;
+        }
+
+        let flag = true;
+        function visualizarOjo() {
+            if(flag){
+                document.getElementById("password").type = "password";
+                document.getElementById("Eye").src = "../imagenes/ojoAbierto.png";
+                flag=false;
+            }else{
+                document.getElementById("password").type = "text";
+                document.getElementById("Eye").src = "../imagenes/ojoCerrado.png";
+                flag=true;
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="paginaInicio">
+    <div class="arribaInicio"></div>
+    <div class="contenedorInicio">
+        <div class="formularioContenedor">
+            <div class="titulo"><h1>INICIAR SESION</h1></div>
+            <div class="formularioInicio">
+                <form name="formularioInicio" method="post" onsubmit="return validarFormulario()">
+                    <input type="text" id="usuario" name="username" class="textBox" maxlength="10" minlength="6" placeholder="Usuario">
+                    <br><br>
+                    <input type="password" id="password" name="password" class="textBox" maxlength="10" minlength="6" placeholder="Contraseña">
+                    <img class="imagenOjo" src="../imagenes/ojoAbierto.png" alt="google" id="Eye" onclick="visualizarOjo()">
+                    <br><br>
+                    <input  class="BotonIniciar" type="submit" value="INICIAR">
+                </form>
+            </div>
+            <div class="subtitulo"><h2> ------ O INICIA SESION CON ------</h2></div>
+            <div class="imagenesInicio">
+                <img class="imagenes"  src="../imagenes/google.png" alt="google" height="30px" width="30px">
+                <img class="imagenes" src="../imagenes/twitter.png" alt="x(twitter)" height="30px" width="30px">
+                <img class="imagenes" src="../imagenes/facebook.png" alt="facebook" height="30px" width="30px">
+            </div>
+        </div>
+        <div>
+            <img src="../imagenes/fondoInicio.jpg" alt="boxeador login" height="auto" width="auto">
+        </div>
+    </div>
+    <div class="abajoInicio"><h1>GYM-BROS</h1></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+body{
+    background-color: black;
+    font-family: sans-serif;
+}
+nav{
+    position: fixed;
+    height: 60px;
+    width: 100vw;
+    border-top: .5rem solid #d63031;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999999;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 15%;
+    font-weight: 700;
+    background-color: #d63031;
+}
+.logo::before{
+    content: "GYM";
+    color: black;
+}
+.logo::after{
+     content: "Bros";
+     color: white;
+ }
+ul{
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+ul a{
+    text-decoration: none;
+    color: white;
+    margin: 0 2rem;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+ul li{
+    list-style: none;
+}
+ul a:hover{
+    color: #d63031;
+}
+.banner{
+    display: grid;
+    grid-template-columns: auto 50%;
+}
+.intro{
+    position: relative;
+    top: 30%;
+    left: 10%;
+    color: white;
+}
+.intro p{
+    display: block;
+    width: 60%;
+    text-align-last: center;
+}
+.intro h2{
+    display: block;
+    width: 60%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+.elegir{
+    display: flex;
+    justify-content: center;
+}
+.elegir li{
+    list-style: none;
+}
+.card{
+    width: 33.3%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.card a{
+    text-decoration: none;
+}
+.card h2:hover{
+    color: cyan;
+}
+
+.sobreNosotros{
+    display: flex;
+    justify-content: center;
+}
+.contactanos{
+    width: 33.3%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+.contactanos li{
+    list-style: none;
+}
+.creadores{
+    width: 33.3%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+.creadores li{
+    list-style: none;
+}
+.redesSociales{
+    width: 33.3%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+.redesSociales li{
+    list-style: none;
+}
