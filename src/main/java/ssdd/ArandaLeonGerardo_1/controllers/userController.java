@@ -39,4 +39,10 @@ public class userController {
         userService.updateUser(user.getId(),user);
         return "redirect:/users";
     }
+
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+        return "redirect:/Inicio";
+    }
 }
