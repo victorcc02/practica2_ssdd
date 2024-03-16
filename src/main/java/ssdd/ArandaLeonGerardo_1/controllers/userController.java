@@ -35,9 +35,9 @@ public class userController {
     }
 
     @PostMapping("/users/edit/{id}")
-    public String editProfilePost(User user){
-        userService.updateUser(user.getId(),user);
-        return "redirect:/users";
+    public String editProfilePost(User user, @PathVariable Long id){
+        userService.updateUser(id, user);
+        return "redirect:/users/{id}";
     }
 
     @GetMapping("/users/delete/{id}")

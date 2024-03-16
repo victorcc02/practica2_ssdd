@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Editar perfil</title>
-    <link rel="stylesheet" href="/css/styleEditProfile.css">
+    <head>
+        <title>Editar perfil</title>
+        <link rel="stylesheet" href="/css/styleEditProfile.css">
     <script>
         let flag = true;
         function visualizeEye() {
@@ -71,7 +71,7 @@
     <button class="editImageButton">Editar imagen</button>
 </div>
 <br>
-<form action="/users/edit/{{user.id}}" method="post">
+<form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()">
     <label for="username" class="title">Nombre de usuario</label><br>
     <input id="usernmae" name="username" type="text" class="field"><!-- Revisar no esté cogido ya-->
     <br><br>
@@ -112,15 +112,15 @@
     <br><br>
     <label for="caloricPhase" class="title">Etapa calórica</label><br>
     <select name="caloricPhase" class="select">
-        <option>Definición</option><!-- Añadir también explicación-->
+        <option>Definicion</option><!-- Añadir también explicación-->
         <option>Mantenimiento</option>
         <option>Volumen</option>
     </select>
     <br><br>
-</form>
-<span class="lowerButtonsContainer">
+    <span class="lowerButtonsContainer">
             <button class="cancelButton" onclick="goBackwards()">Cancelar</button>
-            <button class="saveButton" onclick="validateForm()">Guardar</button>
-        </span>
+            <button class="saveButton" type="submit">Guardar</button>
+    </span>
+</form>
 </body>
 </html>
