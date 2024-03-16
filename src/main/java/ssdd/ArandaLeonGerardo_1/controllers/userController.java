@@ -29,7 +29,6 @@ public class userController {
         User user = userService.getUser((id));
         if(user != null){
             model.addAttribute("user",user);
-            model.addAttribute("users",userService.getAllUsers());
             return "edit";
         }
         return "redirect:/Portada";

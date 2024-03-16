@@ -21,17 +21,37 @@
         }
         function validateForm(){
             let username = document.getElementById("username").value;
-            let users = {{users}};
-            if(users.contains(username)){
-                alert("El nombre de usuario ya está cogido. Por favor elija otro.");
-                return false;
-            }
             if(username === ""){
                 alert("Longitud en el nombre de usuario no válida (nombre vacío).");
                 return false;
             }
-            if(username > 30){
+            if(username.length > 30){
                 alert("Longitud en el nombre de usuario no válida (muy largo).");
+                return false;
+            }
+            let password = document.getElementById("password").value;
+            if(password.length < 6){
+                alert("Contraseña muy corta. Introduzca una más larga.");
+                return false;
+            }
+            let height = document.getElementById("height").value;
+            if(height < 50 || height > 280){
+                alert("Altura no válida. Recuerda que es en centímetros.");
+                return false;
+            }
+            let age = document.getElementById("age").value;
+            if(age < 3 || age > 130){
+                alert("Edad no válida.");
+                return false;
+            }
+            let weight = document.getElementById("weight").value;
+            if(weight < 15 || weight > 300){
+                alert("Peso no válido. Recuerda que es en kilogramos");
+                return false;
+            }
+            let goalWeight = document.getElementById("goalWeight").value;
+            if(goalWeight < 15 || goalWeight > 300){
+                alert("Peso no válido. Recuerda que es en kilogramos");
                 return false;
             }
             return true;
