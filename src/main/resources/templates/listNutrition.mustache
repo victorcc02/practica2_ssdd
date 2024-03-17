@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de nutriciones</title>
+    <link rel="stylesheet" href="/css/styleListNutrition.css">
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/ListaNutricion/CrearNutricion"><li>CREAR NUTRICION</li></a>
+            <a href="/Nutricion"><li>ATRAS</li></a>
+            <a href="/Portada"><li>PORTADA</li></a>
+        </ul>
+    </nav>
+</header>
+<div class="listNutrition">
+    <div class="blackSpace">
+    </div>
+    <div class="list">
+
+        <h2>Lista de nutriciones</h2>
+        <ul>
+            {{#nutrition}}
+                <li>
+                    <a href="/ListaNutricion/detalleNutricion/{{id}}">{{nombre}}</a>
+                </li>
+            {{/nutrition}}
+        </ul>
+    </div>
+    <div class="blackSpace">
+    </div>
+</div>
+</body>
+</html>
