@@ -25,9 +25,9 @@ nav{
     color: black;
 }
 .logo::after{
-     content: "Bros";
-     color: white;
- }
+    content: "Bros";
+    color: white;
+}
 ul{
     display: flex;
     align-items: center;
@@ -70,11 +70,11 @@ ul a:hover{
     letter-spacing: 2px;
     font-size: 30px;
 }
-.elegir{
+.choose{
     display: flex;
     justify-content: center;
 }
-.elegir li{
+.choose li{
     list-style: none;
 }
 .card{
@@ -92,11 +92,11 @@ ul a:hover{
     color: cyan;
 }
 
-.sobreNosotros{
+.aboutUs{
     display: flex;
     justify-content: center;
 }
-.contactanos{
+.contactUs{
     width: 33.3%;
     height: 250px;
     display: flex;
@@ -105,10 +105,10 @@ ul a:hover{
     align-items: center;
     color: white;
 }
-.contactanos li{
+.contactUs li{
     list-style: none;
 }
-.creadores{
+.creators{
     width: 33.3%;
     height: 250px;
     display: flex;
@@ -117,10 +117,10 @@ ul a:hover{
     align-items: center;
     color: white;
 }
-.creadores li{
+.creators li{
     list-style: none;
 }
-.redesSociales{
+.socialMedia{
     width: 33.3%;
     height: 250px;
     display: flex;
@@ -129,6 +129,6 @@ ul a:hover{
     align-items: center;
     color: white;
 }
-.redesSociales li{
+.socialMedia li{
     list-style: none;
 }
