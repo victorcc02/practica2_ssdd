@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Editar perfil</title>
         <link rel="stylesheet" href="/css/styleEditProfile.css">
         <script>
@@ -56,16 +57,19 @@
                 }
                 return true;
             }
-            function editImage(user){
+            function editImage(){
                 let userImage = document.getElementById("uImage");
                 let input = document.getElementById("editImageInput");
+                console.log(input.files);
                 if(input.files && input.files[0]){
                     let reader = new FileReader();
                     reader.onload = function(e){
                         userImage.src = e.target.result;
-                        user.userImage = userImage.src;
+                        document.getElementById("userImage").value = e.target.result;
                     };
                     reader.readAsDataURL(input.files[0]);
+                }else{
+                    document.getElementById("userImage").value = "{{user.userImage}}";
                 }
             }
         </script>
@@ -77,16 +81,17 @@
             </button>
         </div>
         <div class="userImage">
-            <img src="/imagenes/emptyUser.png" id="uImage" alt="Foto usuario">
+            <img src="{{user.userImage}}" id="uImage" alt="Foto usuario">
         </div>
         <div class="editImageInputContainer">
             <label for="editImageInput" class="editImageButton">
-                <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage({{user}})">
+                <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage()">
                 <span class="editImageButtonText">Editar imagen</span>
             </label>
         </div>
         <br>
-        <form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()">
+        <form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()" accept-charset="UTF-8">
+            <input type="hidden" name="userImage" id="userImage" value="{{user.userImage}}">
             <label for="username" class="title">Nombre de usuario</label><br>
             <input id="username" name="username" type="text" class="field" value={{user.username}}
                     placeholder={{user.username}}>
