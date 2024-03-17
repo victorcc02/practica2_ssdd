@@ -28,12 +28,12 @@ nav{
     content: "Bros";
     color: white;
 }
-ul{
+nav ul{
     display: flex;
     align-items: center;
     height: 60px;
 }
-ul a{
+nav ul a{
     text-decoration: none;
     color: white;
     margin: 0 2rem;
@@ -42,34 +42,46 @@ ul a{
     font-weight: 700;
     font-size: 16px;
 }
-ul li{
+nav ul li{
     list-style: none;
 }
-ul a:hover{
+nav ul a:hover{
     color: #d63031;
 }
-.listaNutriciones{
+.listNutrition{
     display: flex;
     justify-content: center;
 }
-.espacioNegro{
+.blackSpace{
     background-color: black;
     width: 33.3%;
-    height: 150px;
+    height: auto;
     margin-top: 200px;
 }
-.lista{
-    background-color: #636e72;
+.list{
+    background: linear-gradient(to bottom, #636e72 , lightslategray, #636e72);
     width: 33.3%;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    list-style: none;
 }
-.lista ul{
-    display: block;
+
+.list ul li {
+    list-style: none;
+    margin-top: 20px;
 }
-.lista h2{
+.list ul a{
+    text-decoration: none;
+    color: white;
+}
+.list ul a:hover{
+    color: #d63031;
+}
+.list h2{
     color: white;
 }
