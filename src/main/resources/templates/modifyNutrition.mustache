@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Nutricion</title>
+    <link rel="stylesheet" href="/css/styleModifyNutrition.css">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <h2 class="logo"></h2>
+            <ul>
+                <a href="/ListaNutricion/detalleNutricion/{{id}}"><li>ATRAS</li></a>
+            </ul>
+        </nav>
+    </header>
+    <div class="modificado">
+        <div class="espacioNegro">
+        </div>
+        <div class="cambios">
+            <h1>Editar Nutricion</h1>
+            <form action="/ListaNutricion/ModificarNutricion" method="post">
+                <input type="hidden" name="id" value="{{nutricion.id}}">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{nutricion.nombre}}"><br><br>
+                <label for="comida">Comida:</label>
+                <input type="text" id="comida" name="comida" value="{{nutricion.comida}}"><br><br>
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" value="{{nutricion.tipo}}"><br><br>
+                <input type="submit" value="Editar">
+            </form>
+        </div>
+        <div class="espacioNegro">
+        </div>
+    </div>
+</body>
+</html>

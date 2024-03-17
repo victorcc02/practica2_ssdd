@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
-import ssdd.ArandaLeonGerardo_1.service.NutricionService;
+import ssdd.ArandaLeonGerardo_1.service.NutritionService;
 
 import java.util.Collection;
 
@@ -14,15 +14,15 @@ import java.util.Collection;
 public class NutritionRESTController {
 
     @Autowired
-    private NutricionService nutricionService;
+    private NutritionService nutritionService;
     @PostMapping
     public ResponseEntity<Nutrition> crearNutricion(@RequestBody Nutrition nutrition) {
-        return ResponseEntity.status(201).body(nutricionService.crearNutricion(nutrition));
+        return ResponseEntity.status(201).body(nutritionService.crearNutricion(nutrition));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Nutrition> obtenerNutricion(@PathVariable Long id) {
-        Nutrition nutrition = nutricionService.obtenerNutricion(id);
+        Nutrition nutrition = nutritionService.obtenerNutricion(id);
         if (nutrition == null) {
             return ResponseEntity.notFound().build();
         }
@@ -31,12 +31,12 @@ public class NutritionRESTController {
 
     @GetMapping
     public ResponseEntity<Collection<Nutrition>> obtenerTodasLasNutricion() {
-        return ResponseEntity.ok(nutricionService.obtenerTodasLasNutricion());
+        return ResponseEntity.ok(nutritionService.obtenerTodasLasNutricion());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Nutrition> actualizarNutricion(@PathVariable Long id, @RequestBody Nutrition nutrition) {
-        Nutrition actualizada = nutricionService.actualizarNutricion(id, nutrition);
+        Nutrition actualizada = nutritionService.actualizarNutricion(id, nutrition);
         if (actualizada == null) {
             return ResponseEntity.notFound().build();
         }
@@ -45,7 +45,7 @@ public class NutritionRESTController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarNutricion(@PathVariable Long id) {
-        nutricionService.eliminarNutricion(id);
+        nutritionService.eliminarNutricion(id);
         return ResponseEntity.ok().build();
     }
 }

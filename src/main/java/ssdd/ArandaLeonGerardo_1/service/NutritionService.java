@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
-public class NutricionService {
+public class NutritionService {
     private final Map<Long, Nutrition> mapaNutricion = new HashMap<>();
     private final AtomicLong nextId = new AtomicLong();
 
