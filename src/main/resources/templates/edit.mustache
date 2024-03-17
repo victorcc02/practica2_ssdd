@@ -56,6 +56,9 @@
                 }
                 return true;
             }
+            function editImage(){
+
+            }
         </script>
     </head>
     <body>
@@ -67,8 +70,11 @@
         <div class="userImage">
             <img src="/imagenes/emptyUser.png" alt="Foto usuario">
         </div>
-        <div class="editImageButtonContainer">
-            <button class="editImageButton">Editar imagen</button>
+        <div class="editImageInputContainer">
+            <label for="editImageInput" class="editImageButton">
+                <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage()">
+                <span class="editImageButtonText">Editar imagen</span>
+            </label>
         </div>
         <br>
         <form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()">
