@@ -56,8 +56,17 @@
                 }
                 return true;
             }
-            function editImage(){
-
+            function editImage(user){
+                let userImage = document.getElementById("uImage");
+                let input = document.getElementById("editImageInput");
+                if(input.files && input.files[0]){
+                    let reader = new FileReader();
+                    reader.onload = function(e){
+                        userImage.src = e.target.result;
+                        user.userImage = userImage.src;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
             }
         </script>
     </head>
@@ -68,11 +77,11 @@
             </button>
         </div>
         <div class="userImage">
-            <img src="/imagenes/emptyUser.png" alt="Foto usuario">
+            <img src="/imagenes/emptyUser.png" id="uImage" alt="Foto usuario">
         </div>
         <div class="editImageInputContainer">
             <label for="editImageInput" class="editImageButton">
-                <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage()">
+                <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage({{user}})">
                 <span class="editImageButtonText">Editar imagen</span>
             </label>
         </div>
