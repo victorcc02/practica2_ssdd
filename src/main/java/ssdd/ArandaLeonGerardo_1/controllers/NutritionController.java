@@ -17,21 +17,21 @@ public class NutritionController {
 
     @GetMapping("/Nutricion")
     public String InterfazNutricion() {
-        return "Nutricion";
+        return "nutrition";
     }
     @GetMapping("/ListaNutricion")
     public String InterfazListaNutricion(Model model) {
-        model.addAttribute("nutricion", nutritionService.obtenerTodasLasNutricion());
-        return "listaNutricion";
+        model.addAttribute("nutrition", nutritionService.obtenerTodasLasNutricion());
+        return "listNutrition";
     }
     @GetMapping("/ListaNutricion/CrearNutricion")
     public String InterfazCrearNutricion(Model model) {
         model.addAttribute("nutricion",new Nutrition());
-        return "crearNutricion";
+        return "createNutrition";
     }
     @PostMapping("/ListaNutricion/CrearNutricion")
-    public String agregarNutricion(Nutrition alimento){
-        nutritionService.crearNutricion(alimento);
+    public String agregarNutricion(Nutrition food){
+        nutritionService.crearNutricion(food);
         return "redirect:/ListaNutricion";
     }
     @GetMapping("/ListaNutricion/detalleNutricion/{id}")
@@ -40,7 +40,7 @@ public class NutritionController {
         if (nutrition == null) {
             return "redirect:/ListaNutricion";
         }
-        model.addAttribute("nutricion", nutrition);
+        model.addAttribute("nutrition", nutrition);
         return "detailsNutrition";
     }
 
@@ -50,7 +50,7 @@ public class NutritionController {
         if (nutrition == null) {
             return "redirect:/ListaNutricion";
         }
-        model.addAttribute("nutricion", nutrition);
+        model.addAttribute("nutrition", nutrition);
         return "modifyNutrition";
     }
     @PostMapping("/ListaNutricion/ModificarNutricion")
@@ -58,11 +58,16 @@ public class NutritionController {
         nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
         return "redirect:/ListaNutricion";
     }
-    @GetMapping("/ListaNutricion/EliminarNutricion/{id}")
-    public String eliminadoDeNutricion(@PathVariable Long id) {
-        nutritionService.eliminarNutricion(id);
-        return "redirect:/ListaNutricion";
+    /*
+    @GetMapping("/ListaNutricion/ModificarNutricion/{id}")
+    public String mostrarVentanaEdliminar(@PathVariable Long id) {
+        return "eliminarNutricion";
     }
+    @PostMapping("/ListaNutricion/EliminarNutricion/{id}")
+    public String eliminadoDeNutricion(@PathVariable Long id) {
+        nutricionService.eliminarNutricion(id);
+        return "redirect:/ListaNutricion";
+    }*/
 }
 
 
