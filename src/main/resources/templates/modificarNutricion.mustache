@@ -6,13 +6,13 @@
 <body>
     <h1>Editar Nutricion</h1>
     <form action="/ListaNutricion/ModificarNutricion" method="post">
-        <input type="hidden" name="id" value="{{nutricion.id}}">
+        <input type="hidden" name="id" value="{{nutrition.id}}">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="{{nutricion.nombre}}"><br><br>
+        <input type="text" id="nombre" name="nombre" value="{{nutrition.nombre}}"><br><br>
         <label for="comida">Comida:</label>
-        <input type="text" id="comida" name="comida" value="{{nutricion.comida}}"><br><br>
+        <input type="text" id="comida" name="comida" value="{{nutrition.comida}}"><br><br>
         <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo" name="tipo" value="{{nutricion.tipo}}"><br><br>
+        <input type="text" id="tipo" name="tipo" value="{{nutrition.tipo}}"><br><br>
         <input type="submit" value="Editar">
     </form>
 </body>

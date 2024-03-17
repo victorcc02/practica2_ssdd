@@ -1,15 +1,15 @@
 package ssdd.ArandaLeonGerardo_1.entities;
 
-public class Nutricion {
+public class Nutrition {
     private Long id;
     private String nombre;
     private String comida;
     private String tipo;
 
-    public Nutricion() {
+    public Nutrition() {
     }
 
-    public Nutricion(String nombre, String comida, String tipo) {
+    public Nutrition(String nombre, String comida, String tipo) {
         this.nombre = nombre;
         this.comida = comida;
         this.tipo = tipo;

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Listado de nutriciones</title>
-    <link rel="stylesheet" href="css/estiloListaNutricion.css">
+    <link rel="stylesheet" href="css/styleNutritionList.css">
 </head>
 <body>
     <header>
@@ -21,11 +21,11 @@
         <div class="lista">
             <h2>Lista de nutriciones</h2>
             <ul>
-                {{#nutricion}}
+                {{#nutrition}}
                     <li>
                         <a href="/ListaNutricion/detalleNutricion/{{id}}">{{nombre}}</a>
                     </li>
-                {{/nutricion}}
+                {{/nutrition}}
             </ul>
         </div>
         <div class="espacioNegro">

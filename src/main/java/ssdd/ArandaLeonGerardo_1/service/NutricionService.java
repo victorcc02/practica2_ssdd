@@ -1,7 +1,7 @@
 package ssdd.ArandaLeonGerardo_1.service;
 
 import org.springframework.stereotype.Service;
-import ssdd.ArandaLeonGerardo_1.entities.Nutricion;
+import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,32 +10,32 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class NutricionService {
-    private final Map<Long, Nutricion> mapaNutricion = new HashMap<>();
+    private final Map<Long, Nutrition> mapaNutricion = new HashMap<>();
     private final AtomicLong nextId = new AtomicLong();
 
 
-    public Nutricion crearNutricion(Nutricion nutricion) {
+    public Nutrition crearNutricion(Nutrition nutrition) {
         long id = nextId.incrementAndGet();
-        nutricion.setId(id);
-        mapaNutricion.put(id, nutricion);
-        return nutricion;
+        nutrition.setId(id);
+        mapaNutricion.put(id, nutrition);
+        return nutrition;
     }
 
-    public Nutricion obtenerNutricion(Long id) {
+    public Nutrition obtenerNutricion(Long id) {
         return mapaNutricion.get(id);
     }
 
-    public Collection<Nutricion> obtenerTodasLasNutricion() {
+    public Collection<Nutrition> obtenerTodasLasNutricion() {
         return mapaNutricion.values();
     }
 
-    public Nutricion actualizarNutricion(Long id, Nutricion nutricion) {
+    public Nutrition actualizarNutricion(Long id, Nutrition nutrition) {
         if (!mapaNutricion.containsKey(id)) {
             return null;
         }
-        nutricion.setId(id);
-        mapaNutricion.put(id, nutricion);
-        return nutricion;
+        nutrition.setId(id);
+        mapaNutricion.put(id, nutrition);
+        return nutrition;
     }
 
     public void eliminarNutricion(Long id) {
