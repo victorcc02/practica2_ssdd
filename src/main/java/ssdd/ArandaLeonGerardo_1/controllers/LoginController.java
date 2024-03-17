@@ -16,7 +16,7 @@ public class LoginController {
     @GetMapping("/Inicio")
     public String InterfazInicio(Model model){
         model.addAttribute("user",new User());
-        return "inicioSesion";
+        return "login";
     }
     @PostMapping("/Inicio")
     public String irPortada(Model model, User user) {
@@ -26,6 +26,6 @@ public class LoginController {
     @GetMapping("/Portada")
     public String InterfazPortada(Model model, @RequestParam("id") Long id) {
         model.addAttribute("user",userService.getUser(id));
-        return "Portada";
+        return "frontPage";
     }
 }
