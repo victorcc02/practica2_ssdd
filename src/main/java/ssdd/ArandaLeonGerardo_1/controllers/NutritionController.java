@@ -41,7 +41,7 @@ public class NutritionController {
             return "redirect:/ListaNutricion";
         }
         model.addAttribute("nutricion", nutrition);
-        return "detalleNutricion";
+        return "detailsNutrition";
     }
 
     @GetMapping("/ListaNutricion/ModificarNutricion/{id}")
