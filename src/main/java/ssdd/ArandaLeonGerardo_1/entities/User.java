@@ -1,6 +1,7 @@
 package ssdd.ArandaLeonGerardo_1.entities;
 
 public class User {
+    private String userImage;
     private Long id;
     private String username;
     private String password;
@@ -15,12 +16,14 @@ public class User {
     //Constructor, getters, setters
     //Other details are not compulsory but editable
     public User(Long id, String username, String password) {
+        this.userImage = "/imagenes/emptyUser.png";
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
     public User() {
+        this.userImage = "/imagenes/emptyUser.png";
     }
 
     public Long getId() {
@@ -101,5 +104,13 @@ public class User {
 
     public void setCaloricPhase(String caloricPhase) {
         this.caloricPhase = caloricPhase;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 }
