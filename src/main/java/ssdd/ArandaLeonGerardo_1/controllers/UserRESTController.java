@@ -8,7 +8,7 @@ import ssdd.ArandaLeonGerardo_1.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
-public class userRESTController {
+public class UserRESTController {
     @Autowired
     private UserService userService;
 
