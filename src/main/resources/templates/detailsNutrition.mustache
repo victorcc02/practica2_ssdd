@@ -2,29 +2,29 @@
 <html>
 <head>
     <title>Detalle de la Nutricion</title>
-    <link rel="stylesheet" href="/css/styleDetails.css">
+    <link rel="stylesheet" href="/css/styleDetailsNutrition.css">
 </head>
 <body>
     <header>
         <nav>
             <h2 class="logo"></h2>
             <ul>
-                <a href="/ListaNutricion/ModificarNutricion/{{nutricion.id}}">Editar Nutricion</a>
-                <a href="/ListaNutricion/EliminarNutricion/{{nutricion.id}}">Eliminar Nutricion</a>
+                <a href="/ListaNutricion/ModificarNutricion/{{nutrition.id}}">Editar Nutricion</a>
+                <a href="/ListaNutricion/EliminarNutricion/{{nutrition.id}}">Eliminar Nutricion</a>
                 <a href="/ListaNutricion">Lista de nutriciones</a>
             </ul>
         </nav>
     </header>
-    <div class="detalles">
-        <div class="espacioNegro">
+    <div class="details">
+        <div class="blackSpace">
         </div>
-        <div class="atributos">
-            <h1>Nutricion {{nutricion.id}} - {{nutricion.nombre}}</h1>
-            <p>Nombre: {{nutricion.nombre}}</p>
-            <p>Comida: {{nutricion.comida}}</p>
-            <p>Tipo: {{nutricion.tipo}}</p>
+        <div class="atributes">
+            <h1>Nutricion {{nutrition.id}} - {{nutrition.nombre}}</h1>
+            <p>Nombre: {{nutrition.nombre}}</p>
+            <p>Comida: {{nutrition.comida}}</p>
+            <p>Tipo: {{nutrition.tipo}}</p>
         </div>
-        <div class="espacioNegro">
+        <div class="blackSpace">
         </div>
     </div>
 </body>
