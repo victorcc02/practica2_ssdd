@@ -4,12 +4,14 @@ package ssdd.ArandaLeonGerardo_1.entities;
 import java.util.List;
 
 public class Routine {
+    private String name;
     private Long id;
     private String intensity;
     private int duration; // minutes
     private List<String> exercises;
     private String goal; // Increase-Lose weight...
-    public Routine(Long id,String intensity, int duration, List<String> exercises, String goal) {
+    public Routine(String name, Long id, String intensity, int duration, List<String> exercises, String goal) {
+        this.name = name;
         this.id = id;
         this.intensity = intensity;
         this.duration = duration;
@@ -58,5 +60,13 @@ public class Routine {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

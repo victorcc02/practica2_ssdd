@@ -11,6 +11,9 @@ import ssdd.ArandaLeonGerardo_1.service.UserService;
 
 @Controller
 public class UserController {
+    /*Due to security reasons, it will not be possible to view the information of all
+    * existing users. A user will only be able to see details corresponding to
+    * their own account*/
     @Autowired
     private UserService userService;
 

@@ -16,12 +16,16 @@
         </div>
         <header>
             <nav>
-                <a>CREAR NUTRICION</a>
+                <a href="/routines?id={{userId}}/createRutine">CREAR NUTRICION</a>
             </nav>
         </header>
-        {{#routines}}
-
-        {{/routines}}
+        <select>
+            {{#routines}}
+                <option>
+                    {{name}}
+                </option>
+            {{/routines}}
+        </select>
         {{^routines}}
             <p class="noRoutines">Todavia no se han agregado rutinas</p>
         {{/routines}}
