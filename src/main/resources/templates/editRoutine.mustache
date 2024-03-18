@@ -20,14 +20,15 @@
                 }
 
                 let duration = document.getElementById("duration").value;
-                if(duration=='string'){
+                if(duration < 1){
                     alert("Duración no válida. Recuerda que la duración se mide en números (minutos).");
                     return false;
                 }
-                if(duration > 600){
+                if(duration > 200){
                     alert("No debes exceder las 6 horas de entrenamiento, esto puede ser malo para tu salud");
                     return false;
                 }
+                return true;
             }
 
         </script>
@@ -42,7 +43,7 @@
             <img src="{{user.userImage}}" id="uImage" alt="Foto usuario">
         </div>
         <br>
-        <form action="/routines" method="post" onsubmit="return validateForm()" accept-charset="UTF-8">
+        <form action="/routines" method="post" onsubmit="return validateForm()">
             <input type="hidden" name="routineName" id="routineName" value="{{routine.nameRoutine}}">
             <label for="routineName" class="title">Nombre de la rutina</label><br>
             <input id="routineName" name="routineName" type="text" class="field" value={{routine.routineName}}
@@ -56,7 +57,7 @@
             </select>
             <br><br>
             <label for="duration" class="title">Duracion de la rutina</label><br>
-            <input id="duration" name="duration" type="text" class="field" value={{routine.duration}}
+            <input id="duration" name="duration" type="text" class="field" min="1" max="200" value={{routine.duration}}
                    placeholder={{routine.duration}}>
             <br><br>
             <label for="exercises" class="title">Ejercicios de la rutina</label><br>

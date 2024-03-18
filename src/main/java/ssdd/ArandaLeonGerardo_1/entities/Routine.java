@@ -12,7 +12,7 @@ public class Routine {
     private String goal; // Increase-Lose weight...
 
 
-    public Routine(String name, Long id, String intensity, int duration, String exercises, String goal) {
+    public Routine(String routineName, Long id, String intensity, int duration, String exercises, String goal) {
         this.routineName = routineName;
         this.id = id;
         this.intensity = intensity;
