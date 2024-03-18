@@ -19,7 +19,7 @@ public class LoginController {
         return "login";
     }
     @PostMapping("/Inicio")
-    public String irPortada(Model model, User user) {
+    public String irPortada(User user) {
         userService.createUser(user);
         return "redirect:/Portada?id=" + user.getId();
     }

@@ -20,6 +20,9 @@ public class Routine {
         this.goal = goal;
     }
 
+    public Routine() {
+    }
+
     public String getIntensity() {
         return intensity;
     }
