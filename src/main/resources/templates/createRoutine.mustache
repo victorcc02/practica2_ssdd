@@ -15,6 +15,7 @@
                 <img src="/imagenes/goBack.jpg" alt="flechaPaginaAnterior">
             </button>
         </div>
+        <br><br>
         <form action="/routines/createRoutine?={{userId}}" method="post">
             <label for="routineName" class="title">Nombre de la rutina</label><br>
             <input id="routineName" class="field" name="name" type="text" minlength="1" maxlength="15"
@@ -32,7 +33,7 @@
                min="1" max="600" class="numeric" placeholder="Duracion (minutos)">
             <br><br>
             <label for="exercises" class="title">Ejercicios</label><br>
-            <textarea name="exercises" id="exercises" rows="10" cols="70">
+            <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70">
                 Ejemplo empuje:
                 Pecho -> Press banca (4 x 12)
                          Press banca inclinado (4 x 12)
@@ -51,6 +52,7 @@
                 <option>Mantenerse</option>
                 <option>Subir de peso</option>
             </select>
+            <br><br>
             <br><br>
             <span class="lowerButtonsContainer">
                 <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
