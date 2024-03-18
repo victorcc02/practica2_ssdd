@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Crea una rutina</title>
+        <link rel="stylesheet" href="/css/styleCreateRoutine.css">
         <script>
             function goBackwards(){
                 window.location.href = "/routines?id={{userId}}";
@@ -43,12 +44,18 @@
                           Elevaciones laterales (4 x 10)
                 Cardio -> Correr (20')
             </textarea>
+            <br><br>
             <label for="goal" class="title">Objetivo</label><br>
             <select name="goal"  class="select" id="goal">
                 <option>Bajar de peso</option>
                 <option>Mantenerse</option>
                 <option>Subir de peso</option>
             </select>
+            <br><br>
+            <span class="lowerButtonsContainer">
+                <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
+                <button class="saveButton" type="submit">Guardar</button>
+            </span>
         </form>
     </body>
 </html>
