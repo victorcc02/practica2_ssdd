@@ -2,6 +2,18 @@
 <html>
     <head>
         <title>Crea una rutina</title>
+        <script>
+            function goBackwards(){
+                window.location.href = "/routines?id={{userId}}";
+            }
+        </script>
     </head>
+    <body>
+        <div class="goBackButtonContainer">
+            <button type="button" class="goBackButton" onclick="goBackwards()">
+                <img src="/imagenes/goBack.jpg" alt="flechaPaginaAnterior">
+            </button>
+        </div>
 
+    </body>
 </html>

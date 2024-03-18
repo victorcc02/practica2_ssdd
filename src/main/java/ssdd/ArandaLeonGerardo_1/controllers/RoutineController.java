@@ -38,9 +38,14 @@ public class RoutineController {
         return "redirect:/Portada";
     }
     @GetMapping("/routines/createRoutine")
-    public String createRoutine(Model model){
+    public String createRoutine(Model model, @RequestParam("id") Long id){
         model.addAttribute("routine",new Routine());
-        return "createRoutine";
+        User user = userService.getUser(id);
+        if(user != null){
+            model.addAttribute("userId",user.getId());
+            return "createRoutine";
+        }
+        return "redirect:/Portada";
     }
     @PostMapping("/routines/createRoutine")
     public String createRoutinePost(Routine routine){
