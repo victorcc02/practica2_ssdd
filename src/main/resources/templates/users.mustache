@@ -8,12 +8,12 @@
                 window.location.href = "edit/{{user.id}}";
             }
             function goBackwards(){
-                window.location.href = "/Portada?id={{user.id}}";
+                window.location.href = "/FrontPage?id={{user.id}}";
             }
             function deleteUser(){
                 let confirmation = confirm('¿Estás seguro de querer eliminar este usuario?');
                 if(confirmation){
-                    window.location.href = "/Inicio";
+                    window.location.href = "/Login";
                 }
             }
         </script>
