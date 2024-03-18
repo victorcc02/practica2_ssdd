@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
+import ssdd.ArandaLeonGerardo_1.entities.User;
 import ssdd.ArandaLeonGerardo_1.service.NutritionService;
 import ssdd.ArandaLeonGerardo_1.service.UserService;
 
@@ -37,7 +38,12 @@ public class NutritionController {
     @GetMapping("/ListNutrition")
     public String InterfazListaNutricion(Model model) {
         model.addAttribute("nutrition", nutritionService.obtenerTodasLasNutricion());
-        return "listNutrition";
+        User user = userService.getUser(id);
+        if (user != null){
+            model.addAttribute("userId",user.getId());
+            return "listNutrition";
+        }
+        return "redirect:/Nutrition";
     }
     @GetMapping("/ListNutrition/CreateNutrition")
     public String InterfazCrearNutricion(Model model) {
