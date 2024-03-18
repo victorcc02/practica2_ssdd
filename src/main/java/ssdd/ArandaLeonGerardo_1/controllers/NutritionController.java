@@ -32,7 +32,7 @@ public class NutritionController {
     }
 
     @GetMapping("/Nutrition")
-    public String InterfazNutricion() {
+    public String InterfazNutricion(@RequestParam Long id, Model model) {
         User user = userService.getUser(id);
         if (user != null){
             model.addAttribute("userId",user.getId());
@@ -41,7 +41,7 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @GetMapping("/ListNutrition")
-    public String InterfazListaNutricion(Model model) {
+    public String InterfazListaNutricion(@RequestParam Long id, Model model) {
         model.addAttribute("nutrition", nutritionService.obtenerTodasLasNutricion());
         User user = userService.getUser(id);
         if (user != null){
@@ -51,9 +51,14 @@ public class NutritionController {
         return "redirect:/Nutrition";
     }
     @GetMapping("/ListNutrition/CreateNutrition")
-    public String InterfazCrearNutricion(Model model) {
+    public String InterfazCrearNutricion(@RequestParam Long id,Model model) {
         model.addAttribute("nutricion",new Nutrition());
-        return "createNutrition";
+        User user = userService.getUser(id);
+        if (user != null){
+            model.addAttribute("userId",user.getId());
+            return "createNutrition";
+        }
+        return "redirect:/FrontPage";
     }
     @PostMapping("/ListNutrition/CreateNutrition")
     public String agregarNutricion(Nutrition food){
