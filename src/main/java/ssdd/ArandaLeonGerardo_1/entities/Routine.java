@@ -8,9 +8,9 @@ public class Routine {
     private Long id;
     private String intensity;
     private int duration; // minutes
-    private List<String> exercises;
+    private String exercises;
     private String goal; // Increase-Lose weight...
-    public Routine(String name, Long id, String intensity, int duration, List<String> exercises, String goal) {
+    public Routine(String name, Long id, String intensity, int duration, String exercises, String goal) {
         this.name = name;
         this.id = id;
         this.intensity = intensity;
@@ -38,11 +38,11 @@ public class Routine {
         this.duration = duration;
     }
 
-    public List<String> getExercises() {
+    public String getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<String> exercises) {
+    public void setExercises(String exercises) {
         this.exercises = exercises;
     }
 
