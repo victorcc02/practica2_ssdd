@@ -8,13 +8,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
 import ssdd.ArandaLeonGerardo_1.service.NutritionService;
+import ssdd.ArandaLeonGerardo_1.service.UserService;
 
 @Controller
 public class NutritionController {
 
     @Autowired
     private NutritionService nutritionService;
+    @Autowired
+    private UserService userService;
 
+    @PostConstruct
+    public void nutritionController(){
+        Nutrition nutricionNueces = new Nutrition("Nutricion 1", "nueces","volumen");
+        Nutrition nutricionEnsalada = new Nutrition("Nutricion 2", "ensalada","adelgazar");
+        Nutrition nutricionGimnasio = new Nutrition("Nutricion 2", "batido","proteinas");
+
+        nutritionService.crearNutricion(nutricionNueces);
+        nutritionService.crearNutricion(nutricionEnsalada);
+        nutritionService.crearNutricion(nutricionGimnasio);
+    }
+    
     @GetMapping("/Nutricion")
     public String InterfazNutricion() {
         return "nutrition";
@@ -58,16 +72,17 @@ public class NutritionController {
         nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
         return "redirect:/ListaNutricion";
     }
-    /*
-    @GetMapping("/ListaNutricion/ModificarNutricion/{id}")
-    public String mostrarVentanaEdliminar(@PathVariable Long id) {
-        return "eliminarNutricion";
+    @GetMapping("/ListaNutricion/EliminarNutricion/{id}")
+    public String mostrarFormularioEliminar(@PathVariable Long id, Model model) {
+        Nutrition nutrition = nutritionService.obtenerNutricion(id);
+        model.addAttribute("nutrition", nutrition);
+        return "deleteNutrition";
     }
-    @PostMapping("/ListaNutricion/EliminarNutricion/{id}")
+    @GetMapping("/ListaNutricion/EliminarLaNutricion/{id}")
     public String eliminadoDeNutricion(@PathVariable Long id) {
-        nutricionService.eliminarNutricion(id);
+        nutritionService.eliminarNutricion(id);
         return "redirect:/ListaNutricion";
-    }*/
+    }
 }
 
 
