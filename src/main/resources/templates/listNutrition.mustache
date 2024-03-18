@@ -9,9 +9,9 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListaNutricion/CrearNutricion"><li>CREAR NUTRICION</li></a>
-            <a href="/Nutricion"><li>ATRAS</li></a>
-            <a href="/Portada"><li>PORTADA</li></a>
+            <a href="/ListNutrition/CreateNutrition"><li>CREAR NUTRICION</li></a>
+            <a href="/Nutrition"><li>ATRAS</li></a>
+            <a href="/FrontPage"><li>PORTADA</li></a>
         </ul>
     </nav>
 </header>
@@ -24,7 +24,7 @@
         <ul>
             {{#nutrition}}
                 <li>
-                    <a href="/ListaNutricion/detalleNutricion/{{id}}">{{nombre}}</a>
+                    <a href="/ListNutrition/detailsNutrition/{{id}}">{{nombre}}</a>
                 </li>
             {{/nutrition}}
         </ul>
