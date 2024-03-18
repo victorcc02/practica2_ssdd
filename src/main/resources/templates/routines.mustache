@@ -2,8 +2,28 @@
 <html>
     <head>
         <title>Rutinas</title>
+        <script>
+            function goBackwards(){
+                window.location.href = "/Portada?id={{userId}}";
+            }
+        </script>
     </head>
     <body>
+        <div class="goBackButtonContainer">
+            <button type="button" class="goBackButton" onclick="goBackwards()">
+                <img src="/imagenes/goBack.jpg" alt="flechaPaginaAnterior">
+            </button>
+        </div>
+        <header>
+            <nav>
+                <a>CREAR NUTRICION</a>
+            </nav>
+        </header>
+        {{#routines}}
 
+        {{/routines}}
+        {{^routines}}
+            <p class="noRoutines">Todavia no se han agregado rutinas</p>
+        {{/routines}}
     </body>
 </html>

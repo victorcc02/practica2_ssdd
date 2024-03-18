@@ -6,17 +6,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.ArandaLeonGerardo_1.entities.Routine;
+import ssdd.ArandaLeonGerardo_1.entities.User;
 import ssdd.ArandaLeonGerardo_1.service.RoutineService;
+import ssdd.ArandaLeonGerardo_1.service.UserService;
 
 @Controller
 public class RoutineController {
     @Autowired
     private RoutineService routineService;
+    @Autowired
+    private UserService userService;
     @GetMapping("/routines")
-    public String showAllRoutines(Model model){
+    public String showAllRoutines(Model model, @RequestParam("id") Long id){
         model.addAttribute("routines",routineService.getAllRoutines());
-        return "routines";
+        User user = userService.getUser(id);
+        if(user != null){
+            model.addAttribute("userId",user.getId());
+            return "routines";
+        }
+        return "redirect:/Portada";
     }
     @GetMapping("/routines/{id}")
     public String showRoutine(Model model, @PathVariable Long id){

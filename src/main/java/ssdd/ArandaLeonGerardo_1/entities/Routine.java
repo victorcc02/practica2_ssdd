@@ -7,11 +7,8 @@ public class Routine {
     private Long id;
     private String intensity;
     private int duration; // minutes
-
     private List<String> exercises;
-
     private String goal; // Increase-Lose weight...
-
     public Routine(Long id,String intensity, int duration, List<String> exercises, String goal) {
         this.id = id;
         this.intensity = intensity;
