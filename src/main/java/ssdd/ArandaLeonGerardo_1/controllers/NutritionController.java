@@ -22,66 +22,66 @@ public class NutritionController {
     public void nutritionController(){
         Nutrition nutricionNueces = new Nutrition("Nutricion 1", "nueces","volumen");
         Nutrition nutricionEnsalada = new Nutrition("Nutricion 2", "ensalada","adelgazar");
-        Nutrition nutricionGimnasio = new Nutrition("Nutricion 2", "batido","proteinas");
+        Nutrition nutricionGimnasio = new Nutrition("Nutricion 3", "batido","proteinas");
 
         nutritionService.crearNutricion(nutricionNueces);
         nutritionService.crearNutricion(nutricionEnsalada);
         nutritionService.crearNutricion(nutricionGimnasio);
     }
-    
-    @GetMapping("/Nutricion")
+
+    @GetMapping("/Nutrition")
     public String InterfazNutricion() {
         return "nutrition";
     }
-    @GetMapping("/ListaNutricion")
+    @GetMapping("/ListNutrition")
     public String InterfazListaNutricion(Model model) {
         model.addAttribute("nutrition", nutritionService.obtenerTodasLasNutricion());
         return "listNutrition";
     }
-    @GetMapping("/ListaNutricion/CrearNutricion")
+    @GetMapping("/ListNutrition/CreateNutrition")
     public String InterfazCrearNutricion(Model model) {
         model.addAttribute("nutricion",new Nutrition());
         return "createNutrition";
     }
-    @PostMapping("/ListaNutricion/CrearNutricion")
+    @PostMapping("/ListNutrition/CreateNutrition")
     public String agregarNutricion(Nutrition food){
         nutritionService.crearNutricion(food);
-        return "redirect:/ListaNutricion";
+        return "redirect:/ListNutrition";
     }
-    @GetMapping("/ListaNutricion/detalleNutricion/{id}")
+    @GetMapping("/ListNutrition/detailsNutrition/{id}")
     public String detalladoDeNutricion(@PathVariable Long id, Model model){
         Nutrition nutrition = nutritionService.obtenerNutricion(id);
         if (nutrition == null) {
-            return "redirect:/ListaNutricion";
+            return "redirect:/ListNutrition";
         }
         model.addAttribute("nutrition", nutrition);
         return "detailsNutrition";
     }
 
-    @GetMapping("/ListaNutricion/ModificarNutricion/{id}")
+    @GetMapping("/ListNutrition/ModifyNutrition/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
         Nutrition nutrition = nutritionService.obtenerNutricion(id);
         if (nutrition == null) {
-            return "redirect:/ListaNutricion";
+            return "redirect:/ListNutrition";
         }
         model.addAttribute("nutrition", nutrition);
         return "modifyNutrition";
     }
-    @PostMapping("/ListaNutricion/ModificarNutricion")
+    @PostMapping("/ListNutrition/ModifyNutrition/{id}")
     public String editadoDeNutricion(Nutrition nutrition) {
         nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
-        return "redirect:/ListaNutricion";
+        return "redirect:/ListNutrition";
     }
-    @GetMapping("/ListaNutricion/EliminarNutricion/{id}")
+    @GetMapping("/ListNutrition/DeleteNutrition/{id}")
     public String mostrarFormularioEliminar(@PathVariable Long id, Model model) {
         Nutrition nutrition = nutritionService.obtenerNutricion(id);
         model.addAttribute("nutrition", nutrition);
         return "deleteNutrition";
     }
-    @GetMapping("/ListaNutricion/EliminarLaNutricion/{id}")
+    @GetMapping("/ListNutrition/DeleteNutrition/{id}")
     public String eliminadoDeNutricion(@PathVariable Long id) {
         nutritionService.eliminarNutricion(id);
-        return "redirect:/ListaNutricion";
+        return "redirect:/ListNutrition";
     }
 }
 

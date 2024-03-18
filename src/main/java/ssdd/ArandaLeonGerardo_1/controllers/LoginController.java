@@ -13,17 +13,17 @@ import ssdd.ArandaLeonGerardo_1.service.UserService;
 public class LoginController {
     @Autowired
     private UserService userService;
-    @GetMapping("/Inicio")
+    @GetMapping("/Login")
     public String InterfazInicio(Model model){
         model.addAttribute("user",new User());
         return "login";
     }
-    @PostMapping("/Inicio")
+    @PostMapping("/Login")
     public String irPortada(User user) {
         userService.createUser(user);
-        return "redirect:/Portada?id=" + user.getId();
+        return "redirect:/FrontPage?id=" + user.getId();
     }
-    @GetMapping("/Portada")
+    @GetMapping("/FrontPage")
     public String InterfazPortada(Model model, @RequestParam("id") Long id) {
         model.addAttribute("user",userService.getUser(id));
         return "frontPage";
