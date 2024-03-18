@@ -7,6 +7,16 @@
             function goBackwards(){
                 window.location.href = "/routines?id={{userId}}";
             }
+            function validateForm(){
+                let routineName = document.getElementById("routineName").value;
+                if(routineName === ""){
+                    alert("Longitud en el nombre de la rutina no válida (nombre vacío).");
+                    return false;
+                }
+                if(routineName.length > 15){
+                    alert("Longitud en el nombre de la rutina no válida (muy largo).");
+                }
+            }
         </script>
     </head>
     <body>
@@ -16,7 +26,7 @@
             </button>
         </div>
         <br><br>
-        <form action="/routines/createRoutine?={{userId}}" method="post">
+        <form  method="post" onsubmit="return validateForm()" action="/routines/createRoutine?={{userId}}">
             <label for="routineName" class="title">Nombre de la rutina</label><br>
             <input id="routineName" class="field" name="name" type="text" minlength="1" maxlength="15"
                    placeholder="Inserta el nombre...">
@@ -30,7 +40,7 @@
             <br><br>
             <label for="duration" class="title">Duracion</label><br>
             <input id="duration" name="duration" type="number" inputmode="numeric" step="1"
-               min="1" max="600" class="numeric" placeholder="Duracion (minutos)">
+                   min="1" max="600" class="numeric" placeholder="Duracion (minutos)">
             <br><br>
             <label for="exercises" class="title">Ejercicios</label><br>
             <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70">
