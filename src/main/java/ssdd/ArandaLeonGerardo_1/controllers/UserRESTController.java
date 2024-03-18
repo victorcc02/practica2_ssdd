@@ -29,7 +29,7 @@ public class UserRESTController {
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
