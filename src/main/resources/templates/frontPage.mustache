@@ -9,7 +9,7 @@
         <nav>
             <h2 class="logo"></h2>
             <ul>
-                <a href="/users"><li>USUARIO</li></a>
+                <a href="/users/{{user.id}}"><li>USUARIO</li></a>
                 <a href="/routines"><li>RUTINA</li></a>
                 <a href="/Nutricion"><li>NUTRICION</li></a>
                 <a href="/Inicio"><li>SALIR</li></a>
@@ -29,7 +29,7 @@
     </header>
     <div class="choose">
         <div class="card" style="background: #636e72;color: white">
-            <a href="/users" style="color: white"><li><h2>USUARIO</h2></li></a>
+            <a href="/users/{{user.id}}" style="color: white"><li><h2>USUARIO</h2></li></a>
             <p>Configura tu perfil</p>
         </div>
         <div class="card" style="color: #d63031;background: white">
