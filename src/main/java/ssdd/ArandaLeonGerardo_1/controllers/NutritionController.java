@@ -78,7 +78,7 @@ public class NutritionController {
         model.addAttribute("nutrition", nutrition);
         return "deleteNutrition";
     }
-    @GetMapping("/ListNutrition/DeleteNutrition/{id}")
+    @GetMapping("/ListNutrition/DeleteTheNutrition/{id}")
     public String eliminadoDeNutricion(@PathVariable Long id) {
         nutritionService.eliminarNutricion(id);
         return "redirect:/ListNutrition";

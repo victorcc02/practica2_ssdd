@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Eliminar Nutricion</title>
+    <title>Editar Nutricion</title>
+    <link rel="stylesheet" href="/css/styleDeleteNutrition.css">
     <script>
-        function confirmarEliminar(){
-            
+        function SI() {
+            window.location.href = "/ListNutrition/DeleteTheNutrition/{{nutrition.id}}";
+        }
+        function NO() {
+            window.location.href = "/ListNutrition/detailsNutrition/{{nutrition.id}}";
         }
     </script>
-
 </head>
 <body>
-    <a href="{{Nutricion.id}}" onclick="confirmarEliminar()">Eliminar Nutricion</a>
-    <a href="/ListaNutricion">Volver Listado</a>
+<div></div>
+<div class="elimate">
+    <div class="whiteSpace1">
+    </div>
+    <div class="modalWindow">
+        <h4>¿ESTAS SEGURO QUE DESEA ELIMINAR LA NUTRICION {{nutrition.id}}?</h4>
+        <form>
+            <p>Nombre: {{nutrition.nombre}}</p>
+            <p>Comida: {{nutrition.comida}}</p>
+            <p>Tipo: {{nutrition.tipo}}</p>
+            <button type="button" id="botonSi" onclick="SI()">SI</button>
+            <button type="button" id="botonNo" onclick="NO()">NO</button>
+        </form>
+    </div>
+    <div class="whiteSpace2">
+    </div>
+</div>
+<div></div>
 </body>
 </html>
