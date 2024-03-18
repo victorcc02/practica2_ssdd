@@ -62,9 +62,10 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @PostMapping("/ListNutrition/CreateNutrition")
-    public String agregarNutricion(Nutrition food){
+    public String agregarNutricion(Nutrition food, @RequestParam("id") Long id){
         nutritionService.crearNutricion(food);
-        return "redirect:/ListNutrition";
+        User user = userService.getUser(id);
+        return "redirect:/ListNutrition?id=" + user.getId();
     }
     @GetMapping("/ListNutrition/detailsNutrition/{id}")
     public String detalladoDeNutricion(@PathVariable Long id, Model model){
@@ -73,7 +74,12 @@ public class NutritionController {
             return "redirect:/ListNutrition";
         }
         model.addAttribute("nutrition", nutrition);
-        return "detailsNutrition";
+        User user = userService.getUser(id);
+        if(user != null){
+            model.addAttribute("userId",user.getId());
+            return "detailsNutrition";
+        }
+        return "redirect:/ListNutrition";
     }
 
     @GetMapping("/ListNutrition/ModifyNutrition/{id}")

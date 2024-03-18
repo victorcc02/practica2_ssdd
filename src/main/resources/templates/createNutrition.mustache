@@ -21,7 +21,7 @@
         <nav>
             <h2 class="logo"></h2>
             <ul>
-                <a href="/listNutrition"><li>VOLVER</li></a>
+                <a href="/ListNutrition?id={{userId}}"><li>VOLVER</li></a>
             </ul>
         </nav>
     </header>
@@ -33,7 +33,7 @@
             {{#exito}}
                 <p>Nutricion creada</p>
             {{/exito}}
-            <form name="formularioAgregarNutricion" action="/listNutrition/CreateNutrition?id={{user.id}}" method="post" onsubmit="return validarFormulario()">
+            <form name="formularioAgregarNutricion" action="/ListNutrition/CreateNutrition?id={{userId}}" method="post" onsubmit="return validarFormulario()">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre"><br><br>
                 <label for="comida">Comida:</label>

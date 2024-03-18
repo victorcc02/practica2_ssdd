@@ -9,9 +9,9 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListNutrition/CreateNutritionid={{user.id}}"><li>CREAR NUTRICION</li></a>
-            <a href="/Nutrition?id={{user.id}}"><li>ATRAS</li></a>
-            <a href="/FrontPage?id={{user.id}}"><li>PORTADA</li></a>
+            <a href="/ListNutrition/CreateNutrition?id={{userId}}"><li>CREAR NUTRICION</li></a>
+            <a href="/Nutrition?id={{userId}}"><li>ATRAS</li></a>
+            <a href="/FrontPage?id={{userId}}"><li>PORTADA</li></a>
         </ul>
     </nav>
 </header>
@@ -24,7 +24,7 @@
         <ul>
             {{#nutrition}}
                 <li>
-                    <a href="/ListNutrition/detailsNutrition/{{id}}">{{nombre}}</a>
+                    <a href="/ListNutrition/detailsNutrition?id={{userId}}/{{id}}">{{nombre}}</a>
                 </li>
             {{/nutrition}}
         </ul>
