@@ -33,7 +33,12 @@ public class NutritionController {
 
     @GetMapping("/Nutrition")
     public String InterfazNutricion() {
-        return "nutrition";
+        User user = userService.getUser(id);
+        if (user != null){
+            model.addAttribute("userId",user.getId());
+            return "nutrition";
+        }
+        return "redirect:/FrontPage";
     }
     @GetMapping("/ListNutrition")
     public String InterfazListaNutricion(Model model) {
