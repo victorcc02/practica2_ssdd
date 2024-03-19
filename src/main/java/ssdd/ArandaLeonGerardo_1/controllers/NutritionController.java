@@ -102,15 +102,10 @@ public class NutritionController {
         return "redirect:/ListNutrition?id=" + user.getId();
     }
     @GetMapping("/ListNutrition/DeleteNutrition/{id}")
-    public String mostrarFormularioEliminar(@PathVariable Long id, Model model) {
-        Nutrition nutrition = nutritionService.obtenerNutricion(id);
-        model.addAttribute("nutrition", nutrition);
-        return "deleteNutrition";
-    }
-    @GetMapping("/ListNutrition/DeleteTheNutrition/{id}")
-    public String eliminadoDeNutricion(@PathVariable Long id) {
+    public String eliminadoDeNutricion(@PathVariable Long id,@RequestParam("id") Long userId) {
         nutritionService.eliminarNutricion(id);
-        return "redirect:/ListNutrition";
+        User user = userService.getUser(userId);
+        return "redirect:/ListNutrition?id=" + user.getId();
     }
 }
 
