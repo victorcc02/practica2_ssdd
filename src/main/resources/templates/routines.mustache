@@ -25,12 +25,18 @@
         {{^routines}}
             <p class="noRoutines">Todavia no se han agregado rutinas</p>
         {{/routines}}
+        <div class="selectContainer">
         {{#routines}}
-            <select class="select">
-                <option>
-                    {{RoutineName}}
-                </option>
-            </select>
+            {{^firstRoutine}}
+                    <select class="select">
+            {{/firstRoutine}}
+                        <option>
+                            {{routineName}}
+                        </option>
+            {{^lastRoutine}}
+            {{/lastRoutine}}
+                    </select>
         {{/routines}}
+        </div>
     </body>
 </html>

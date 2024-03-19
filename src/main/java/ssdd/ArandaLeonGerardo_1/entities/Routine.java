@@ -12,9 +12,8 @@ public class Routine {
     private String goal; // Increase-Lose weight...
 
 
-    public Routine(String routineName, Long id, String intensity, int duration, String exercises, String goal) {
+    public Routine(String routineName, String intensity, int duration, String exercises, String goal) {
         this.routineName = routineName;
-        this.id = id;
         this.intensity = intensity;
         this.duration = duration;
         this.exercises = exercises;
@@ -64,11 +63,11 @@ public class Routine {
         this.id = id;
     }
 
-    public String getroutineName() {
+    public String getRoutineName() {
         return routineName;
     }
 
-    public void setroutineName(String name) {
+    public void setRoutineName(String routineName) {
         this.routineName = routineName;
     }
 }

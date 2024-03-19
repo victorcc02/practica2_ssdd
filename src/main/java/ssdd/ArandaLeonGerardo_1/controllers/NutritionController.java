@@ -68,13 +68,13 @@ public class NutritionController {
         return "redirect:/ListNutrition?id=" + user.getId();
     }
     @GetMapping("/ListNutrition/detailsNutrition/{id}")
-    public String detalladoDeNutricion(@PathVariable Long id, Model model){
+    public String detalladoDeNutricion(@PathVariable Long id, Model model, @RequestParam("id") Long userId){
         Nutrition nutrition = nutritionService.obtenerNutricion(id);
         if (nutrition == null) {
             return "redirect:/ListNutrition";
         }
         model.addAttribute("nutrition", nutrition);
-        User user = userService.getUser(id);
+        User user = userService.getUser(userId);
         if(user != null){
             model.addAttribute("userId",user.getId());
             return "detailsNutrition";
@@ -92,9 +92,10 @@ public class NutritionController {
         return "modifyNutrition";
     }
     @PostMapping("/ListNutrition/ModifyNutrition/{id}")
-    public String editadoDeNutricion(Nutrition nutrition) {
+    public String editadoDeNutricion(Nutrition nutrition, @RequestParam("id") Long id) {
         nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
-        return "redirect:/ListNutrition";
+        User user = userService.getUser(id);
+        return "redirect:/ListNutrition?id=" + user.getId();
     }
     @GetMapping("/ListNutrition/DeleteNutrition/{id}")
     public String mostrarFormularioEliminar(@PathVariable Long id, Model model) {

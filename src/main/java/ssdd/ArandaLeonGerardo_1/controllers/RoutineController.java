@@ -48,7 +48,7 @@ public class RoutineController {
         return "redirect:/Portada";
     }
     @PostMapping("/routines/createRoutine")
-    public String createRoutinePost(Routine routine, @RequestParam("id") Long id){
+    public String createRoutinePost(Routine routine, @RequestParam("userId") Long id){
         routineService.createRoutine(routine);
         User user = userService.getUser(id);
         return "redirect:/routines?id=" + user.getId();

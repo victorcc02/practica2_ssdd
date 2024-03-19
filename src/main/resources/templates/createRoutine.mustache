@@ -37,9 +37,10 @@
             </button>
         </div>
         <br><br>
-        <form  method="post" onsubmit="return validateForm()" action="/routines/createRoutine?={{userId}}">
-            <label for="routineName" class="title">Nombre de la rutina</label><br>
-            <input id="routineName" class="field" name="routineName" type="text" minlength="1" maxlength="15"
+        <form action="/routines/createRoutine" method="post" onsubmit="return validateForm()">
+            <input type="hidden" name="userId" value="{{userId}}">
+            <label for="name" class="title">Nombre de la rutina</label><br>
+            <input id="name" class="field" name="routineName" type="text" minlength="1" maxlength="15"
                    placeholder="Inserta el nombre...">
             <br><br>
             <label for="intensity" class="title">Intensidad</label><br>
