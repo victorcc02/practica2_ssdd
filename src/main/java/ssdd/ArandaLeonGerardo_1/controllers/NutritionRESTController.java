@@ -60,8 +60,8 @@ public class NutritionRESTController {
         if (parcialNutrition.getTipo() != null) {
             existente.setTipo(parcialNutrition.getTipo());
         }
-        if (parcialNutrition.getNombre() != null) {
-            existente.setNombre(parcialNutrition.getNombre());
+        if (parcialNutrition.getComida() != null) {
+            existente.setComida(parcialNutrition.getComida());
         }
         nutritionService.actualizarNutricion(id,existente);
         return ResponseEntity.ok(existente);

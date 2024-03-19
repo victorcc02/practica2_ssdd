@@ -3,6 +3,7 @@ package ssdd.ArandaLeonGerardo_1.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
 import ssdd.ArandaLeonGerardo_1.entities.Routine;
 import ssdd.ArandaLeonGerardo_1.service.RoutineService;
 
@@ -41,5 +42,29 @@ public class RoutineRESTController {
     public ResponseEntity<Void> deleteRoutine(@PathVariable Long id){
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Routine> patchRoutine(@PathVariable Long id, @RequestBody Routine parcialRoutine){
+        Routine routine = routineService.getRoutine(id);
+        if (routine == null){
+            return ResponseEntity.notFound().build();
+        }
+        if (parcialRoutine.getRoutineName() != null) {
+            routine.setRoutineName(parcialRoutine.getRoutineName());
+        }
+        if (parcialRoutine.getIntensity() != null) {
+            routine.setIntensity(parcialRoutine.getIntensity());
+        }
+        if (parcialRoutine.getDuration() != 0) {
+            routine.setDuration(parcialRoutine.getDuration());
+        }
+        if(parcialRoutine.getExercises() != null) {
+            routine.setExercises(parcialRoutine.getExercises());
+        }
+        if(parcialRoutine.getGoal() != null) {
+            routine.setGoal(parcialRoutine.getGoal());
+        }
+        routineService.updateRoutine(id,routine);
+        return ResponseEntity.ok(routine);
     }
 }
