@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Editar Nutricion</title>
-    <link rel="stylesheet" href="/css/styleModifyNutrition.css">
-</head>
-<body>
-<header>
-    <nav>
-        <h2 class="logo"></h2>
-        <ul>
-            <a href="/ListNutrition/detailsNutrition/{{nutrition.id}}?id={{userId}}"><li>ATRAS</li></a>
-        </ul>
-    </nav>
-</header>
-<div class="modify">
-    <div class="blackSpace">
-    </div>
-    <div class="changes">
-        <h1>Editar Nutricion</h1>
-        <form action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?id={{userId}}" method="post">
-            <input type="hidden" name="id" value="{{nutrition.id}}">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value="{{nutrition.nombre}}"><br><br>
-            <label for="comida">Comida:</label>
-            <input type="text" id="comida" name="comida" value="{{nutrition.comida}}"><br><br>
-            <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo" name="tipo" value="{{nutrition.tipo}}"><br><br>
-            <input type="submit" value="Editar">
-        </form>
-    </div>
-    <div class="blackSpace">
-    </div>
-</div>
-</body>
+    <head>
+        <title>Editar Nutricion</title>
+        <link rel="stylesheet" href="/css/styleModifyNutrition.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <h2 class="logo"></h2>
+                <ul>
+                    <a href="/ListNutrition/detailsNutrition/{{nutrition.id}}?id={{userId}}"><li>ATRAS</li></a>
+                </ul>
+            </nav>
+        </header>
+        <div class="modify">
+            <div class="blackSpace"></div>
+            <div class="changes">
+                <h1>Editar Nutricion</h1>
+                <form action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?id={{userId}}" method="post">
+                    <input type="hidden" name="id" value="{{nutrition.id}}">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="{{nutrition.nombre}}"><br><br>
+                    <label for="comida">Comida:</label>
+                    <input type="text" id="comida" name="comida" value="{{nutrition.comida}}"><br><br>
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" id="tipo" name="tipo" value="{{nutrition.tipo}}"><br><br>
+                    <input type="submit" value="Editar">
+                </form>
+            </div>
+            <div class="blackSpace"></div>
+        </div>
+    </body>
 </html>
