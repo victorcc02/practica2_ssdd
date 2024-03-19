@@ -17,7 +17,7 @@ public class UserRESTController {
     public ResponseEntity<Collection<User>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
-    @PutMapping
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         return ResponseEntity.status(201).body(userService.createUser(user));
     }
@@ -78,6 +78,7 @@ public class UserRESTController {
         if(parcialUser.getCaloricPhase() != null){
             user.setCaloricPhase(parcialUser.getCaloricPhase());
         }
+        userService.updateUser(id,user);
         return ResponseEntity.ok(user);
     }
 }
