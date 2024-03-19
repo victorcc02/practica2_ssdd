@@ -21,7 +21,7 @@ public class RoutineService {
     public Routine getRoutine(Long id){
         return routineMap.get(id);
     }
-    public Collection<Routine> getAllRoutines(){
+    public Collection <Routine> getAllRoutines(){
         return routineMap.values();
     }
     public Routine updateRoutine(Long id, Routine routine){
