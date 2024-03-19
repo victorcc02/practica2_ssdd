@@ -10,6 +10,17 @@
             function goToCreate(){
                 window.location.href = "/routines/createRoutine?id={{userId}}";
             }
+            function tapar() {
+                OtroArchivo = new OtroArchivo();
+                if (.miMapa.isEmpty()) { // Verificas si el mapa está vacío
+                    document.getElementById("conElemntos").style.display = "none";
+                }else{
+                    document.getElementById("sinElementos").style.display = "none";
+                }
+            }
+                 // Creas una instancia de la clase que contiene el mapa
+
+
         </script>
     </head>
     <body>

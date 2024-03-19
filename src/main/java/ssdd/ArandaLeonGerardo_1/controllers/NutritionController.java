@@ -82,17 +82,21 @@ public class NutritionController {
         return "redirect:/ListNutrition";
     }
 
-    @GetMapping("/ListNutrition/ModifyNutrition/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
-        Nutrition nutrition = nutritionService.obtenerNutricion(id);
-        if (nutrition == null) {
-            return "redirect:/ListNutrition";
+    @GetMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
+    public String mostrarFormularioEditar(@PathVariable Long nutritionId, Model model,@RequestParam("id") Long userId) {
+        Nutrition nutrition = nutritionService.obtenerNutricion(nutritionId);
+        if(nutrition != null){
+            model.addAttribute("nutrition", nutrition);
         }
-        model.addAttribute("nutrition", nutrition);
-        return "modifyNutrition";
+        User user = userService.getUser(userId);
+        if(user != null){
+            model.addAttribute("userId",user.getId());
+            return "modifyNutrition";
+        }
+        return "redirect:/ListNutrition";
     }
-    @PostMapping("/ListNutrition/ModifyNutrition/{id}")
-    public String editadoDeNutricion(Nutrition nutrition, @RequestParam("id") Long id) {
+    @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
+    public String editadoDeNutricion(Nutrition nutrition,@RequestParam("id") Long id) {
         nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
         User user = userService.getUser(id);
         return "redirect:/ListNutrition?id=" + user.getId();
