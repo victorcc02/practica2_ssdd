@@ -10,7 +10,7 @@ import ssdd.ArandaLeonGerardo_1.service.NutritionService;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/api/nutricion")
+@RequestMapping("/api/nutrition")
 public class NutritionRESTController {
 
     @Autowired
