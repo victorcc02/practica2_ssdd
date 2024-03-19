@@ -37,10 +37,9 @@
             </button>
         </div>
         <br>
-        <form action="/routines" method="post" onsubmit="return validateForm()">
-            <input type="hidden" name="routineName" id="routineName" value="{{routine.routineName}}">
+        <form action="/routines/editRoutine/{{routine.id}}?id={{userId}}" method="post" onsubmit="return validateForm()">
             <label for="routineName" class="title">Nombre de la rutina</label><br>
-            <input id="routineName" name="routineName" type="text" class="field" value={{routine.routineName}}
+            <input id="routineName" name="routineName" type="text" class="field" value="{{routine.routineName}}"
                     placeholder={{routine.routineName}}>
             <br><br>
             <label for="intensity" class="title">Intensidad</label><br>
@@ -51,18 +50,19 @@
             </select>
             <br><br>
             <label for="duration" class="title">Duracion de la rutina</label><br>
-            <input id="duration" name="duration" type="text" class="field" min="1" max="200" value={{routine.duration}}
-                   placeholder={{routine.duration}}>
+            <input id="duration" name="duration" type="number" inputmode="numeric" class="numeric"
+                   min="1" max="200" value={{routine.duration}} placeholder={{routine.duration}}>
             <br><br>
             <label for="exercises" class="title">Ejercicios de la rutina</label><br>
-            <input id="exercises" name="exercises" type="text" class="field" value={{routine.exercises}}
-                   placeholder={{routine.exercises}}>
+            <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70" placeholder="{{routine.exercises}}">
+                {{routine.exercises}}
+            </textarea>
             <br><br>
             <label for="goal" class="title">Objetivo</label><br>
             <select name="goal"  class="select" id="goal">
-                <option>Baja</option>
-                <option>Moderada</option>
-                <option>Alta</option>
+                <option>Bajar de peso</option>
+                <option>Mantenerse</option>
+                <option>Subir de peso</option>
             </select>
             <br><br>
             <span class="lowerButtonsContainer">

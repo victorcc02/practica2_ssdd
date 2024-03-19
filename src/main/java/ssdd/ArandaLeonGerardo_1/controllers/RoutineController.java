@@ -73,9 +73,13 @@ public class RoutineController {
         return "editRoutine";
     }
     @PostMapping("/routines/editRoutine/{routineId}")
-    public String editRoutinePost(Routine routine, @PathVariable Long routineId){
+    public String editRoutinePost(Routine routine, @PathVariable Long routineId, @RequestParam("id") Long id){
         routineService.updateRoutine(routineId,routine);
-        return "redirect:/routines";
+        User user = userService.getUser(id);
+        if(user == null){
+            return "redirect:/Login";
+        }
+        return "redirect:/routines?id=" + user.getId();
     }
     @GetMapping("/routines/delete/{routineId}")
     public  String deleteRoutinePost(@PathVariable Long routineId, @RequestParam("id") Long id){
