@@ -42,4 +42,42 @@ public class UserRESTController {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody User parcialUser){
+        User user = userService.getUser(id);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+        if(parcialUser.getUserImage() != null){
+            user.setUserImage(parcialUser.getUserImage());
+        }
+        if(parcialUser.getUsername() != null){
+            user.setUsername(parcialUser.getUsername());
+        }
+        if(parcialUser.getPassword() != null){
+            user.setPassword(parcialUser.getPassword());
+        }
+        if(parcialUser.getWeight() != 0){
+            user.setWeight(parcialUser.getWeight());
+        }
+        if(parcialUser.getGoalWeight() != 0){
+            user.setGoalWeight(parcialUser.getGoalWeight());
+        }
+        if(parcialUser.getHeight() != 0){
+            user.setHeight(parcialUser.getHeight());
+        }
+        if(parcialUser.getGender() != null){
+            user.setGender(parcialUser.getGender());
+        }
+        if(parcialUser.getAge() != 0){
+            user.setAge(parcialUser.getAge());
+        }
+        if(parcialUser.getMorphology() != null){
+            user.setMorphology(parcialUser.getMorphology());
+        }
+        if(parcialUser.getCaloricPhase() != null){
+            user.setCaloricPhase(parcialUser.getCaloricPhase());
+        }
+        return ResponseEntity.ok(user);
+    }
 }
