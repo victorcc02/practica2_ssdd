@@ -10,9 +10,6 @@ nav{
     align-items: center;
     z-index: 999999;
 }
-
-
-
 nav ul{
     display: flex;
     align-items: center;
@@ -30,7 +27,9 @@ nav ul a{
 nav ul li{
     list-style: none;
 }
-
+.list a:hover{
+    color: #d63031;
+}
 .details{
     display: flex;
     justify-content: center;
