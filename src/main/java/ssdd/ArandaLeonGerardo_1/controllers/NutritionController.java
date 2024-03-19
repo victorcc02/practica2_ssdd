@@ -96,8 +96,8 @@ public class NutritionController {
         return "redirect:/ListNutrition";
     }
     @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String editadoDeNutricion(Nutrition nutrition,@RequestParam("id") Long id) {
-        nutritionService.actualizarNutricion(nutrition.getId(), nutrition);
+    public String editadoDeNutricion(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("id") Long id) {
+        nutritionService.actualizarNutricion(nutritionId, nutrition);
         User user = userService.getUser(id);
         return "redirect:/ListNutrition?id=" + user.getId();
     }
