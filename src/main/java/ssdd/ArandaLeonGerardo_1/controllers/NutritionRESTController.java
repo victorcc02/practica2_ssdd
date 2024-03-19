@@ -48,4 +48,22 @@ public class NutritionRESTController {
         nutritionService.eliminarNutricion(id);
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Nutrition> actualizarParcialmenteNutricion(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
+        Nutrition existente = nutritionService.obtenerNutricion(id);
+        if (existente == null){
+            return ResponseEntity.notFound().build();
+        }
+        if (parcialNutrition.getNombre() != null) {
+            existente.setNombre(parcialNutrition.getNombre());
+        }
+        if (parcialNutrition.getTipo() != null) {
+            existente.setTipo(parcialNutrition.getTipo());
+        }
+        if (parcialNutrition.getNombre() != null) {
+            existente.setNombre(parcialNutrition.getNombre());
+        }
+        nutritionService.actualizarNutricion(id,existente);
+        return ResponseEntity.ok(existente);
+    }
 }
