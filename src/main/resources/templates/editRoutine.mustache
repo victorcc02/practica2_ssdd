@@ -4,9 +4,8 @@
         <title>Editar rutina</title>
         <link rel="stylesheet" href="/css/styleEditRoutine.css">
         <script>
-
             function goBackwards(){
-                window.location.href = "/routines";
+                window.location.href = "/routines/{{routine.id}}?id={{userId}}";
             }
             function validateForm(){
                 let routineName = document.getElementById("routineName").value;
@@ -18,7 +17,6 @@
                     alert("Longitud en el nombre de la rutina no válida (muy largo).");
                     return false;
                 }
-
                 let duration = document.getElementById("duration").value;
                 if(duration < 1){
                     alert("Duración no válida. Recuerda que la duración se mide en números (minutos).");
@@ -30,9 +28,6 @@
                 }
                 return true;
             }
-
-
-
         </script>
     </head>
     <body>
@@ -41,12 +36,9 @@
                 <img src="/imagenes/goBack.jpg" alt="flechaPaginaAnterior">
             </button>
         </div>
-        <div class="userImage">
-            <img src="{{user.userImage}}" id="uImage" alt="Foto usuario">
-        </div>
         <br>
         <form action="/routines" method="post" onsubmit="return validateForm()">
-            <input type="hidden" name="routineName" id="routineName" value="{{routine.nameRoutine}}">
+            <input type="hidden" name="routineName" id="routineName" value="{{routine.routineName}}">
             <label for="routineName" class="title">Nombre de la rutina</label><br>
             <input id="routineName" name="routineName" type="text" class="field" value={{routine.routineName}}
                     placeholder={{routine.routineName}}>
@@ -78,7 +70,5 @@
                 <button class="saveButton" type="submit">Guardar</button>
             </span>
         </form>
-
-
     </body>
 </html>

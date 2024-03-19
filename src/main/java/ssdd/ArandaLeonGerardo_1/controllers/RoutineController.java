@@ -69,6 +69,7 @@ public class RoutineController {
             return "redirect:/frontPage?id=" + user.getId();
         }
         model.addAttribute("routine",routine);
+        model.addAttribute("userId",user.getId());
         return "editRoutine";
     }
     @PostMapping("/routines/editRoutine/{routineId}")
