@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Datos de la Rutina</title>
-    <link rel="stylesheet" href="/css/styleDetailsNutrition.css">
+    <link rel="stylesheet" href="/css/styleShowRoutine.css">
     <script>
         function deleteRoutine(){
             let confirmation = confirm('¿Estás seguro de querer eliminar esta rutina?');
@@ -15,7 +15,6 @@
 <body>
 <header>
     <nav>
-        <h2 class="logo"></h2>
         <ul>
             <a href="/routines/editRoutine/{{routine.id}}?id={{userId}}">Editar Rutina</a>
             <a onclick="deleteRoutine()" href="/routines/delete/{{routine.id}}?id={{userId}}">Eliminar Rutina</a>
