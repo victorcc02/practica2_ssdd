@@ -33,7 +33,7 @@ public class RoutineController {
         Routine routine = routineService.getRoutine(id);
         if(routine != null){
             model.addAttribute("routine",routine);
-            return "routine";
+            return "showRoutine";
         }
         return "redirect:/Portada";
     }

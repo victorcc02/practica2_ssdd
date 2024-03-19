@@ -10,6 +10,15 @@
             function goToCreate(){
                 window.location.href = "/routines/createRoutine?id={{userId}}";
             }
+
+            function getURL(){
+                const routineSelected = document.getElementById("selectRoutine").value;
+                window.location.href = routineSelected;
+            }
+
+
+
+
         </script>
     </head>
     <body>
@@ -25,14 +34,20 @@
         {{^routines}}
             <p class="noRoutines">Todavia no se han agregado rutinas</p>
         {{/routines}}
+
         <div class="selectContainer">
-            <select class="select">
+            <select class="select" id="selectRoutine">
                 {{#routines}}
-                <option>
-                    <a href="">{{routineName}}</a>
+                <option value="/routines/{{this.id}}">
+                    {{routineName}}
+
                 </option>
                 {{/routines}}
             </select>
+
+            <button class="goToMenu" id="goToMenu" onclick="getURL()">Seleccionar</button>
         </div>
+
+
     </body>
 </html>

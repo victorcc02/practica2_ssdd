@@ -13,7 +13,29 @@ body{
     height: auto;
     margin-top: 200px;
 }
-
+.editProfileButton{
+    border-radius: 5px;
+    margin-top: 10px;
+    background: linear-gradient(to bottom,royalblue,dodgerblue);
+    border:none;
+    height: 30px;
+    width: 120px;
+    color: white;
+    font-size: 15px;
+}
+.editRoutineButton, .deleteRutineButton {
+    margin-top: 10px;
+}
+.deleteRoutineButton{
+    border-radius: 5px;
+    border:none;
+    height: 30px;
+    width: 140px;
+    color: white;
+    font-size: 15px;
+    background-color: #d63031;
+    margin-right: 10px;
+}
 .whiteSpace2{
     background-color: grey;
     width: 33.3%;
