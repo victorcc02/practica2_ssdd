@@ -1,11 +1,11 @@
-package ssdd.ArandaLeonGerardo_1.controllers;
+package ssdd.practicaWeb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ssdd.ArandaLeonGerardo_1.entities.Nutrition;
-import ssdd.ArandaLeonGerardo_1.service.NutritionService;
+import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.service.NutritionService;
 
 import java.util.Collection;
 

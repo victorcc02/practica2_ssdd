@@ -1,4 +1,4 @@
-package ssdd.ArandaLeonGerardo_1.entities;
+package ssdd.practicaWeb.entities;
 
 public class Nutrition {
     private Long id;

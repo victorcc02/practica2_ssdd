@@ -1,4 +1,4 @@
-package ssdd.ArandaLeonGerardo_1;
+package ssdd.practicaWeb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

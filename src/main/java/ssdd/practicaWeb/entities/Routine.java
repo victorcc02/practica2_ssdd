@@ -1,7 +1,5 @@
-package ssdd.ArandaLeonGerardo_1.entities;
+package ssdd.practicaWeb.entities;
 
-
-import java.util.List;
 
 public class Routine {
     private String routineName;

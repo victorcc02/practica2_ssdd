@@ -1,7 +1,7 @@
-package ssdd.ArandaLeonGerardo_1.service;
+package ssdd.practicaWeb.service;
 
 import org.springframework.stereotype.Service;
-import ssdd.ArandaLeonGerardo_1.entities.User;
+import ssdd.practicaWeb.entities.User;
 
 import java.util.Collection;
 import java.util.HashMap;

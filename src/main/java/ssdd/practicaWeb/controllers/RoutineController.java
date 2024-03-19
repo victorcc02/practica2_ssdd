@@ -1,4 +1,4 @@
-package ssdd.ArandaLeonGerardo_1.controllers;
+package ssdd.practicaWeb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ssdd.ArandaLeonGerardo_1.entities.Routine;
-import ssdd.ArandaLeonGerardo_1.entities.User;
-import ssdd.ArandaLeonGerardo_1.service.RoutineService;
-import ssdd.ArandaLeonGerardo_1.service.UserService;
+import ssdd.practicaWeb.entities.Routine;
+import ssdd.practicaWeb.entities.User;
+import ssdd.practicaWeb.service.RoutineService;
+import ssdd.practicaWeb.service.UserService;
 
 @Controller
 public class RoutineController {
