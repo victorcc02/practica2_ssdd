@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.practicaWeb.entities.Food;
+import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.repositories.FoodRepository;
+import ssdd.practicaWeb.service.FoodService;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.UserService;
 
