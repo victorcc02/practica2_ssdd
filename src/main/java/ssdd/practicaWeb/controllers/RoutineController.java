@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.practicaWeb.entities.Routine;
-import ssdd.practicaWeb.entities.User;
+import ssdd.practicaWeb.entities.GymUser;
+import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
 
@@ -18,10 +19,14 @@ public class RoutineController {
     private RoutineService routineService;
     @Autowired
     private UserService userService;
+    @Autowired
+    RoutineRepository routineRepository;
+
+
     @GetMapping("/routines")
     public String showAllRoutines(Model model, @RequestParam("id") Long id){
         model.addAttribute("routines",routineService.getAllRoutines());
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user != null){
             model.addAttribute("userId",user.getId());
             return "routines";
@@ -34,7 +39,7 @@ public class RoutineController {
         if(routine == null){
             return "redirect:/Portada";
         }
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return "redirect:/Portada";
         }
@@ -45,7 +50,7 @@ public class RoutineController {
     @GetMapping("/routines/createRoutine")
     public String createRoutine(Model model, @RequestParam("id") Long id){
         model.addAttribute("routine",new Routine());
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user != null){
             model.addAttribute("userId",user.getId());
             return "createRoutine";
@@ -55,13 +60,13 @@ public class RoutineController {
     @PostMapping("/routines/createRoutine")
     public String createRoutinePost(Routine routine, @RequestParam("userId") Long id){
         routineService.createRoutine(routine);
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         return "redirect:/routines?id=" + user.getId();
     }
     @GetMapping("/routines/editRoutine/{routineId}")
     public String editRoutine(Model model, @PathVariable Long routineId, @RequestParam("id") Long id){
         Routine routine = routineService.getRoutine(routineId);
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return "redirect:/Login";
         }
@@ -75,7 +80,7 @@ public class RoutineController {
     @PostMapping("/routines/editRoutine/{routineId}")
     public String editRoutinePost(Routine routine, @PathVariable Long routineId, @RequestParam("id") Long id){
         routineService.updateRoutine(routineId,routine);
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return "redirect:/Login";
         }
@@ -84,7 +89,7 @@ public class RoutineController {
     @GetMapping("/routines/delete/{routineId}")
     public  String deleteRoutinePost(@PathVariable Long routineId, @RequestParam("id") Long id){
         routineService.deleteRoutine(routineId);
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return "redirect:/Login";
         }
