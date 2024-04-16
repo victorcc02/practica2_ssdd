@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Inicio de Sesion</title>
-        <link rel="stylesheet" href="/css/styleLogin.css">
-        <script>
-            function validarFormulario() {
-                var usuario = document.forms["formularioInicio"]["usuario"].value;
-                var password = document.forms["formularioInicio"]["password"].value;
-                if (usuario === "" || password === "") {
-                    alert("Inserta un usuario y una contraseña");
-                    return false;
-                }
-                return true;
+<head>
+    <title>Inicio de Sesion</title>
+    <link rel="stylesheet" href="/css/styleLogin.css">
+    <script>
+        function validateForm() {
+            var user = document.forms["formLogin"]["user"].value;
+            var password = document.forms["formLogin"]["password"].value;
+            if (user === "" || password === "") {
+                alert("Inserta un usuario y una contraseña");
+                return false;
             }
-            let flag = true;
-            function visualizarOjo() {
-                if(flag){
-                    document.getElementById("password").type = "password";
-                    document.getElementById("Eye").src = "../imagenes/openEye.png";
-                    flag=false;
-                }else{
-                    document.getElementById("password").type = "text";
-                    document.getElementById("Eye").src = "../imagenes/closeEye.png";
-                    flag=true;
-                }
+            return true;
+        }
+        let flag = true;
+        function visualizeEye() {
+            if(flag){
+                document.getElementById("password").type = "password";
+                document.getElementById("Eye").src = "../images/openEye.png";
+                flag=false;
+            }else{
+                document.getElementById("password").type = "text";
+                document.getElementById("Eye").src = "../images/closeEye.png";
+                flag=true;
             }
-        </script>
-    </head>
-    <body>
-        <div class="loginPage">
-            <div class="upLogin"></div>
-            <div class="containerLogin">
-                <div class="containerFormulary">
-                    <div class="titleLogin"><h1>INICIAR SESION</h1></div>
-                    <div class="loginFormulary">
-                        <form name="formularioInicio" method="post" onsubmit="return validarFormulario()">
-                            <input type="text" id="usuario" name="username" class="textBox" maxlength="10" minlength="6" placeholder="Usuario">
-                            <br><br>
-                            <input type="password" name="password" id="password" class="textBox" maxlength="10" minlength="6" placeholder="Contraseña">
-                            <img class="eyeImage" src="../imagenes/openEye.png" alt="google" id="Eye" onclick="visualizarOjo()">
-                            <br><br>
-                            <input  class="loginBoton" type="submit" value="INICIAR">
-                        </form>
-                    </div>
-                    <div class="subtitleLogin"><h2> ------ O INICIA SESION CON ------</h2></div>
-                    <div class="loginImages">
-                        <img class="images"  src="../imagenes/google.png" alt="google" height="30px" width="30px">
-                        <img class="images" src="../imagenes/twitter.png" alt="x(twitter)" height="30px" width="30px">
-                        <img class="images" src="../imagenes/facebook.png" alt="facebook" height="30px" width="30px">
-                    </div>
-                </div>
-                <div>
-                    <img src="../imagenes/backgroundLogin.jpg" alt="boxeador login" height="auto" width="auto">
-                </div>
+        }
+    </script>
+</head>
+<body>
+<div class="loginPage">
+    <div class="upLogin"></div>
+    <div class="containerLogin">
+        <div class="containerFormulary">
+            <div class="titleLogin"><h1>INICIAR SESION</h1></div>
+            <div class="loginFormulary">
+                <form name="formLogin" method="post" onsubmit="return validateForm()">
+                    <input type="text" id="user" name="username" class="textBox" maxlength="10" minlength="6" placeholder="Usuario">
+                    <br><br>
+                    <input type="password" name="password" id="password" class="textBox" maxlength="10" minlength="6" placeholder="Contraseña">
+                    <img class="eyeImage" src="../images/openEye.png" alt="google" id="Eye" onclick="visualizeEye()">
+                    <br><br>
+                    <input  class="loginBoton" type="submit" value="INICIAR">
+                </form>
             </div>
-            <div class="downLogin"><h1>GYM-BROS</h1></div>
+            <div class="subtitleLogin"><h2> ------ O INICIA SESION CON ------</h2></div>
+            <div class="loginImages">
+                <img class="images"  src="../images/google.png" alt="google" height="30px" width="30px">
+                <img class="images" src="../images/twitter.png" alt="x(twitter)" height="30px" width="30px">
+                <img class="images" src="../images/facebook.png" alt="facebook" height="30px" width="30px">
+            </div>
         </div>
-    </body>
+        <div>
+            <img src="../images/backgroundLogin.jpg" alt="boxer login" height="auto" width="auto">
+        </div>
+    </div>
+    <div class="downLogin"><h1>GYM-BROS</h1></div>
+</div>
+</body>
 </html>
