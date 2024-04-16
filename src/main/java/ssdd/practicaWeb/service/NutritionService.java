@@ -1,44 +1,65 @@
 package ssdd.practicaWeb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.repositories.NutritionRepository;
+import ssdd.practicaWeb.repositories.UserRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NutritionService {
-    private final Map<Long, Nutrition> mapaNutricion = new HashMap<>();
-    private final AtomicLong nextId = new AtomicLong();
 
+    @Autowired
+    NutritionRepository nutritionRepository;
 
-    public Nutrition crearNutricion(Nutrition nutrition) {
-        long id = nextId.incrementAndGet();
-        nutrition.setId(id);
-        mapaNutricion.put(id, nutrition);
+    @Autowired
+    UserRepository userRepository;
+
+    public Nutrition createNutrition(Nutrition nutrition, GymUser user) {
+        List<Nutrition> newList = user.getListNutrition();
+        newList.add(nutrition);
+        user.setListNutrition(newList);
+        userRepository.save(user);
         return nutrition;
     }
 
-    public Nutrition obtenerNutricion(Long id) {
-        return mapaNutricion.get(id);
-    }
-
-    public Collection<Nutrition> obtenerTodasLasNutricion() {
-        return mapaNutricion.values();
-    }
-
-    public Nutrition actualizarNutricion(Long id, Nutrition nutrition) {
-        if (!mapaNutricion.containsKey(id)) {
+    public Nutrition getNutrition(Long id) {
+        Optional<Nutrition> theNutrition = nutritionRepository.findById(id);
+        if (theNutrition.isPresent()) {
+            Nutrition nutrition = theNutrition.get();
+            return nutrition;
+        } else {
             return null;
         }
-        nutrition.setId(id);
-        mapaNutricion.put(id, nutrition);
-        return nutrition;
     }
 
-    public void eliminarNutricion(Long id) {
-        mapaNutricion.remove(id);
+    public Collection<Nutrition> getAll() {
+        return nutritionRepository.findAll();
+    }
+
+    public Nutrition updateNutrition(Long id, Nutrition nutrition) {
+        Optional<Nutrition> theNutrition = nutritionRepository.findById(id);
+        if(theNutrition.isPresent()) {
+            nutrition.setId(id);
+            nutritionRepository.save(nutrition);
+            return nutrition;
+        }
+
+        return null;
+    }
+
+    public Nutrition deleteNutrition(Long id) {
+        Optional<Nutrition> theNutrition = nutritionRepository.findById(id);
+        if (theNutrition.isPresent()) {
+            Nutrition nutrition = theNutrition.get();
+            nutritionRepository.delete(nutrition);
+            return nutrition;
+        }
+        return null;
     }
 }
