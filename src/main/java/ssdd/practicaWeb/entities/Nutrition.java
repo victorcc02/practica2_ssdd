@@ -1,18 +1,49 @@
 package ssdd.practicaWeb.entities;
 
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
 public class Nutrition {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String comida;
-    private String tipo;
+
+    private String name;
+    private String type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private GymUser gymUser;
+
+    @ManyToMany(mappedBy = "listNutritions")
+    private Set<Food> listFoods = new HashSet<>();
 
     public Nutrition() {
     }
 
-    public Nutrition(String nombre, String comida, String tipo) {
-        this.nombre = nombre;
-        this.comida = comida;
-        this.tipo = tipo;
+    public Nutrition(String name , String type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public GymUser getGymUser() {
+        return gymUser;
+    }
+
+    public void setGymUser(GymUser gymUser) {
+        this.gymUser = gymUser;
+    }
+
+    public Set<Food> getListFoods() {
+        return listFoods;
+    }
+
+    public void setListFoods(Set<Food> listFoods) {
+        this.listFoods = listFoods;
     }
 
     public Long getId() {
@@ -23,27 +54,19 @@ public class Nutrition {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getComida() {
-        return comida;
+    public String getType() {
+        return type;
     }
 
-    public void setComida(String comida) {
-        this.comida = comida;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 }
