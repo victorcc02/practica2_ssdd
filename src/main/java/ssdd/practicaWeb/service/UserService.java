@@ -1,7 +1,7 @@
 package ssdd.practicaWeb.service;
 
 import org.springframework.stereotype.Service;
-import ssdd.practicaWeb.entities.User;
+import ssdd.practicaWeb.entities.GymUser;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,21 +10,21 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class UserService {
-    private final Map<Long, User> userMap = new HashMap<>();
+    private final Map<Long, GymUser> userMap = new HashMap<>();
     private final AtomicLong nextId = new AtomicLong();
-    public User createUser(User user){
+    public GymUser createUser(GymUser user){
         long id = nextId.incrementAndGet();
         user.setId(id);
         userMap.put(id,user);
         return user;
     }
-    public User getUser(Long id){
+    public GymUser getUser(Long id){
         return userMap.get(id);
     }
-    public Collection<User> getAllUsers(){
+    public Collection<GymUser> getAllUsers(){
         return userMap.values();
     }
-    public User updateUser(Long id, User user){
+    public GymUser updateUser(Long id, GymUser user){
         if(!userMap.containsKey(id)){
             return null;
         }

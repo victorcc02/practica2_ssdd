@@ -3,7 +3,7 @@ package ssdd.practicaWeb.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ssdd.practicaWeb.entities.User;
+import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.service.UserService;
 
 import java.util.Collection;
@@ -14,24 +14,24 @@ public class UserRESTController {
     @Autowired
     private UserService userService;
     @GetMapping
-    public ResponseEntity<Collection<User>> getAllUsers(){
+    public ResponseEntity<Collection<GymUser>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<GymUser> createUser(@RequestBody GymUser user){
         return ResponseEntity.status(201).body(userService.createUser(user));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id){
-        User user = userService.getUser(id);
+    public ResponseEntity<GymUser> getUser(@PathVariable Long id){
+        GymUser user = userService.getUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(user);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
-        User updated = userService.updateUser(id,user);
+    public ResponseEntity<GymUser> updateUser(@PathVariable Long id, @RequestBody GymUser user){
+        GymUser updated = userService.updateUser(id,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
@@ -43,8 +43,8 @@ public class UserRESTController {
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody User parcialUser){
-        User user = userService.getUser(id);
+    public ResponseEntity<GymUser> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
+        GymUser user = userService.getUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
