@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.User;
+import ssdd.practicaWeb.entities.GymUser;
+import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.UserService;
 
@@ -20,21 +21,24 @@ public class NutritionController {
     private NutritionService nutritionService;
     @Autowired
     private UserService userService;
+    @Autowired
+    NutritionRepository nutritionRepository;
 
-    @PostConstruct
-    public void nutritionController(){
-        Nutrition nutricionNueces = new Nutrition("Nutricion 1", "nueces","volumen");
-        Nutrition nutricionEnsalada = new Nutrition("Nutricion 2", "ensalada","adelgazar");
-        Nutrition nutricionGimnasio = new Nutrition("Nutricion 3", "batido","proteinas");
+/*  @PostConstruct
+    public void nutritionConstructor(){
+        Nutrition nutritionVolume = new Nutrition("Nutricion 1","volumen",);
+        Nutrition nutritionSlim = new Nutrition("Nutricion 2","adelgazar",);
+        Nutrition nutritionGym = new Nutrition("Nutricion 3","proteinas",);
 
-        nutritionService.crearNutricion(nutricionNueces);
-        nutritionService.crearNutricion(nutricionEnsalada);
-        nutritionService.crearNutricion(nutricionGimnasio);
-    }
+        nutritionService.createNutrition(nutritionVolume);
+        nutritionService.createNutrition(nutritionSlim);
+        nutritionService.createNutrition(nutritionGym);
+    }*/
+
 
     @GetMapping("/Nutrition")
-    public String InterfazNutricion(@RequestParam Long id, Model model) {
-        User user = userService.getUser(id);
+    public String InterfaceNutrition(@RequestParam Long id, Model model) {
+        GymUser user = userService.getGymUser(id);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "nutrition";
@@ -42,9 +46,9 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @GetMapping("/ListNutrition")
-    public String InterfazListaNutricion(@RequestParam Long id, Model model) {
-        model.addAttribute("nutrition", nutritionService.obtenerTodasLasNutricion());
-        User user = userService.getUser(id);
+    public String InterfaceListNutrition(@RequestParam Long id, Model model) {
+        model.addAttribute("nutrition", nutritionService.getAll());
+        GymUser user = userService.getGymUser(id);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "listNutrition";
@@ -52,9 +56,9 @@ public class NutritionController {
         return "redirect:/Nutrition";
     }
     @GetMapping("/ListNutrition/CreateNutrition")
-    public String InterfazCrearNutricion(@RequestParam Long id,Model model) {
+    public String InterfaceCreateNutrition(@RequestParam Long id, Model model) {
         model.addAttribute("nutricion",new Nutrition());
-        User user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "createNutrition";
@@ -62,19 +66,25 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @PostMapping("/ListNutrition/CreateNutrition")
-    public String agregarNutricion(Nutrition food, @RequestParam("id") Long id){
-        nutritionService.crearNutricion(food);
-        User user = userService.getUser(id);
-        return "redirect:/ListNutrition?id=" + user.getId();
+    public String addNutrition(Nutrition nutrition, @RequestParam("id") Long id){
+        GymUser user = userService.getGymUser(id);
+        if (user != null){
+            nutrition.setGymUser(user);
+            nutritionService.createNutrition(nutrition, user);
+            //return "redirect:/ListNutrition?id=" + user.getId();
+            return "redirect:/ListFoods?id=" + nutrition.getId();
+        }
+        return "redirect:/FrontPage";
+
     }
     @GetMapping("/ListNutrition/detailsNutrition/{id}")
-    public String detalladoDeNutricion(@PathVariable Long id, Model model, @RequestParam("id") Long userId){
-        Nutrition nutrition = nutritionService.obtenerNutricion(id);
+    public String detailsNutrition(@PathVariable Long id, Model model, @RequestParam("id") Long userId){
+        Nutrition nutrition = nutritionService.getNutrition(id);
         if (nutrition == null) {
             return "redirect:/ListNutrition";
         }
         model.addAttribute("nutrition", nutrition);
-        User user = userService.getUser(userId);
+        GymUser user = userService.getGymUser(userId);
         if(user != null){
             model.addAttribute("userId",user.getId());
             return "detailsNutrition";
@@ -83,12 +93,12 @@ public class NutritionController {
     }
 
     @GetMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String mostrarFormularioEditar(@PathVariable Long nutritionId, Model model,@RequestParam("id") Long userId) {
-        Nutrition nutrition = nutritionService.obtenerNutricion(nutritionId);
+    public String showFormEdit(@PathVariable Long nutritionId, Model model, @RequestParam("id") Long userId) {
+        Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         if(nutrition != null){
             model.addAttribute("nutrition", nutrition);
         }
-        User user = userService.getUser(userId);
+        GymUser user = userService.getGymUser(userId);
         if(user != null){
             model.addAttribute("userId",user.getId());
             return "modifyNutrition";
@@ -96,15 +106,15 @@ public class NutritionController {
         return "redirect:/ListNutrition";
     }
     @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String editadoDeNutricion(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("id") Long id) {
-        nutritionService.actualizarNutricion(nutritionId, nutrition);
-        User user = userService.getUser(id);
+    public String editNutrition(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("id") Long id) {
+        nutritionService.updateNutrition(nutritionId, nutrition);
+        GymUser user = userService.getGymUser(id);
         return "redirect:/ListNutrition?id=" + user.getId();
     }
     @GetMapping("/ListNutrition/DeleteNutrition/{id}")
-    public String eliminadoDeNutricion(@PathVariable Long id,@RequestParam("id") Long userId) {
-        nutritionService.eliminarNutricion(id);
-        User user = userService.getUser(userId);
+    public String deleteNutrition(@PathVariable Long id, @RequestParam("id") Long userId) {
+        nutritionService.deleteNutrition(id);
+        GymUser user = userService.getGymUser(userId);
         return "redirect:/ListNutrition?id=" + user.getId();
     }
 }
