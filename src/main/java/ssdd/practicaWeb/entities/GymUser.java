@@ -1,8 +1,22 @@
 package ssdd.practicaWeb.entities;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-public class User {
-    private String userImage;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Getter
+@Setter
+public class GymUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String userImage;
     private String username;
     private String password;
     private double weight;//Kg
@@ -13,17 +27,39 @@ public class User {
     private String morphology;
     private String caloricPhase;
 
+    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Nutrition> listNutrition = new ArrayList<>();
+
+    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Routine> listRoutine = new HashSet<>();
+
     //Constructor, getters, setters
     //Other details are not compulsory but editable
-    public User(Long id, String username, String password) {
-        this.userImage = "/imagenes/emptyUser.png";
+    public GymUser(Long id, String username, String password) {
+        this.userImage = "/images/emptyUser.png";
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public User() {
-        this.userImage = "/imagenes/emptyUser.png";
+    public GymUser() {
+        this.userImage = "/images/emptyUser.png";
+    }
+
+    public List<Nutrition> getListNutrition() {
+        return listNutrition;
+    }
+
+    public void setListNutrition(List<Nutrition> listNutrition) {
+        this.listNutrition = listNutrition;
+    }
+
+    public Set<Routine> getListRoutine() {
+        return listRoutine;
+    }
+
+    public void setListRoutine(Set<Routine> listRoutine) {
+        this.listRoutine = listRoutine;
     }
 
     public Long getId() {
