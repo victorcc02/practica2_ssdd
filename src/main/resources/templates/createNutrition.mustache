@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Crear Nutricion</title>
-        <link rel="stylesheet" href="/css/styleCreateNutrition.css">
-        <script>
-            function validarFormulario() {
-                var nombre = document.forms["formularioAgregarNutricion"]["nombre"].value;
-                var comida = document.forms["formularioAgregarNutricion"]["comida"].value;
-                var tipo = document.forms["formularioAgregarNutricion"]["tipo"].value;
-                if (nombre === "" || comida === "" || tipo === "") {
-                    alert("Todos los campos son obligatorios");
-                    return false;
-                }
-                return true;
+<head>
+    <title>Create Nutrition</title>
+    <link rel="stylesheet" href="/css/styleCreateNutrition.css">
+    <script>
+        function validateForm() {
+            var name = document.forms["formUpdateNutrition"]["name"].value;
+            var food = document.forms["formUpdateNutrition"]["food"].value;
+            var type = document.forms["formUpdateNutrition"]["type"].value;
+            if (name === "" || food === "" || type === "") {
+                alert("Todos los campos son obligatorios");
+                return false;
             }
-        </script>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <h2 class="logo"></h2>
-                <ul>
-                    <a href="/ListNutrition?id={{userId}}"><li>VOLVER</li></a>
-                </ul>
-            </nav>
-        </header>
-        <div class="create">
-            <div class="blackSpace"></div>
-            <div class="boxAtributes">
-                <h1>Crea tu propia nutricion</h1>
-                {{#exito}}
-                    <p>Nutricion creada</p>
-                {{/exito}}
-                <form name="formularioAgregarNutricion" action="/ListNutrition/CreateNutrition?id={{userId}}" method="post" onsubmit="return validarFormulario()">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre"><br><br>
-                    <label for="comida">Comida:</label>
-                    <input type="text" id="comida" name="comida"><br><br>
-                    <label for="tipo">Tipo:</label>
-                    <input type="text" id="tipo" name="tipo"><br><br>
-                    <input type="submit" value="Agregar">
-                </form>
-            </div>
-            <div class="blackSpace"></div>
-        </div>
-    </body>
+            return true;
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/ListNutrition?id={{userId}}"><li>VOLVER</li></a>
+        </ul>
+    </nav>
+</header>
+<div class="create">
+    <div class="blackSpace"></div>
+    <div class="boxAtributes">
+        <h1>Crea tu propia nutricion</h1>
+        {{#succesfull}}
+            <p>Nutricion creada</p>
+        {{/succesfull}}
+        <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?id={{userId}}" method="post" onsubmit="return validateForm()">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="type">Tipo:</label>
+        <input type="text" id="type" name="type"><br><br>
+        <input type="submit" value="Agregar Alimentos">
+        </form>
+    </div>
+    <div class="blackSpace"></div>
+</div>
+</body>
 </html>
