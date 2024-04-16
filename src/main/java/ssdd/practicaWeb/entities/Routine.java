@@ -1,14 +1,23 @@
 package ssdd.practicaWeb.entities;
 
+import jakarta.persistence.*;
 
+@Entity
 public class Routine {
-    private String routineName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    private String routineName;
     private String intensity;
     private int duration; // minutes
     private String exercises;
     private String goal; // Increase-Lose weight...
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private GymUser gymUser;
 
     public Routine(String routineName, String intensity, int duration, String exercises, String goal) {
         this.routineName = routineName;
