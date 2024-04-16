@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/styleSearchFood.css">
+</head>
+<body>
+
+<h2 class="tituloMenu">Añade tus alimentos</h2>
+<p class="tituloMenu">Añade los alimentos que quieras a tu nutricion, ten en cuenta el tipo de nutricion</p>
+
+<div class="row">
+    <div class="left" style="background-color:#bbb;">
+        <h2 class="tituloMenu">Lista de alimentos</h2>
+        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+        <ul id="myMenu">
+            {{#food}}
+                <li>
+                    <a href="/ListFoods/detailsFood/{{this.id}}?id={{nutritionId}}">{{this.name}}</a>
+                </li>
+            {{/food}}
+        </ul>
+    </div>
+
+    <div class="right" style="background-color:#ddd;">
+        <h2 class="tituloMenu">Detalles de la nutricion</h2>
+        <p class="tituloMenu">Nombre: {{nutrition.name}}</p>
+        <p class="tituloMenu">Tipo: {{nutrition.type}}</p>
+        <p class="tituloMenu">Alimentos: {{nutrition.listFoods}}</p>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+      var input, filter, ul, li, a, i;
+      input = document.getElementById("mySearch");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myMenu");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+</script>
+
+</body>
+</html>
