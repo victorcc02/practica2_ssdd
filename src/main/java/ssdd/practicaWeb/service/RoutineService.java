@@ -1,38 +1,52 @@
 package ssdd.practicaWeb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Routine;
+import ssdd.practicaWeb.repositories.RoutineRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 @Service
 public class RoutineService {
-    private final Map<Long, Routine> routineMap = new HashMap<>();
-    private final AtomicLong  nextId = new AtomicLong();
+
+    @Autowired
+    RoutineRepository routineRepository;
+
     public Routine createRoutine(Routine routine){
-        long id = nextId.incrementAndGet();
-        routine.setId(id);
-        routineMap.put(id,routine);
+        routineRepository.save(routine);
         return routine;
     }
     public Routine getRoutine(Long id){
-        return routineMap.get(id);
-    }
-    public Collection <Routine> getAllRoutines(){
-        return routineMap.values();
-    }
-    public Routine updateRoutine(Long id, Routine routine){
-        if(!routineMap.containsKey(id)){
+        Optional<Routine> theRoutine = routineRepository.findById(id);
+        if (theRoutine.isPresent()) {
+            Routine routine = theRoutine.get();
+            return routine;
+        } else {
             return null;
         }
-        routine.setId(id);
-        routineMap.put(id,routine);
-        return routine;
     }
-    public void deleteRoutine(Long id){
-        routineMap.remove(id);
+    public Collection <Routine> getAllRoutines(){
+        return routineRepository.findAll();
+    }
+    public Routine updateRoutine(Long id, Routine routine){
+        Optional<Routine> theRoutine = routineRepository.findById(id);
+        if(theRoutine.isPresent()) {
+            routine.setId(id);
+            routineRepository.save(routine);
+            return routine;
+        }
+
+        return null;
+    }
+    public Routine deleteRoutine(Long id){
+        Optional<Routine> theRoutine = routineRepository.findById(id);
+        if (theRoutine.isPresent()) {
+            Routine routine = theRoutine.get();
+            routineRepository.delete(routine);
+            return routine;
+        }
+        return null;
     }
 }
