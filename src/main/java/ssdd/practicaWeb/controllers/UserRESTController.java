@@ -11,19 +11,22 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/users")
 public class UserRESTController {
+
     @Autowired
     private UserService userService;
+
+
     @GetMapping
     public ResponseEntity<Collection<GymUser>> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllUsers());
+        return ResponseEntity.ok(userService.getAllGymUser());
     }
     @PostMapping
     public ResponseEntity<GymUser> createUser(@RequestBody GymUser user){
-        return ResponseEntity.status(201).body(userService.createUser(user));
+        return ResponseEntity.status(201).body(userService.createGymUser(user));
     }
     @GetMapping("/{id}")
     public ResponseEntity<GymUser> getUser(@PathVariable Long id){
-        GymUser user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
@@ -31,7 +34,7 @@ public class UserRESTController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<GymUser> updateUser(@PathVariable Long id, @RequestBody GymUser user){
-        GymUser updated = userService.updateUser(id,user);
+        GymUser updated = userService.updateGymUser(id,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
@@ -39,12 +42,12 @@ public class UserRESTController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
-        userService.deleteUser(id);
+        userService.deleteGymUser(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
     public ResponseEntity<GymUser> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
-        GymUser user = userService.getUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
@@ -78,7 +81,7 @@ public class UserRESTController {
         if(parcialUser.getCaloricPhase() != null){
             user.setCaloricPhase(parcialUser.getCaloricPhase());
         }
-        userService.updateUser(id,user);
+        userService.updateGymUser(id,user);
         return ResponseEntity.ok(user);
     }
 }

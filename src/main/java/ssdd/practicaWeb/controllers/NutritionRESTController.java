@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.service.NutritionService;
 
@@ -15,55 +16,52 @@ public class NutritionRESTController {
 
     @Autowired
     private NutritionService nutritionService;
+
     @PostMapping
-    public ResponseEntity<Nutrition> crearNutricion(@RequestBody Nutrition nutrition) {
-        return ResponseEntity.status(201).body(nutritionService.crearNutricion(nutrition));
+    public ResponseEntity<Nutrition> createNutrition(@RequestBody Nutrition nutrition, GymUser user) {
+        return ResponseEntity.status(201).body(nutritionService.createNutrition(nutrition,user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Nutrition> obtenerNutricion(@PathVariable Long id) {
-        Nutrition nutrition = nutritionService.obtenerNutricion(id);
+    public ResponseEntity<Nutrition> getNutricion(@PathVariable Long id) {
+        Nutrition nutrition = nutritionService.getNutrition(id);
         if (nutrition == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(nutrition);
     }
-
     @GetMapping
-    public ResponseEntity<Collection<Nutrition>> obtenerTodasLasNutricion() {
-        return ResponseEntity.ok(nutritionService.obtenerTodasLasNutricion());
+    public ResponseEntity<Collection<Nutrition>> allNutritions() {
+        return ResponseEntity.ok(nutritionService.getAll());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Nutrition> actualizarNutricion(@PathVariable Long id, @RequestBody Nutrition nutrition) {
-        Nutrition actualizada = nutritionService.actualizarNutricion(id, nutrition);
-        if (actualizada == null) {
+    public ResponseEntity<Nutrition> updateNutrition(@PathVariable Long id, @RequestBody Nutrition nutrition) {
+        Nutrition update = nutritionService.updateNutrition(id, nutrition);
+        if (update == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(actualizada);
+        return ResponseEntity.ok(update);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarNutricion(@PathVariable Long id) {
-        nutritionService.eliminarNutricion(id);
+    public ResponseEntity<Void> deleteNutrition(@PathVariable Long id) {
+        nutritionService.deleteNutrition(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Nutrition> actualizarParcialmenteNutricion(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
-        Nutrition existente = nutritionService.obtenerNutricion(id);
-        if (existente == null){
+    public ResponseEntity<Nutrition> apdateParcialNutrition(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
+        Nutrition existed = nutritionService.getNutrition(id);
+        if (existed == null){
             return ResponseEntity.notFound().build();
         }
-        if (parcialNutrition.getNombre() != null) {
-            existente.setNombre(parcialNutrition.getNombre());
+        if (parcialNutrition.getName() != null) {
+            existed.setName(parcialNutrition.getName());
         }
-        if (parcialNutrition.getTipo() != null) {
-            existente.setTipo(parcialNutrition.getTipo());
+        if (parcialNutrition.getType() != null) {
+            existed.setType(parcialNutrition.getType());
         }
-        if (parcialNutrition.getComida() != null) {
-            existente.setComida(parcialNutrition.getComida());
-        }
-        nutritionService.actualizarNutricion(id,existente);
-        return ResponseEntity.ok(existente);
+        nutritionService.updateNutrition(id, existed);
+        return ResponseEntity.ok(existed);
     }
 }
