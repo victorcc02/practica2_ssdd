@@ -30,8 +30,8 @@ public class UserService {
         return userRepository.findAll();
     }
     public GymUser updateGymUser(Long id, GymUser gymUser){
-        Optional<GymUser> theRoutine = userRepository.findById(id);
-        if(theRoutine.isPresent()) {
+        Optional<GymUser> theGymUser = userRepository.findById(id);
+        if(theGymUser.isPresent()) {
             gymUser.setId(id);
             userRepository.save(gymUser);
             return gymUser;
