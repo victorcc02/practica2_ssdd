@@ -13,6 +13,8 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+
+
     public GymUser createGymUser(GymUser gymUser){
         userRepository.save(gymUser);
         return gymUser;
@@ -26,9 +28,9 @@ public class UserService {
             return null;
         }
     }
-    public Collection <GymUser> getAllGymUser(){
+    /*public Collection <GymUser> getAllGymUser(){
         return userRepository.findAll();
-    }
+    }*/
     public GymUser updateGymUser(Long id, GymUser gymUser){
         Optional<GymUser> theGymUser = userRepository.findById(id);
         if(theGymUser.isPresent()) {
