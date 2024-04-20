@@ -29,16 +29,18 @@ public class LoginController {
     }
     @PostMapping("/Login")
     public String goFrontPage(GymUser user) {
-        Optional<GymUser> theGymUser = userRepository.findById(user.getId());
-        if (theGymUser.isPresent()){
+        //Optional<GymUser> theGymUser = userRepository.findById(user.getId());
+        /*if (theGymUser.isPresent()){
             return "redirect:/FrontPage?id=" + user.getId();
         }else {
             userService.createGymUser(user);
             return "redirect:/FrontPage?id=" + user.getId();
-        }
-
+        }*/
+        userService.createGymUser(user);
+        return "redirect:/FrontPage?id=" + user.getId();
 
     }
+  
     @GetMapping("/FrontPage")
     public String InterfaceFrontPage(Model model, @RequestParam("id") Long id) {
         model.addAttribute("user",userService.getGymUser(id));

@@ -13,7 +13,8 @@
         function deleteUser(){
             let confirmation = confirm('¿Estás seguro de querer eliminar este usuario?');
             if(confirmation){
-                window.location.href = "/Login";
+
+                window.location.href = "/users/delete/{{user.id}}";
             }
         }
     </script>

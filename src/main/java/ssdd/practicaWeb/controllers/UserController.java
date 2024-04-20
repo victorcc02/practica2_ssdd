@@ -27,7 +27,7 @@ public class UserController {
             model.addAttribute("user",user);
             return "users";
         }
-        return "redirect:/Portada";
+        return "redirect:/FrontPage";
     }
 
     @GetMapping("/users/edit/{id}")
@@ -37,7 +37,7 @@ public class UserController {
             model.addAttribute("user",user);
             return "edit";
         }
-        return "redirect:/Portada";
+        return "redirect:/FrontPage";
     }
 
     @PostMapping("/users/edit/{id}")
@@ -49,6 +49,6 @@ public class UserController {
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Long id){
         userService.deleteGymUser(id);
-        return "redirect:/Inicio";
+        return "redirect:/Login";
     }
 }

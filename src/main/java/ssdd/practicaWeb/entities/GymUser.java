@@ -30,8 +30,8 @@ public class GymUser {
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Nutrition> listNutrition = new ArrayList<>();
 
-    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Routine> listRoutine = new HashSet<>();
+    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Routine> listRoutine = new ArrayList<>();
 
     //Constructor, getters, setters
     //Other details are not compulsory but editable
@@ -54,11 +54,11 @@ public class GymUser {
         this.listNutrition = listNutrition;
     }
 
-    public Set<Routine> getListRoutine() {
+    public List<Routine> getListRoutine() {
         return listRoutine;
     }
 
-    public void setListRoutine(Set<Routine> listRoutine) {
+    public void setListRoutine(List<Routine> listRoutine) {
         this.listRoutine = listRoutine;
     }
 
