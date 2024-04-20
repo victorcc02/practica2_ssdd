@@ -16,10 +16,10 @@ public class UserRESTController {
     private UserService userService;
 
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<Collection<GymUser>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllGymUser());
-    }
+    }*/
     @PostMapping
     public ResponseEntity<GymUser> createUser(@RequestBody GymUser user){
         return ResponseEntity.status(201).body(userService.createGymUser(user));
