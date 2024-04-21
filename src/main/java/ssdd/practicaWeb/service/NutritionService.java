@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.repositories.UserRepository;
 
@@ -15,10 +16,15 @@ import java.util.Optional;
 public class NutritionService {
 
     @Autowired
-    NutritionRepository nutritionRepository;
-
+    private NutritionRepository nutritionRepository;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private FoodService foodService;
+    @Autowired
+    private UserService userService;
 
     public Nutrition createNutrition(Nutrition nutrition, GymUser user) {
         List<Nutrition> newList = user.getListNutrition();
