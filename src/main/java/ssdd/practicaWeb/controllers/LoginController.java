@@ -36,9 +36,13 @@ public class LoginController {
             userService.createGymUser(user);
             return "redirect:/FrontPage?id=" + user.getId();
         }*/
-        userService.createGymUser(user);
-        return "redirect:/FrontPage?id=" + user.getId();
 
+        GymUser optionalGymUser = userService.getGymUser(user.getUsername());
+        if(optionalGymUser == null){
+            userService.createGymUser(user);
+            return "redirect:/FrontPage?id=" + user.getId();
+        }
+        return "redirect:/FrontPage?id=" + optionalGymUser.getId();
     }
   
     @GetMapping("/FrontPage")

@@ -26,6 +26,11 @@
                 alert("No debes exceder las 6 horas de entrenamiento, esto puede ser malo para tu salud");
                 return false;
             }
+            let exercises = document.getElementById("exercises").value;
+            if(exercises > 255){
+                alert("Longitud excedida: 255 caracteres como máximo");
+                return false;
+            }
             return true;
         }
     </script>

@@ -13,11 +13,19 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-
-
     public GymUser createGymUser(GymUser gymUser){
         userRepository.save(gymUser);
         return gymUser;
+    }
+
+    public GymUser getGymUser(String username){
+        Collection <GymUser> gymUsers = getAllGymUser();
+        for(GymUser user: gymUsers){
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
     }
     public GymUser getGymUser(Long id){
         Optional<GymUser> theUser = userRepository.findById(id);
@@ -28,9 +36,9 @@ public class UserService {
             return null;
         }
     }
-    /*public Collection <GymUser> getAllGymUser(){
+    public Collection <GymUser> getAllGymUser(){
         return userRepository.findAll();
-    }*/
+    }
     public GymUser updateGymUser(Long id, GymUser gymUser){
         Optional<GymUser> theGymUser = userRepository.findById(id);
         if(theGymUser.isPresent()) {
