@@ -18,7 +18,7 @@
                 return false;
             }
             let duration = document.getElementById("duration").value;
-            if(duration < 1){
+            if(duration < 1 || duration === ""){
                 alert("Duración no válida. Recuerda que la duración se mide en números (minutos).");
                 return false;
             }
