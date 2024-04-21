@@ -16,35 +16,49 @@
         <ul id="myMenu">
             {{#food}}
                 <li>
-                    <a href="/ListFoods/detailsFood/{{this.id}}?id={{nutritionId}}">{{this.name}}</a>
+                    <a href="/ListFoods/detailsFood/{{this.id}}?id={{nutrition.id}}">{{this.name}}</a>
                 </li>
             {{/food}}
         </ul>
     </div>
-
-    <div class="right" style="background-color:#ddd;">
+    <div style="background-color:#ddd;" class="right">
         <h2 class="tituloMenu">Detalles de la nutricion</h2>
         <p class="tituloMenu">Nombre: {{nutrition.name}}</p>
         <p class="tituloMenu">Tipo: {{nutrition.type}}</p>
-        <p class="tituloMenu">Alimentos: {{nutrition.listFoods}}</p>
+        <p class="tituloMenu">Alimentos</p>
+        <ul class="ul">
+            {{#nutrition.listFoods}}
+                <li class="li">
+                    {{this.name}}
+                    <a href="/ListFoods/deleteFoodList?nutritionId={{nutrition.id}}&foodId={{this.id}}">
+                    <img src="../images/paperbin.png" alt="paperbin" height="15px" width="15px">
+                    </a>
+                </li>
+            {{/nutrition.listFoods}}
+        </ul>
+        <br><br>
+        <div>
+            <a href="/ListFoods/CreateFood?id={{nutrition.id}}" class="button buttonBlue">Crear alimento</a>
+            <a href="/ListNutrition?id={{userId}}" class="button buttonBlue">Terminar nutricion</a>
+        </div>
     </div>
 </div>
 
 <script>
     function myFunction() {
-      var input, filter, ul, li, a, i;
-      input = document.getElementById("mySearch");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myMenu");
-      li = ul.getElementsByTagName("li");
-      for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
+        let input, filter, ul, li, a, i;
+        input = document.getElementById("mySearch");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myMenu");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
         }
-      }
     }
 </script>
 
