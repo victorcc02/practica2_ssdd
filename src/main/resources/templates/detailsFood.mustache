@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del alimento</title>
+    <link rel="stylesheet" href="/css/styleDetailsFood.css">
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/ListFoods?id={{nutritionId}}">volver</a>
+        </ul>
+    </nav>
+</header>
+<div class="details">
+    <div class="blackSpace"></div>
+    <form class="atributes">
+        <p>Nombre: {{food.name}}</p>
+        <p>Calorias: {{food.calories}}</p>
+        <p>Tipo: {{food.type}}</p>
+        <br><br>
+        <a href="/ListFoods/addFood?nutritionId={{nutritionId}}&foodId={{food.id}}" class="boton">Agregar alimento</a>
+        <br><br>
+        <a href="/ListFoods/ModifyFood/{{food.id}}?id={{nutritionId}}" class="boton">Editar alimento</a>
+        <br><br>
+        <a href="/ListFoods/DeleteFood/{{food.id}}?id={{nutritionId}}" class="boton">Eliminar alimento</a>
+    </form>
+</div>
+<div class="blackSpace"></div>
+</div>
+</body>
+</html>
