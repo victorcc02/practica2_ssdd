@@ -50,7 +50,7 @@ public class NutritionRESTController {
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Nutrition> apdateParcialNutrition(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
+    public ResponseEntity<Nutrition> updateParcialNutrition(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
         Nutrition existed = nutritionService.getNutrition(id);
         if (existed == null){
             return ResponseEntity.notFound().build();
