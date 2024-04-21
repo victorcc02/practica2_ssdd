@@ -29,14 +29,6 @@ public class LoginController {
     }
     @PostMapping("/Login")
     public String goFrontPage(GymUser user) {
-        //Optional<GymUser> theGymUser = userRepository.findById(user.getId());
-        /*if (theGymUser.isPresent()){
-            return "redirect:/FrontPage?id=" + user.getId();
-        }else {
-            userService.createGymUser(user);
-            return "redirect:/FrontPage?id=" + user.getId();
-        }*/
-
         GymUser optionalGymUser = userService.getGymUser(user.getUsername());
         if(optionalGymUser == null){
             userService.createGymUser(user);
