@@ -3,8 +3,10 @@ package ssdd.practicaWeb.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.service.RoutineService;
+import ssdd.practicaWeb.service.UserService;
 
 import java.util.Collection;
 
@@ -13,13 +15,17 @@ import java.util.Collection;
 public class RoutineRESTController {
     @Autowired
     private RoutineService routineService;
-    @GetMapping
-    public ResponseEntity<Collection<Routine>> getAllRoutines(){
-        return ResponseEntity.ok(routineService.getAllRoutines());
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/userId/{id}")
+    public ResponseEntity<Collection<Routine>> getAllRoutines(@PathVariable Long userId){
+        return ResponseEntity.ok(routineService.getAllRoutines(userId));
     }
+
     @PostMapping
-    public ResponseEntity<Routine> createRoutine(@RequestBody Routine routine){
-        return ResponseEntity.status(201).body(routineService.createRoutine(routine));
+    public ResponseEntity<Routine> createRoutine(@RequestBody Routine routine , GymUser user){
+        return ResponseEntity.status(201).body(routineService.createRoutine(routine,user));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Routine> getRoutine(@PathVariable Long id){
@@ -31,7 +37,8 @@ public class RoutineRESTController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Routine> updateRoutine(@PathVariable Long id, @RequestBody Routine routine){
-        Routine updated = routineService.updateRoutine(id,routine);
+        GymUser user = userService.getGymUser(id);
+        Routine updated = routineService.updateRoutine(id,routine,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
@@ -44,6 +51,7 @@ public class RoutineRESTController {
     }
     @PatchMapping("/{id}")
     public ResponseEntity<Routine> patchRoutine(@PathVariable Long id, @RequestBody Routine parcialRoutine){
+        GymUser user = userService.getGymUser(id);
         Routine routine = routineService.getRoutine(id);
         if (routine == null){
             return ResponseEntity.notFound().build();
@@ -63,7 +71,7 @@ public class RoutineRESTController {
         if(parcialRoutine.getGoal() != null) {
             routine.setGoal(parcialRoutine.getGoal());
         }
-        routineService.updateRoutine(id,routine);
+        routineService.updateRoutine(id,routine, user);
         return ResponseEntity.ok(routine);
     }
 }
