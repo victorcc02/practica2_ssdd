@@ -26,11 +26,6 @@
                 alert("No debes exceder las 6 horas de entrenamiento, esto puede ser malo para tu salud");
                 return false;
             }
-            let exercises = document.getElementById("exercises").value;
-            if(exercises > 255){
-                alert("Longitud excedida: 255 caracteres como máximo");
-                return false;
-            }
             return true;
         }
     </script>
@@ -61,16 +56,11 @@
     <br><br>
     <label for="exercises" class="title">Ejercicios</label><br>
     <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70">
-                Ejemplo empuje:
-                Pecho -> Press banca (4 x 12)
-                         Press banca inclinado (4 x 12)
-                         Cruces polea alta(4 x 10)
-                Triceps -> Fondos (4 x 10)
-                           Extesiones polea (4 x 12)
-                           Rompecraneos (3 x 10)
-                Hombro -> Press militar (3 x 10)
-                          Elevaciones laterales (4 x 10)
-                Cardio -> Correr (20')
+                Ejemplo:
+                Pecho: Press banca (4 x 12)
+                Triceps: Fondos (4 x 10)
+                Hombro: Press militar (3 x 10)
+                Cardio: Correr (20')
             </textarea>
     <br><br>
     <label for="goal" class="title">Objetivo</label><br>
