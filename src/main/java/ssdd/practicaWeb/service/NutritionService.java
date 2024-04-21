@@ -44,7 +44,7 @@ public class NutritionService {
         }
     }
 
-    public Collection<Nutrition> getAll() {
+    public Collection<Nutrition> getAll(Long id) {
         List<Nutrition> listNutritionUser = nutritionRepository.findByGymUser(userService.getGymUser(id));
         return listNutritionUser;
     }
