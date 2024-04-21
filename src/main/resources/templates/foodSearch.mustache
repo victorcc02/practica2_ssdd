@@ -3,6 +3,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/styleSearchFood.css">
+    <script>
+        function deleteFood(){
+            let confirmation = confirm('¿Estás seguro de querer eliminar esta comida?');
+            if(confirmation){
+                window.location.href = "/ListFoods/DeleteFood/{{nutrition.id}}";
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -31,7 +39,7 @@
                 <li class="li">
                     {{this.name}}
                     <a href="/ListFoods/deleteFoodList?nutritionId={{nutrition.id}}&foodId={{this.id}}">
-                    <img src="../images/paperbin.png" alt="paperbin" height="15px" width="15px">
+                    <img src="../images/paperbin.png" alt="paperbin" height="15px" width="15px" onclick="deleteFood()">
                     </a>
                 </li>
             {{/nutrition.listFoods}}
