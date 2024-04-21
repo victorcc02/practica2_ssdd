@@ -30,6 +30,14 @@ public class Routine {
     public Routine() {
     }
 
+    public GymUser getGymUser() {
+        return gymUser;
+    }
+
+    public void setGymUser(GymUser gymUser) {
+        this.gymUser = gymUser;
+    }
+
     public String getIntensity() {
         return intensity;
     }
