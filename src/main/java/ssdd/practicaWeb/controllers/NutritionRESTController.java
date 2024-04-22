@@ -30,7 +30,7 @@ public class NutritionRESTController {
         }
         return ResponseEntity.ok(nutrition);
     }
-    @GetMapping
+    @GetMapping("/all/{userId}")
     public ResponseEntity<Collection<Nutrition>> allNutritions(@PathVariable Long userId) {
         return ResponseEntity.ok(nutritionService.getAll(userId));
     }
