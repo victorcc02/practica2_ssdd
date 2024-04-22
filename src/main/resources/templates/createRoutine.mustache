@@ -27,6 +27,10 @@
                 return false;
             }
             let exercises = document.forms["createForm"]["exercises"].value;
+            if(exercises.length < 5){
+                alert("Longitud incorrecta. Por favor rellene este campo.");
+                return false;
+            }
             if(exercises.length > 255){
                 alert("Longitud excedida: 255 caracteres como máximo");
                 return false;
