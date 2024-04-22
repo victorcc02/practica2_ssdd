@@ -8,7 +8,7 @@
             window.location.href = "/routines?id={{userId}}";
         }
         function validateForm(){
-            let routineName = document.getElementById("routineName").value;
+            let routineName = document.forms["createForm"]["routineName"].value;
             if(routineName === ""){
                 alert("Longitud en el nombre de la rutina no válida (nombre vacío).");
                 return false;
@@ -17,8 +17,8 @@
                 alert("Longitud en el nombre de la rutina no válida (muy largo).");
                 return false;
             }
-            let duration = document.getElementById("duration").value;
-            if(duration < 1 || duration === ""){
+            let duration = document.forms["createForm"]["duration"].value;
+            if(duration < 1){
                 alert("Duración no válida. Recuerda que la duración se mide en números (minutos).");
                 return false;
             }
@@ -26,7 +26,7 @@
                 alert("No debes exceder las 6 horas de entrenamiento, esto puede ser malo para tu salud");
                 return false;
             }
-            let exercises = document.getElementById("exercises").value;
+            let exercises = document.forms["createForm"]["exercises"].value;
             if(exercises > 255){
                 alert("Longitud excedida: 255 caracteres como máximo");
                 return false;
@@ -42,7 +42,7 @@
     </button>
 </div>
 <br><br>
-<form action="/routines/createRoutine" method="post" onsubmit="return validateForm()">
+<form name="createForm" action="/routines/createRoutine" method="post" onsubmit="return validateForm()">
     <input type="hidden" name="userId" value="{{userId}}">
     <label for="name" class="title">Nombre de la rutina</label><br>
     <input id="name" class="field" name="routineName" type="text" minlength="1" maxlength="15"
