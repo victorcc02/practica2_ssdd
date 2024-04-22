@@ -59,7 +59,6 @@
         function editImage(){
             let userImage = document.getElementById("uImage");
             let input = document.getElementById("editImageInput");
-            console.log(input.files);
             if(input.files && input.files[0]){
                 let reader = new FileReader();
                 reader.onload = function(e){

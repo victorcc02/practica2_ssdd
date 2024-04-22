@@ -15,7 +15,7 @@ public class GymUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(length = 1000000)
     private String userImage;
     private String username;
     private String password;
