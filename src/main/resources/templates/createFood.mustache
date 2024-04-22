@@ -12,6 +12,10 @@
                 alert("Todos los campos son obligatorios");
                 return false;
             }
+            if (calories < 1){
+                alert("Calorias no validas. Recuerda que las calorias se miden en números.");
+                return false;
+            }
             return true;
         }
     </script>
@@ -38,7 +42,7 @@
         <label for="type">Tipo:</label>
         <input type="text" id="type" name="type"><br><br>
         <label for="calories">Calories:</label>
-        <input type="text" id="calories" name="calories"><br><br>
+        <input type="number" id="calories" name="calories"><br><br>
         <input type="submit" value="Agregar Alimento">
         </form>
     </div>

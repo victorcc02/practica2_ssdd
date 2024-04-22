@@ -7,7 +7,7 @@
         function deleteRoutine(){
             let confirmation = confirm('¿Estás seguro de querer eliminar esta rutina?');
             if(confirmation){
-                window.location.href = "/routines?id={{userId}}";
+                window.location.href = "/routines/delete/{{routine.id}}?id={{userId}}";
             }
         }
     </script>
@@ -17,7 +17,7 @@
     <nav>
         <ul class="list">
             <a href="/routines/editRoutine/{{routine.id}}?id={{userId}}">Editar Rutina</a>
-            <a onclick="deleteRoutine()" href="/routines/delete/{{routine.id}}?id={{userId}}">Eliminar Rutina</a>
+            <a onclick="deleteRoutine()" >Eliminar Rutina</a>
             <a href="/routines?id={{userId}}">Volver a las rutinas</a>
         </ul>
     </nav>

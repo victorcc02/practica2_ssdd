@@ -3,6 +3,16 @@
 <head>
     <title>Editar Nutricion</title>
     <link rel="stylesheet" href="/css/styleModifyNutrition.css">
+    <script>
+        function validateForm(){
+            let nutritionName = document.forms["editNutritionForm"]["name"].value;
+            console.log(nutritionName)
+            if (nutritionName === "") {
+                alert("Longitud en el nombre de la nutrición no válida (nombre vacío).");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -17,7 +27,7 @@
     <div class="blackSpace"></div>
     <div class="changes">
         <h1>Editar Nutricion</h1>
-        <form action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?id={{userId}}" method="post">
+        <form name="editNutritionForm" method="post" onsubmit="return validateForm()" action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?id={{userId}}" method="post">
         <input type="hidden" name="id" value="{{nutrition.id}}">
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" value="{{nutrition.name}}"><br><br>

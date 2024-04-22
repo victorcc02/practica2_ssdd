@@ -5,13 +5,14 @@
     <link rel="stylesheet" href="/css/styleCreateNutrition.css">
     <script>
         function validateForm() {
-            var name = document.forms["formUpdateNutrition"]["name"].value;
-            var food = document.forms["formUpdateNutrition"]["food"].value;
-            var type = document.forms["formUpdateNutrition"]["type"].value;
+            let name = document.forms["formUpdateNutrition"]["name"].value;
+            let food = document.forms["formUpdateNutrition"]["food"].value;
+            let type = document.forms["formUpdateNutrition"]["type"].value;
             if (name === "" || food === "" || type === "") {
                 alert("Todos los campos son obligatorios");
                 return false;
             }
+
             return true;
         }
     </script>
@@ -34,7 +35,7 @@
         {{/succesfull}}
         <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?id={{userId}}" method="post" onsubmit="return validateForm()">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <input type="text" id="name" name="name" required><br><br>
         <label for="type">Tipo:</label>
         <input type="text" id="type" name="type"><br><br>
         <input type="submit" value="Agregar Alimentos">

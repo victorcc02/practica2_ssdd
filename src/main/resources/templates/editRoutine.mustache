@@ -28,7 +28,7 @@
                 return false;
             }
             let exercises = document.forms["editForm"]["exercises"].value;
-            if(exercises > 255){
+            if(exercises.length > 255){
                 alert("Longitud excedida: 255 caracteres como máximo");
                 return false;
             }
