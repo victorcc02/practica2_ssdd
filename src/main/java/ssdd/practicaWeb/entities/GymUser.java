@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,19 +13,31 @@ import java.util.List;
 @Getter
 @Setter
 public class GymUser {
+    public interface User{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(User.class)
     private Long id;
-    @Column(length = 1000000)
+    @Column(length = 1500000)
+    @JsonView(User.class)
     private String userImage;
+    @JsonView(User.class)
     private String username;
+    @JsonView(User.class)
     private String password;
+    @JsonView(User.class)
     private double weight;//Kg
+    @JsonView(User.class)
     private double goalWeight;//kg
+    @JsonView(User.class)
     private int height;//cm
+    @JsonView(User.class)
     private String gender;
+    @JsonView(User.class)
     private int age;
+    @JsonView(User.class)
     private String morphology;
+    @JsonView(User.class)
     private String caloricPhase;
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

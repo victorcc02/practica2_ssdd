@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 
@@ -8,19 +9,24 @@ import java.util.Set;
 
 @Entity
 public class Nutrition {
-
+    public interface PublicNutrition{}
+    public interface AsociationUserNutrition{}
+    public interface ListFood{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(PublicNutrition.class)
     private Long id;
-
+    @JsonView(PublicNutrition.class)
     private String name;
+    @JsonView(PublicNutrition.class)
     private String type;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonView(AsociationUserNutrition.class)
     private GymUser gymUser;
 
     @ManyToMany(mappedBy = "listNutritions")
+    @JsonView(ListFood.class)
     private Set<Food> listFoods = new HashSet<>();
 
     public Nutrition() {

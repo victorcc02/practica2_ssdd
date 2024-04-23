@@ -1,22 +1,29 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 @Entity
 public class Routine {
+    public interface PublicRoutine{}
+    public interface AsociationUserRoutine{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(PublicRoutine.class)
     private Long id;
-
-
+    @JsonView(PublicRoutine.class)
     private String routineName;
+    @JsonView(PublicRoutine.class)
     private String intensity;
+    @JsonView(PublicRoutine.class)
     private int duration; // minutes
+    @JsonView(PublicRoutine.class)
     private String exercises;
+    @JsonView(PublicRoutine.class)
     private String goal; // Increase-Lose weight...
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonView(AsociationUserRoutine.class)
     private GymUser gymUser;
 
     public Routine(String routineName, String intensity, int duration, String exercises, String goal) {
