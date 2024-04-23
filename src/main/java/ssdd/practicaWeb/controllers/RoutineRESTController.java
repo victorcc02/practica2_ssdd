@@ -25,8 +25,9 @@ public class RoutineRESTController {
         return ResponseEntity.ok(routineService.getAllRoutines(userId));
     }
 
-    @PostMapping
-    public ResponseEntity<Routine> createRoutine(@RequestBody Routine routine , GymUser user){
+    @PostMapping("/{userId}")
+    public ResponseEntity<Routine> createRoutine(@RequestBody Routine routine , @PathVariable Long userId){
+        GymUser user = userService.getGymUser(userId);
         return ResponseEntity.status(201).body(routineService.createRoutine(routine,user));
     }
     @GetMapping("/{id}")
