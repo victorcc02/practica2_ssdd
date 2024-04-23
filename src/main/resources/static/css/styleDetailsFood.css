@@ -72,4 +72,5 @@ nav ul a:hover{
     color: #fff;
     border-radius: 4px;
     text-decoration:none;
+    cursor: pointer;
 }
