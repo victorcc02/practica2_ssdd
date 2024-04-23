@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 public class Nutrition {
     public interface PublicNutrition{}
-    public interface AsociationUserNutrition{}
-    public interface ListFood{}
+    public interface AsociationUserNutrition extends GymUser.PublicUser{}
+    public interface ListFood extends Food.PublicFood{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(PublicNutrition.class)

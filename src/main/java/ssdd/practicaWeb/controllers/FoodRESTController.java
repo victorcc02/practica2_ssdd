@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ public class FoodRESTController {
 
     @Autowired
     private FoodService foodService;
+    interface DetailedView extends Food.PublicFood, Food.AsociationFoodNutrition{}
 
     @PostMapping
     public ResponseEntity<Food> createFood(@RequestBody Food food) {
@@ -22,6 +24,7 @@ public class FoodRESTController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Food> getFood(@PathVariable Long id) {
         Food food = foodService.getFood(id);
         if (food == null) {
@@ -31,11 +34,13 @@ public class FoodRESTController {
     }
 
     @GetMapping
+    @JsonView(DetailedView.class)
     public ResponseEntity<Collection<Food>> allFoods() {
         return ResponseEntity.ok(foodService.getAllFood());
     }
 
     @PutMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Food> updateFood(@PathVariable Long id, @RequestBody Food food) {
         Food update = foodService.updateFood(id, food);
         if (update == null) {
@@ -45,11 +50,13 @@ public class FoodRESTController {
     }
 
     @DeleteMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteFood(@PathVariable Long id) {
         foodService.deleteFood(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Food> updateParcialFood(@PathVariable Long id, @RequestBody Food parcialFood) {
         Food existed = foodService.getFood(id);
         if (existed == null){

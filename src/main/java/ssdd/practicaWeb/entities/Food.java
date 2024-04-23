@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class Food {
     public interface PublicFood{}
-    public interface AsociationFoodNutrition{}
+    public interface AsociationFoodNutrition extends Nutrition.PublicNutrition{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(PublicFood.class)

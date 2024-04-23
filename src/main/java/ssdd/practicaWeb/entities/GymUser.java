@@ -13,31 +13,37 @@ import java.util.List;
 @Getter
 @Setter
 public class GymUser {
-    public interface User{}
+    /*
+    * Variables are marked with JsonView() and an interface.
+    * In the RESTController we will use one interface or another
+    * to print the values we want
+    * */
+    public interface PublicUser{}
+    public interface DetailedUser{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(User.class)
+    @JsonView(PublicUser.class)
     private Long id;
     @Column(length = 1500000)
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private String userImage;
-    @JsonView(User.class)
+    @JsonView(PublicUser.class)
     private String username;
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private String password;
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private double weight;//Kg
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private double goalWeight;//kg
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private int height;//cm
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private String gender;
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private int age;
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private String morphology;
-    @JsonView(User.class)
+    @JsonView(DetailedUser.class)
     private String caloricPhase;
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,9 @@ public class RoutineRESTController {
     private RoutineService routineService;
     @Autowired
     private UserService userService;
-
-    @GetMapping("/userId/{id}")
+    interface DetailedView extends Routine.PublicRoutine, Routine.AsociationUserRoutine{}
+    @GetMapping("/all/{userId}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Collection<Routine>> getAllRoutines(@PathVariable Long userId){
         return ResponseEntity.ok(routineService.getAllRoutines(userId));
     }
@@ -28,6 +30,7 @@ public class RoutineRESTController {
         return ResponseEntity.status(201).body(routineService.createRoutine(routine,user));
     }
     @GetMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Routine> getRoutine(@PathVariable Long id){
         Routine routine = routineService.getRoutine(id);
         if(routine == null){
@@ -36,6 +39,7 @@ public class RoutineRESTController {
         return ResponseEntity.ok(routine);
     }
     @PutMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Routine> updateRoutine(@PathVariable Long id, @RequestBody Routine routine){
         GymUser user = userService.getGymUser(id);
         Routine updated = routineService.updateRoutine(id,routine,user);
@@ -45,11 +49,13 @@ public class RoutineRESTController {
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteRoutine(@PathVariable Long id){
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Routine> patchRoutine(@PathVariable Long id, @RequestBody Routine parcialRoutine){
         GymUser user = userService.getGymUser(id);
         Routine routine = routineService.getRoutine(id);

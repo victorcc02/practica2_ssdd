@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class NutritionRESTController {
 
     @Autowired
     private NutritionService nutritionService;
+    interface DetailedView extends Nutrition.PublicNutrition, Nutrition.AsociationUserNutrition, Nutrition.ListFood{}
 
     @PostMapping
     public ResponseEntity<Nutrition> createNutrition(@RequestBody Nutrition nutrition, GymUser user) {
@@ -23,6 +25,7 @@ public class NutritionRESTController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Nutrition> getNutricion(@PathVariable Long id) {
         Nutrition nutrition = nutritionService.getNutrition(id);
         if (nutrition == null) {
@@ -31,11 +34,13 @@ public class NutritionRESTController {
         return ResponseEntity.ok(nutrition);
     }
     @GetMapping("/all/{userId}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Collection<Nutrition>> allNutritions(@PathVariable Long userId) {
         return ResponseEntity.ok(nutritionService.getAll(userId));
     }
 
     @PutMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Nutrition> updateNutrition(@PathVariable Long id, @RequestBody Nutrition nutrition) {
         Nutrition update = nutritionService.updateNutrition(id, nutrition);
         if (update == null) {
@@ -45,11 +50,13 @@ public class NutritionRESTController {
     }
 
     @DeleteMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteNutrition(@PathVariable Long id) {
         nutritionService.deleteNutrition(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Nutrition> updateParcialNutrition(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
         Nutrition existed = nutritionService.getNutrition(id);
         if (existed == null){

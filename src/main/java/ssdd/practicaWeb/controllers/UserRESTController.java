@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +12,20 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/users")
 public class UserRESTController {
-
     @Autowired
     private UserService userService;
-
-
-    /*@GetMapping
+    interface DetailedView extends GymUser.PublicUser, GymUser.DetailedUser{}
+    @GetMapping
+    @JsonView(DetailedView.class) //returns all values marked with JsonView(User.class)
     public ResponseEntity<Collection<GymUser>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllGymUser());
-    }*/
+    }
     @PostMapping
     public ResponseEntity<GymUser> createUser(@RequestBody GymUser user){
         return ResponseEntity.status(201).body(userService.createGymUser(user));
     }
     @GetMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<GymUser> getUser(@PathVariable Long id){
         GymUser user = userService.getGymUser(id);
         if(user == null){
@@ -33,6 +34,7 @@ public class UserRESTController {
         return ResponseEntity.ok(user);
     }
     @PutMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<GymUser> updateUser(@PathVariable Long id, @RequestBody GymUser user){
         GymUser updated = userService.updateGymUser(id,user);
         if(updated == null){
@@ -41,11 +43,13 @@ public class UserRESTController {
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteGymUser(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
+    @JsonView(DetailedView.class)
     public ResponseEntity<GymUser> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
         GymUser user = userService.getGymUser(id);
         if(user == null){

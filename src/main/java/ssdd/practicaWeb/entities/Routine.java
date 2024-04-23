@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 public class Routine {
     public interface PublicRoutine{}
-    public interface AsociationUserRoutine{}
+    public interface AsociationUserRoutine extends GymUser.PublicUser{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(PublicRoutine.class)
