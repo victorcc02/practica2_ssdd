@@ -54,22 +54,15 @@ ul a:hover{
 }
 .intro{
     position: relative;
-    top: 30%;
-    left: 10%;
     color: white;
+    display: grid;
+    grid-template-rows: auto 30%;
 }
 .intro p{
     display: block;
-    width: 60%;
     text-align-last: center;
 }
-.intro h2{
-    display: block;
-    width: 60%;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 30px;
-}
+
 .choose{
     display: flex;
     justify-content: center;
