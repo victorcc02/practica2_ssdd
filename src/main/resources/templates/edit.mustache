@@ -25,13 +25,21 @@
                 alert("Longitud en el nombre de usuario no válida (nombre vacío).");
                 return false;
             }
-            if(username.length > 30){
+            if(username.length < 6){
+                alert("Longitud en el nombre de usuario no válida (muy pequeño).");
+                return false;
+            }
+            if(username.length > 10){
                 alert("Longitud en el nombre de usuario no válida (muy largo).");
                 return false;
             }
             let password = document.getElementById("password").value;
             if(password.length < 6){
                 alert("Contraseña muy corta. Introduzca una más larga.");
+                return false;
+            }
+            if(password.length > 10){
+                alert("Contraseña muy larga. Introduzca una más corta.");
                 return false;
             }
             let height = document.getElementById("height").value;
@@ -92,11 +100,11 @@
     <input type="hidden" name="userImage" id="userImage" value="{{user.userImage}}">
     <label for="username" class="title">Nombre de usuario</label><br>
     <input id="username" name="username" type="text" class="field" value={{user.username}}
-           placeholder={{user.username}}>
+           placeholder={{user.username}} minlength="6" maxlength="10">
     <br><br>
     <label for="password" class="title">Contraseña</label><br>
     <span class="passwordContainer">
-                <input name="password" id="password" type="password" class="field" value={{user.password}}>
+                <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>
                 <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password"><!-- foto ojo y funcion-->
             </span>
     <br>
