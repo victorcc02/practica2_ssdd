@@ -104,8 +104,9 @@ public class NutritionController {
 
     @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
     public String editNutrition(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("id") Long userId) {
-        nutrition.setGymUser(userService.getGymUser(userId));
-        nutritionService.updateNutrition(nutritionId, nutrition);
+        GymUser user = userService.getGymUser(userId);
+        nutrition.setGymUser(user);
+        nutritionService.updateNutrition(nutritionId, nutrition, user);
         return "redirect:/ListFoods?id=" + nutritionId;
     }
     @GetMapping("/ListNutrition/DeleteNutrition/{id}")

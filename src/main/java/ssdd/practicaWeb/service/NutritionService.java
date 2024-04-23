@@ -48,10 +48,11 @@ public class NutritionService {
         return listNutritionUser;
     }
 
-    public Nutrition updateNutrition(Long id, Nutrition nutrition) {
-        Optional<Nutrition> theNutrition = nutritionRepository.findById(id);
+    public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user) {
+        Optional<Nutrition> theNutrition = nutritionRepository.findById(nutritionId);
         if(theNutrition.isPresent()) {
-            nutrition.setId(id);
+            nutrition.setGymUser(user);
+            nutrition.setId(nutritionId);
             nutritionRepository.save(nutrition);
             return nutrition;
         }

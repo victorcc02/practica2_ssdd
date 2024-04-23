@@ -39,10 +39,10 @@ public class RoutineRESTController {
         }
         return ResponseEntity.ok(routine);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/{userId}/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Routine> updateRoutine(@PathVariable Long id, @RequestBody Routine routine){
-        GymUser user = userService.getGymUser(id);
+    public ResponseEntity<Routine> updateRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine routine){
+        GymUser user = userService.getGymUser(userId);
         Routine updated = routineService.updateRoutine(id,routine,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
@@ -55,10 +55,10 @@ public class RoutineRESTController {
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{userId}/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Routine> patchRoutine(@PathVariable Long id, @RequestBody Routine parcialRoutine){
-        GymUser user = userService.getGymUser(id);
+    public ResponseEntity<Routine> patchRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine parcialRoutine){
+        GymUser user = userService.getGymUser(userId);
         Routine routine = routineService.getRoutine(id);
         if (routine == null){
             return ResponseEntity.notFound().build();

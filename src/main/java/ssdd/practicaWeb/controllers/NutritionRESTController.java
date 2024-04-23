@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.service.NutritionService;
+import ssdd.practicaWeb.service.UserService;
 
 import java.util.Collection;
 
@@ -17,10 +18,13 @@ public class NutritionRESTController {
 
     @Autowired
     private NutritionService nutritionService;
+    @Autowired
+    private UserService userService;
     interface DetailedView extends Nutrition.PublicNutrition, Nutrition.AsociationUserNutrition, Nutrition.ListFood{}
 
-    @PostMapping
-    public ResponseEntity<Nutrition> createNutrition(@RequestBody Nutrition nutrition, GymUser user) {
+    @PostMapping("/{userId}")
+    public ResponseEntity<Nutrition> createNutrition(@RequestBody Nutrition nutrition, @PathVariable Long userId) {
+        GymUser user = userService.getGymUser(userId);
         return ResponseEntity.status(201).body(nutritionService.createNutrition(nutrition,user));
     }
 
@@ -39,10 +43,11 @@ public class NutritionRESTController {
         return ResponseEntity.ok(nutritionService.getAll(userId));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{userId}/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Nutrition> updateNutrition(@PathVariable Long id, @RequestBody Nutrition nutrition) {
-        Nutrition update = nutritionService.updateNutrition(id, nutrition);
+    public ResponseEntity<Nutrition> updateNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition nutrition) {
+        GymUser user = userService.getGymUser(userId);
+        Nutrition update = nutritionService.updateNutrition(id, nutrition, user);
         if (update == null) {
             return ResponseEntity.notFound().build();
         }
@@ -55,9 +60,10 @@ public class NutritionRESTController {
         nutritionService.deleteNutrition(id);
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("/{userId}/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Nutrition> updateParcialNutrition(@PathVariable Long id, @RequestBody Nutrition parcialNutrition) {
+    public ResponseEntity<Nutrition> updateParcialNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition parcialNutrition) {
+        GymUser user = userService.getGymUser(userId);
         Nutrition existed = nutritionService.getNutrition(id);
         if (existed == null){
             return ResponseEntity.notFound().build();
@@ -68,7 +74,7 @@ public class NutritionRESTController {
         if (parcialNutrition.getType() != null) {
             existed.setType(parcialNutrition.getType());
         }
-        nutritionService.updateNutrition(id, existed);
+        nutritionService.updateNutrition(id, existed, user);
         return ResponseEntity.ok(existed);
     }
 }

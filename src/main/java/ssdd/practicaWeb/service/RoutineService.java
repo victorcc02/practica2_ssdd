@@ -37,11 +37,11 @@ public class RoutineService {
         List<Routine> listRoutineUser = routineRepository.findByGymUser(userService.getGymUser(id));
         return listRoutineUser;
     }
-    public Routine updateRoutine(Long routineId, Routine routine, GymUser userId){
+    public Routine updateRoutine(Long routineId, Routine routine, GymUser user){
         Optional<Routine> theRoutine = routineRepository.findById(routineId);
         if(theRoutine.isPresent()) {
             routine.setId(routineId);
-            routine.setGymUser(userId);
+            routine.setGymUser(user);
             routineRepository.save(routine);
             return routine;
         }
