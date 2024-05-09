@@ -19,7 +19,6 @@ public class Nutrition {
     private String type;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private GymUser gymUser;
 
     @ManyToMany(mappedBy = "listNutritions")

@@ -16,7 +16,6 @@ public class Routine {
     private String goal; // Increase-Lose weight...
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private GymUser gymUser;
 
     public Routine(String routineName, String intensity, int duration, String exercises, String goal) {
