@@ -45,8 +45,11 @@ public class NutritionService {
     }
 
     public Collection<Nutrition> getAll(Long id) {
-        List<Nutrition> listNutritionUser = nutritionRepository.findByGymUser(userService.getGymUser(id));
-        return listNutritionUser;
+        Optional<List<Nutrition>> listNutritionUser = nutritionRepository.findByGymUser(userService.getGymUser(id));
+        if(listNutritionUser.isPresent()){
+            return listNutritionUser.get();
+        }
+        return null;
     }
 
     public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user) {

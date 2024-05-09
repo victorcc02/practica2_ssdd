@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ssdd.practicaWeb.entities.Food;
+import ssdd.practicaWeb.entities.FoodDTO;
 import ssdd.practicaWeb.service.FoodService;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/food")
@@ -16,37 +19,43 @@ public class FoodRESTController {
 
     @Autowired
     private FoodService foodService;
-    interface DetailedView extends Food.PublicFood, Food.AsociationFoodNutrition{}
+    interface DetailedView extends FoodDTO.PublicFood, FoodDTO.AsociationFoodNutrition{}
 
     @PostMapping
-    public ResponseEntity<Food> createFood(@RequestBody Food food) {
-        return ResponseEntity.status(201).body(foodService.createFood(food));
+    public ResponseEntity<FoodDTO> createFood(@RequestBody Food food) {
+        Food foodObt = foodService.createFood(food);
+        return ResponseEntity.status(201).body(new FoodDTO(foodObt));
     }
 
     @GetMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Food> getFood(@PathVariable Long id) {
+    public ResponseEntity<FoodDTO> getFood(@PathVariable Long id) {
         Food food = foodService.getFood(id);
         if (food == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(food);
+        return ResponseEntity.ok(new FoodDTO(food));
     }
 
     @GetMapping
     @JsonView(DetailedView.class)
-    public ResponseEntity<Collection<Food>> allFoods() {
-        return ResponseEntity.ok(foodService.getAllFood());
+    public ResponseEntity<Collection<FoodDTO>> allFoods() {
+        List<FoodDTO> list = new ArrayList<>();
+        List<Food> listFood = (List<Food>) foodService.getAllFood();
+        for(Food food: listFood){
+            list.add(new FoodDTO(food));
+        }
+        return ResponseEntity.ok(list);
     }
 
     @PutMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Food> updateFood(@PathVariable Long id, @RequestBody Food food) {
+    public ResponseEntity<FoodDTO> updateFood(@PathVariable Long id, @RequestBody Food food) {
         Food update = foodService.updateFood(id, food);
         if (update == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(update);
+        return ResponseEntity.ok(new FoodDTO(update));
     }
 
     @DeleteMapping("/{id}")
@@ -57,7 +66,7 @@ public class FoodRESTController {
     }
     @PatchMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<Food> updateParcialFood(@PathVariable Long id, @RequestBody Food parcialFood) {
+    public ResponseEntity<FoodDTO> updateParcialFood(@PathVariable Long id, @RequestBody Food parcialFood) {
         Food existed = foodService.getFood(id);
         if (existed == null){
             return ResponseEntity.notFound().build();
@@ -72,6 +81,6 @@ public class FoodRESTController {
             existed.setCalories(parcialFood.getCalories());
         }
         foodService.updateFood(id, existed);
-        return ResponseEntity.ok(existed);
+        return ResponseEntity.ok(new FoodDTO(existed));
     }
 }

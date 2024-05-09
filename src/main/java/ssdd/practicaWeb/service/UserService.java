@@ -46,25 +46,21 @@ public class UserService {
     public Collection <GymUser> getAllGymUser(){
         return userRepository.findAll();
     }
-    public GymUserDTO updateGymUser(Long id, GymUser gymUser){
+    public GymUser updateGymUser(Long id, GymUser gymUser){
         Optional<GymUser> theGymUser = userRepository.findById(id);
         if(theGymUser.isPresent()) {
             gymUser.setId(id);
             userRepository.save(gymUser);
-            List<Routine> routines = routineRepository.findByGymUser(gymUser);
-            List<Nutrition> nutritions = nutritionRepository.findByGymUser(gymUser);
-            return new GymUserDTO(gymUser,nutritions,routines);
+            return gymUser;
         }
         return null;
     }
-    public GymUserDTO deleteGymUser(Long id){
+    public GymUser deleteGymUser(Long id){
         Optional<GymUser> theGymUser = userRepository.findById(id);
         if (theGymUser.isPresent()) {
             GymUser user = theGymUser.get();
-            List<Routine> routines = routineRepository.findByGymUser(user);
-            List<Nutrition> nutritions = nutritionRepository.findByGymUser(user);
             userRepository.delete(user);
-            return new GymUserDTO(user,nutritions,routines);
+            return user;
         }
         return null;
     }

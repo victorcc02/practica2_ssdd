@@ -34,8 +34,11 @@ public class RoutineService {
         }
     }
     public Collection <Routine> getAllRoutines(Long id){
-        List<Routine> listRoutineUser = routineRepository.findByGymUser(userService.getGymUser(id));
-        return listRoutineUser;
+        Optional<List<Routine>> listRoutineUser = routineRepository.findByGymUser(userService.getGymUser(id));
+        if(listRoutineUser.isPresent()){
+            return listRoutineUser.get();
+        }
+        return null;
     }
     public Routine updateRoutine(Long routineId, Routine routine, GymUser user){
         Optional<Routine> theRoutine = routineRepository.findById(routineId);

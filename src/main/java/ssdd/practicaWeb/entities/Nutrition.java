@@ -12,26 +12,18 @@ import java.util.Set;
 
 @Entity
 public class Nutrition {
-    public interface PublicNutrition{}
-    public interface AsociationUserNutrition extends GymUser.PublicUser{}
-    public interface ListFood extends Food.PublicFood{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(PublicNutrition.class)
     private Long id;
-    @JsonView(PublicNutrition.class)
     private String name;
-    @JsonView(PublicNutrition.class)
     private String type;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonView(AsociationUserNutrition.class)
     @JsonManagedReference
     private GymUser gymUser;
 
     @ManyToMany(mappedBy = "listNutritions")
-    @JsonView(ListFood.class)
-    private List<Food> listFoods = new ArrayList<>();
+    private List<Food> listFoods;
 
     public Nutrition() {
     }

@@ -4,21 +4,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Food {
-    public interface PublicFood{}
-    public interface AsociationFoodNutrition extends Nutrition.PublicNutrition{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(PublicFood.class)
     private Long id;
-    @JsonView(PublicFood.class)
     private String name;
-    @JsonView(PublicFood.class)
     private int calories;
-    @JsonView(PublicFood.class)
     private String type;
     @ManyToMany
     @JoinTable(
@@ -26,8 +21,7 @@ public class Food {
             joinColumns = @JoinColumn(name = "food_id"),
             inverseJoinColumns = @JoinColumn(name = "nutrition_id")
     )
-    @JsonView(AsociationFoodNutrition.class)
-    private Set<Nutrition> listNutritions = new HashSet<>();
+    private List<Nutrition> listNutritions;
 
     public Food(String name, String type, int calories) {
         this.name = name;
@@ -46,11 +40,11 @@ public class Food {
         this.id = id;
     }
 
-    public Set<Nutrition> getListNutritions() {
+    public List<Nutrition> getListNutritions() {
         return listNutritions;
     }
 
-    public void setListNutritions(Set<Nutrition> listNutritions) {
+    public void setListNutritions(List<Nutrition> listNutritions) {
         this.listNutritions = listNutritions;
     }
 

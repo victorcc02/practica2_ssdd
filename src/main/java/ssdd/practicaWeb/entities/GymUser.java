@@ -19,40 +19,25 @@ public class GymUser {
     * In the RESTController we will use one interface or another
     * to print the values we want
     * */
-    public interface PublicUser{}
-    public interface DetailedUser{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(PublicUser.class)
     private Long id;
     @Column(length = 1500000)
-    @JsonView(DetailedUser.class)
     private String userImage;
-    @JsonView(PublicUser.class)
     private String username;
-    @JsonView(DetailedUser.class)
     private String password;
-    @JsonView(DetailedUser.class)
     private double weight;//Kg
-    @JsonView(DetailedUser.class)
     private double goalWeight;//kg
-    @JsonView(DetailedUser.class)
     private int height;//cm
-    @JsonView(DetailedUser.class)
     private String gender;
-    @JsonView(DetailedUser.class)
     private int age;
-    @JsonView(DetailedUser.class)
     private String morphology;
-    @JsonView(DetailedUser.class)
     private String caloricPhase;
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
     private List<Nutrition> listNutrition = new ArrayList<>();
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
     private List<Routine> listRoutine = new ArrayList<>();
 
     //Constructor, getters, setters

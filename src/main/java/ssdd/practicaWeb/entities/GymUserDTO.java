@@ -1,18 +1,33 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.List;
 
 public class GymUserDTO {
+    public interface PublicUser{}
+    public interface DetailedUser{}
+    @JsonView(PublicUser.class)
     private Long id;
+    @JsonView(DetailedUser.class)
     private String userImage;
+    @JsonView(PublicUser.class)
     private String username;
+    @JsonView(DetailedUser.class)
     private String password;
+    @JsonView(DetailedUser.class)
     private double weight;//Kg
+    @JsonView(DetailedUser.class)
     private double goalWeight;//kg
+    @JsonView(DetailedUser.class)
     private int height;//cm
+    @JsonView(DetailedUser.class)
     private String gender;
+    @JsonView(DetailedUser.class)
     private int age;
+    @JsonView(DetailedUser.class)
     private String morphology;
+    @JsonView(DetailedUser.class)
     private String caloricPhase;
     private List<Nutrition> listNutrition;
     private List<Routine> listRoutine;

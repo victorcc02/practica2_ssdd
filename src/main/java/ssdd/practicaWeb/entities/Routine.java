@@ -6,25 +6,16 @@ import jakarta.persistence.*;
 
 @Entity
 public class Routine {
-    public interface PublicRoutine{}
-    public interface AsociationUserRoutine extends GymUser.PublicUser{}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(PublicRoutine.class)
     private Long id;
-    @JsonView(PublicRoutine.class)
     private String routineName;
-    @JsonView(PublicRoutine.class)
     private String intensity;
-    @JsonView(PublicRoutine.class)
     private int duration; // minutes
-    @JsonView(PublicRoutine.class)
     private String exercises;
-    @JsonView(PublicRoutine.class)
     private String goal; // Increase-Lose weight...
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonView(AsociationUserRoutine.class)
     @JsonManagedReference
     private GymUser gymUser;
 

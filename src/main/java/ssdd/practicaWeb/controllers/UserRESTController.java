@@ -27,7 +27,7 @@ public class UserRESTController {
     private RoutineService routineService;
     @Autowired
     private NutritionService nutritionService;
-    interface DetailedView extends GymUser.PublicUser, GymUser.DetailedUser{}
+    interface DetailedView extends GymUserDTO.PublicUser, GymUserDTO.DetailedUser{}
     @GetMapping
     @JsonView(DetailedView.class) //returns all values marked with JsonView(User.class)
     public ResponseEntity<Collection<GymUserDTO>> getAllUsers(){
@@ -49,7 +49,7 @@ public class UserRESTController {
     @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> getUser(@PathVariable Long id){
         GymUser user = userService.getGymUser(id);
-        List<Routine> routines = routineService.getRoutinesUser(user);;
+        List<Routine> routines = routineService.getRoutinesUser(user);
         List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         if(user == null){
             return ResponseEntity.notFound().build();
@@ -59,11 +59,13 @@ public class UserRESTController {
     @PutMapping("/{id}")
     @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> updateUser(@PathVariable Long id, @RequestBody GymUser user){
-        GymUserDTO updated = userService.updateGymUser(id,user);
+        GymUser updated = userService.updateGymUser(id,user);
+        List<Routine> routines = routineService.getRoutinesUser(user);
+        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(new GymUserDTO(updated,nutritions,routines));
     }
     @DeleteMapping("/{id}")
     @JsonView(DetailedView.class)
@@ -74,7 +76,7 @@ public class UserRESTController {
     @PatchMapping("/{id}")
     @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
-        GymUserDTO user = userService.getGymUser(id);
+        GymUser user = userService.getGymUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
@@ -108,8 +110,7 @@ public class UserRESTController {
         if(parcialUser.getCaloricPhase() != null){
             user.setCaloricPhase(parcialUser.getCaloricPhase());
         }
-        GymUser castedUser = user.cast();
-        userService.updateGymUser(id,castedUser);
-        return ResponseEntity.ok(user);
+        userService.updateGymUser(id,user);
+        return ResponseEntity.ok(new GymUserDTO(user));
     }
 }
