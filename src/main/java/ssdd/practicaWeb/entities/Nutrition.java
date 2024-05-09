@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +31,7 @@ public class Nutrition {
 
     @ManyToMany(mappedBy = "listNutritions")
     @JsonView(ListFood.class)
-    private Set<Food> listFoods = new HashSet<>();
+    private List<Food> listFoods = new ArrayList<>();
 
     public Nutrition() {
     }
@@ -47,11 +49,11 @@ public class Nutrition {
         this.gymUser = gymUser;
     }
 
-    public Set<Food> getListFoods() {
+    public List<Food> getListFoods() {
         return listFoods;
     }
 
-    public void setListFoods(Set<Food> listFoods) {
+    public void setListFoods(List<Food> listFoods) {
         this.listFoods = listFoods;
     }
 
