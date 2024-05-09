@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
@@ -23,6 +24,7 @@ public class Nutrition {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonView(AsociationUserNutrition.class)
+    @JsonManagedReference
     private GymUser gymUser;
 
     @ManyToMany(mappedBy = "listNutritions")

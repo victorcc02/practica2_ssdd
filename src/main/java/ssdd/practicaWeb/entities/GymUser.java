@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -47,9 +48,11 @@ public class GymUser {
     private String caloricPhase;
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Nutrition> listNutrition = new ArrayList<>();
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Routine> listRoutine = new ArrayList<>();
 
     //Constructor, getters, setters
