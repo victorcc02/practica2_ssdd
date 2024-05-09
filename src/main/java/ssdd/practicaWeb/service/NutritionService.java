@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.repositories.UserRepository;
@@ -101,5 +102,12 @@ public class NutritionService {
             }
         }
         nutritionRepository.save(nutrition);
+    }
+    public List<Nutrition> getNutritionsUser(GymUser user){
+        Optional<List<Nutrition>> nutritions = nutritionRepository.findByGymUser(user);
+        if(nutritions.isPresent()){
+            return nutritions.get();
+        }
+        return null;
     }
 }

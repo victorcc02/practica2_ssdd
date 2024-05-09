@@ -60,4 +60,11 @@ public class RoutineService {
         }
         return null;
     }
+    public List<Routine> getRoutinesUser(GymUser user){
+        Optional<List<Routine>> routines = routineRepository.findByGymUser(user);
+        if(routines.isPresent()){
+            return routines.get();
+        }
+        return null;
+    }
 }

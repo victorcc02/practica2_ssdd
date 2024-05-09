@@ -5,7 +5,8 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Routine;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RoutineRepository extends JpaRepository<Routine, Long> {
-    List<Routine> findByGymUser(GymUser gymUser);
+    Optional<List<Routine>> findByGymUser(GymUser gymUser);
 }

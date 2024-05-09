@@ -5,38 +5,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssdd.practicaWeb.entities.GymUser;
+import ssdd.practicaWeb.entities.GymUserDTO;
+import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.entities.Routine;
+import ssdd.practicaWeb.repositories.NutritionRepository;
+import ssdd.practicaWeb.repositories.RoutineRepository;
+import ssdd.practicaWeb.service.NutritionService;
+import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserRESTController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoutineService routineService;
+    @Autowired
+    private NutritionService nutritionService;
     interface DetailedView extends GymUser.PublicUser, GymUser.DetailedUser{}
     @GetMapping
     @JsonView(DetailedView.class) //returns all values marked with JsonView(User.class)
-    public ResponseEntity<Collection<GymUser>> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllGymUser());
+    public ResponseEntity<Collection<GymUserDTO>> getAllUsers(){
+        List<GymUserDTO> list = new ArrayList<>();
+        List<GymUser> gymUsers = (List<GymUser>) userService.getAllGymUser();
+        for(GymUser user: gymUsers){
+            List<Routine> routines = routineService.getRoutinesUser(user);
+            List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
+            list.add(new GymUserDTO(user,nutritions,routines));
+        }
+        return ResponseEntity.ok(list);
     }
     @PostMapping
-    public ResponseEntity<GymUser> createUser(@RequestBody GymUser user){
-        return ResponseEntity.status(201).body(userService.createGymUser(user));
+    public ResponseEntity<GymUserDTO> createUser(@RequestBody GymUser user){
+        GymUser userObt = userService.createGymUser(user);
+        return ResponseEntity.status(201).body(new GymUserDTO(userObt));
     }
     @GetMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<GymUser> getUser(@PathVariable Long id){
+    public ResponseEntity<GymUserDTO> getUser(@PathVariable Long id){
         GymUser user = userService.getGymUser(id);
+        List<Routine> routines = routineService.getRoutinesUser(user);;
+        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(new GymUserDTO(user,nutritions,routines));
     }
     @PutMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<GymUser> updateUser(@PathVariable Long id, @RequestBody GymUser user){
-        GymUser updated = userService.updateGymUser(id,user);
+    public ResponseEntity<GymUserDTO> updateUser(@PathVariable Long id, @RequestBody GymUser user){
+        GymUserDTO updated = userService.updateGymUser(id,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
@@ -50,8 +73,8 @@ public class UserRESTController {
     }
     @PatchMapping("/{id}")
     @JsonView(DetailedView.class)
-    public ResponseEntity<GymUser> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
-        GymUser user = userService.getGymUser(id);
+    public ResponseEntity<GymUserDTO> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
+        GymUserDTO user = userService.getGymUser(id);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
@@ -85,7 +108,8 @@ public class UserRESTController {
         if(parcialUser.getCaloricPhase() != null){
             user.setCaloricPhase(parcialUser.getCaloricPhase());
         }
-        userService.updateGymUser(id,user);
+        GymUser castedUser = user.cast();
+        userService.updateGymUser(id,castedUser);
         return ResponseEntity.ok(user);
     }
 }

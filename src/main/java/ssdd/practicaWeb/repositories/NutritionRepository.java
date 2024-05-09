@@ -5,7 +5,8 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NutritionRepository extends JpaRepository<Nutrition, Long> {
-    List<Nutrition> findByGymUser(GymUser gymUser);
+    Optional<List<Nutrition>> findByGymUser(GymUser gymUser);
 }
