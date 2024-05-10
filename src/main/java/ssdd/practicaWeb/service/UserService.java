@@ -3,16 +3,12 @@ package ssdd.practicaWeb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.GymUser;
-import ssdd.practicaWeb.entities.GymUserDTO;
-import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.Routine;
+
 import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.repositories.UserRepository;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service

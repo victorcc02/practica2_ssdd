@@ -1,8 +1,6 @@
 package ssdd.practicaWeb.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.persistence.*;
 
 public class RoutineDTO {
     public interface PublicRoutine{}

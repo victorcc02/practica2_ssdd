@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.repositories.UserRepository;

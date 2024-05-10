@@ -8,8 +8,6 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.GymUserDTO;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.entities.Routine;
-import ssdd.practicaWeb.repositories.NutritionRepository;
-import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;

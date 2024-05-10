@@ -1,6 +1,5 @@
 package ssdd.practicaWeb.controllers;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +23,6 @@ public class NutritionController {
     private UserService userService;
     @Autowired
     private FoodService foodService;
-
-/*  @PostConstruct
-    public void nutritionConstructor(){
-        Nutrition nutritionVolume = new Nutrition("Nutricion 1","volumen",);
-        Nutrition nutritionSlim = new Nutrition("Nutricion 2","adelgazar",);
-        Nutrition nutritionGym = new Nutrition("Nutricion 3","proteinas",);
-
-        nutritionService.createNutrition(nutritionVolume);
-        nutritionService.createNutrition(nutritionSlim);
-        nutritionService.createNutrition(nutritionGym);
-    }*/
 
 
     @GetMapping("/Nutrition")

@@ -10,11 +10,6 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.repositories.UserRepository;
 import ssdd.practicaWeb.service.UserService;
 
-
-import java.util.Optional;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Controller
 public class LoginController {
     @Autowired
