@@ -19,9 +19,7 @@ public class RoutineRESTController {
     private RoutineService routineService;
     @Autowired
     private UserService userService;
-    interface DetailedView extends RoutineDTO.PublicRoutine, RoutineDTO.AsociationUserRoutine{}
     @GetMapping("/all/{userId}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<Collection<RoutineDTO>> getAllRoutines(@PathVariable Long userId){
         List<RoutineDTO> list = new ArrayList<>();
         List<Routine> routines = (List<Routine>) routineService.getAllRoutines(userId);
@@ -38,7 +36,6 @@ public class RoutineRESTController {
         return ResponseEntity.status(201).body(new RoutineDTO(routineObt));
     }
     @GetMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<RoutineDTO> getRoutine(@PathVariable Long id){
         Routine routine = routineService.getRoutine(id);
         if(routine == null){
@@ -47,7 +44,6 @@ public class RoutineRESTController {
         return ResponseEntity.ok(new RoutineDTO(routine));
     }
     @PutMapping("/{userId}/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<RoutineDTO> updateRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine routine){
         GymUser user = userService.getGymUser(userId);
         Routine updated = routineService.updateRoutine(id,routine,user);
@@ -57,13 +53,11 @@ public class RoutineRESTController {
         return ResponseEntity.ok(new RoutineDTO(updated));
     }
     @DeleteMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteRoutine(@PathVariable Long id){
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{userId}/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<RoutineDTO> patchRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine parcialRoutine){
         GymUser user = userService.getGymUser(userId);
         Routine routine = routineService.getRoutine(id);

@@ -25,9 +25,7 @@ public class UserRESTController {
     private RoutineService routineService;
     @Autowired
     private NutritionService nutritionService;
-    interface DetailedView extends GymUserDTO.PublicUser, GymUserDTO.DetailedUser{}
     @GetMapping
-    @JsonView(DetailedView.class) //returns all values marked with JsonView(User.class)
     public ResponseEntity<Collection<GymUserDTO>> getAllUsers(){
         List<GymUserDTO> list = new ArrayList<>();
         List<GymUser> gymUsers = (List<GymUser>) userService.getAllGymUser();
@@ -44,7 +42,6 @@ public class UserRESTController {
         return ResponseEntity.status(201).body(new GymUserDTO(userObt));
     }
     @GetMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> getUser(@PathVariable Long id){
         GymUser user = userService.getGymUser(id);
         List<Routine> routines = routineService.getRoutinesUser(user);
@@ -55,7 +52,6 @@ public class UserRESTController {
         return ResponseEntity.ok(new GymUserDTO(user,nutritions,routines));
     }
     @PutMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> updateUser(@PathVariable Long id, @RequestBody GymUser user){
         GymUser updated = userService.updateGymUser(id,user);
         List<Routine> routines = routineService.getRoutinesUser(user);
@@ -66,13 +62,11 @@ public class UserRESTController {
         return ResponseEntity.ok(new GymUserDTO(updated,nutritions,routines));
     }
     @DeleteMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteGymUser(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}")
-    @JsonView(DetailedView.class)
     public ResponseEntity<GymUserDTO> patchUser(@PathVariable Long id, @RequestBody GymUser parcialUser){
         GymUser user = userService.getGymUser(id);
         if(user == null){

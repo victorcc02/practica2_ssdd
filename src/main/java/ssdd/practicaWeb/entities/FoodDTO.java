@@ -1,22 +1,37 @@
 package ssdd.practicaWeb.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class FoodDTO {
-    public interface PublicFood{}
-    public interface AsociationFoodNutrition extends NutritionDTO.PublicNutrition{}
-    @JsonView(PublicFood.class)
     private Long id;
-    @JsonView(PublicFood.class)
     private String name;
-    @JsonView(PublicFood.class)
     private int calories;
-    @JsonView(PublicFood.class)
     private String type;
-    @JsonView(AsociationFoodNutrition.class)
-    private List<Nutrition> listNutritions;
+    private List<NutritionView> listNutritions;
+    @Getter
+    @Setter
+    private class NutritionView{
+        private Long id;
+        private String name;
+        private String type;
+
+        public NutritionView(Nutrition nutrition) {
+            this();
+            this.setId(nutrition.getId());
+            this.setName(nutrition.getName());
+            this.setType(nutrition.getType());
+        }
+
+        public NutritionView() {
+        }
+    }
 
     public FoodDTO() {
     }
@@ -27,46 +42,12 @@ public class FoodDTO {
         this.setName(food.getName());
         this.setCalories(food.getCalories());
         this.setType(food.getType());
-        this.setListNutritions(food.getListNutritions());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Nutrition> getListNutritions() {
-        return listNutritions;
-    }
-
-    public void setListNutritions(List<Nutrition> listNutritions) {
-        this.listNutritions = listNutritions;
+        List<NutritionView> list = new ArrayList<>();
+        if(!food.getListNutritions().isEmpty()){
+            for(Nutrition nutrition: food.getListNutritions()){
+                list.add(new NutritionView(nutrition));
+            }
+        }
+        this.setListNutritions(list);
     }
 }

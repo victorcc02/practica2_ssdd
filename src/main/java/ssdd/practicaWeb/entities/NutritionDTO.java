@@ -1,23 +1,36 @@
 package ssdd.practicaWeb.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 public class NutritionDTO {
-    public interface PublicNutrition{}
-    public interface AsociationUserNutrition extends GymUserDTO.PublicUser{}
-    public interface ListFood extends FoodDTO.PublicFood{}
-    @JsonView(PublicNutrition.class)
+    //public interface PublicNutrition{}
     private Long id;
-    @JsonView(PublicNutrition.class)
     private String name;
-    @JsonView(PublicNutrition.class)
     private String type;
-    @JsonView(AsociationUserNutrition.class)
-    private GymUser gymUser;
-    @JsonView(ListFood.class)
-    private List<Food> listFoods;
+    private Long gymUserId;
+    private String gymUserUsername;
+    private List<FoodView> listFoods;
+    @Getter
+    @Setter
+    private class FoodView{
+        private Long id;
+        private String name;
+
+        public FoodView(Food food) {
+            this();
+            this.setId(food.getId());
+            this.setName(food.getName());
+        }
+
+        public FoodView() {
+        }
+    }
 
     public NutritionDTO() {
     }
@@ -27,47 +40,14 @@ public class NutritionDTO {
         this.setId(nutrition.getId());
         this.setName(nutrition.getName());
         this.setType(nutrition.getType());
-        this.setGymUser(nutrition.getGymUser());
-        this.setListFoods(nutrition.getListFoods());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public GymUser getGymUser() {
-        return gymUser;
-    }
-
-    public void setGymUser(GymUser gymUser) {
-        this.gymUser = gymUser;
-    }
-
-    public List<Food> getListFoods() {
-        return listFoods;
-    }
-
-    public void setListFoods(List<Food> listFoods) {
-        this.listFoods = listFoods;
+        List<FoodView> list = new ArrayList<>();
+        if(!nutrition.getListFoods().isEmpty()){
+            for(Food food: nutrition.getListFoods()){
+                list.add(new FoodView(food));
+            }
+        }
+        this.setListFoods(list);
+        this.setGymUserId(nutrition.getGymUser().getId());
+        this.setGymUserUsername(nutrition.getGymUser().getUsername());
     }
 }
