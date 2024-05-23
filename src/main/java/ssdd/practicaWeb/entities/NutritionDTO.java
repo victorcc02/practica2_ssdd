@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 public class NutritionDTO {
-    //public interface PublicNutrition{}
     private Long id;
     private String name;
     private String type;

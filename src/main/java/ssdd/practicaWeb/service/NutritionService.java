@@ -18,8 +18,6 @@ public class NutritionService {
     @Autowired
     private NutritionRepository nutritionRepository;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private FoodRepository foodRepository;
     @Autowired
     private FoodService foodService;
@@ -27,7 +25,20 @@ public class NutritionService {
     private UserService userService;
 
     public Nutrition createNutrition(Nutrition nutrition, GymUser user) {
-        Nutrition newNutrition = new Nutrition(nutrition.getName(),nutrition.getType());
+        Nutrition newNutrition = new Nutrition(nutrition.getName(),nutrition.getType(),new ArrayList<>());
+        if(nutrition.getListFoods() != null){
+            for(Food food: nutrition.getListFoods()){
+                Optional<Food> aux = foodRepository.findByName(food.getName());
+                if(aux.isPresent()){
+                    addFood(newNutrition,aux.get());
+                }else{
+                    food = new Food(food.getName(),food.getType(),0);
+                    food.setListNutritions(new ArrayList<>());
+                    Food newFood = foodService.createFood(food);
+                    addFood(newNutrition,newFood);
+                }
+            }
+        }
         newNutrition.setGymUser(user);
         nutritionRepository.save(newNutrition);
         return newNutrition;
@@ -86,6 +97,11 @@ public class NutritionService {
     }
 
     public void addFood (Nutrition nutrition, Food food){
+        Optional<Food> optionalFood = foodRepository.findByName(food.getName());
+        if(optionalFood.isEmpty()){
+            food = new Food(food.getName(),null,0);
+            food.setListNutritions(new ArrayList<>());
+        }
         nutrition.getListFoods().add(food);
         food.getListNutritions().add(nutrition);
         nutritionRepository.save(nutrition);

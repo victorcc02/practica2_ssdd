@@ -1,6 +1,5 @@
 package ssdd.practicaWeb.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,6 @@ public class NutritionRESTController {
     private NutritionService nutritionService;
     @Autowired
     private UserService userService;
-    //interface DetailedView extends NutritionDTO.PublicNutrition{}
 
     @PostMapping("/{userId}")
     public ResponseEntity<NutritionDTO> createNutrition(@RequestBody Nutrition nutrition, @PathVariable Long userId) {
@@ -33,7 +31,6 @@ public class NutritionRESTController {
     }
 
     @GetMapping("/{id}")
-    //@JsonView(DetailedView.class)
     public ResponseEntity<NutritionDTO> getNutricion(@PathVariable Long id) {
         Nutrition nutrition = nutritionService.getNutrition(id);
         if (nutrition == null) {
@@ -42,7 +39,6 @@ public class NutritionRESTController {
         return ResponseEntity.ok(new NutritionDTO(nutrition));
     }
     @GetMapping("/all/{userId}")
-    //@JsonView(DetailedView.class)
     public ResponseEntity<Collection<NutritionDTO>> allNutritions(@PathVariable Long userId) {
         List<NutritionDTO> list = new ArrayList<>();
         Collection<Nutrition> listNutrition = nutritionService.getAll(userId);
@@ -53,7 +49,6 @@ public class NutritionRESTController {
     }
 
     @PutMapping("/{userId}/{id}")
-    //@JsonView(DetailedView.class)
     public ResponseEntity<NutritionDTO> updateNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition nutrition) {
         GymUser user = userService.getGymUser(userId);
         Nutrition update = nutritionService.updateNutrition(id, nutrition, user);
@@ -64,13 +59,11 @@ public class NutritionRESTController {
     }
 
     @DeleteMapping("/{id}")
-    //@JsonView(DetailedView.class)
     public ResponseEntity<Void> deleteNutrition(@PathVariable Long id) {
         nutritionService.deleteNutrition(id);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{userId}/{id}")
-    //@JsonView(DetailedView.class)
     public ResponseEntity<NutritionDTO> updateParcialNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition parcialNutrition) {
         GymUser user = userService.getGymUser(userId);
         Nutrition existed = nutritionService.getNutrition(id);

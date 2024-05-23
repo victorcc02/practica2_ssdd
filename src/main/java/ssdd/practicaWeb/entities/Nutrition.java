@@ -4,6 +4,7 @@ package ssdd.practicaWeb.entities;
 import jakarta.persistence.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +25,10 @@ public class Nutrition {
     public Nutrition() {
     }
 
-    public Nutrition(String name , String type) {
+    public Nutrition(String name , String type, List<Food> foods) {
         this.name = name;
         this.type = type;
+        this.listFoods = foods;
     }
 
     public GymUser getGymUser() {
