@@ -29,5 +29,4 @@ public class RoutineDTO {
         this.setGymUserId(routine.getGymUser().getId());
         this.setGymUserUsername(routine.getGymUser().getUsername());
     }
-
 }
