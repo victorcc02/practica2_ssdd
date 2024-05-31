@@ -32,11 +32,11 @@ public class GymUser {
     private String morphology;
     private String caloricPhase;
 
-    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Nutrition> listNutrition = new ArrayList<>();
+    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER)
+    private List<Nutrition> listNutrition;
 
-    @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Routine> listRoutine = new ArrayList<>();
+    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER)
+    private List<Routine> listRoutine;
 
     //Constructor, getters, setters
     //Other details are not compulsory but editable

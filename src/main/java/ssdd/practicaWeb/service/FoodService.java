@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.repositories.FoodRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -14,6 +15,9 @@ public class FoodService {
     FoodRepository foodRepository;
 
     public Food createFood(Food food){
+        if(food.getListNutritions() == null){
+            food.setListNutritions(new ArrayList<>());
+        }
         foodRepository.save(food);
         return food;
     }
