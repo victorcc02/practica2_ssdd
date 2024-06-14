@@ -40,7 +40,7 @@ public class NutritionDTO {
         this.setName(nutrition.getName());
         this.setType(nutrition.getType());
         List<FoodView> list = new ArrayList<>();
-        if(!nutrition.getListFoods().isEmpty()){
+        if(nutrition.getListFoods() != null){
             for(Food food: nutrition.getListFoods()){
                 list.add(new FoodView(food));
             }

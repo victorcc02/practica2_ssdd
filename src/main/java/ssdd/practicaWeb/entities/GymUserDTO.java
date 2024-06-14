@@ -72,14 +72,14 @@ public class GymUserDTO {
         this.setMorphology(user.getMorphology());
         this.setCaloricPhase(user.getCaloricPhase());
         List<RoutineView> listRoutine = new ArrayList<>();
-        if(!user.getListRoutine().isEmpty()){
+        if(user.getListRoutine() != null){
             for(Routine routine: user.getListRoutine()){
                 listRoutine.add(new RoutineView(routine));
             }
         }
         this.setListRoutine(listRoutine);
         List<NutritionView> listNutrition = new ArrayList<>();
-        if(!user.getListNutrition().isEmpty()){
+        if(user.getListNutrition() != null){
             for(Nutrition nutrition: user.getListNutrition()){
                 listNutrition.add(new NutritionView(nutrition));
             }
@@ -101,14 +101,14 @@ public class GymUserDTO {
         this.setMorphology(user.getMorphology());
         this.setCaloricPhase(user.getCaloricPhase());
         List<RoutineView> listRoutine = new ArrayList<>();
-        if(!routines.isEmpty()){
+        if(routines != null){
             for(Routine routine: routines){
                 listRoutine.add(new RoutineView(routine));
             }
         }
         this.setListRoutine(listRoutine);
         List<NutritionView> listNutrition = new ArrayList<>();
-        if(!nutritions.isEmpty()){
+        if(nutritions != null){
             for(Nutrition nutrition: nutritions){
                 listNutrition.add(new NutritionView(nutrition));
             }

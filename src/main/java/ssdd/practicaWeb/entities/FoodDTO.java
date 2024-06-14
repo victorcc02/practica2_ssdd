@@ -43,7 +43,7 @@ public class FoodDTO {
         this.setCalories(food.getCalories());
         this.setType(food.getType());
         List<NutritionView> list = new ArrayList<>();
-        if(!food.getListNutritions().isEmpty()){
+        if(food.getListNutritions() != null){
             for(Nutrition nutrition: food.getListNutritions()){
                 list.add(new NutritionView(nutrition));
             }

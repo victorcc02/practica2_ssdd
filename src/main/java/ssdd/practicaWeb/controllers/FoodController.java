@@ -62,7 +62,7 @@ public class FoodController {
     @GetMapping("/ListFoods/CreateFood")
     public String InterfaceCreateFood(@RequestParam Long id, Model model) {
         model.addAttribute("food",new Food());
-        model.addAttribute("nutritionId", id);
+        model.addAttribute("userId", id);
         return "createFood";
     }
     @PostMapping("/ListFoods/CreateFood")
