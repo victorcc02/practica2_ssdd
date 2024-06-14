@@ -60,13 +60,13 @@ public class FoodController {
     }
 
     @GetMapping("/ListFoods/CreateFood")
-    public String InterfaceCreateFood(@RequestParam Long id, Model model) {
+    public String InterfaceCreateFood(@RequestParam("userId") Long userId, Model model) {
         model.addAttribute("food",new Food());
-        model.addAttribute("userId", id);
+        model.addAttribute("userId", userId);
         return "createFood";
     }
     @PostMapping("/ListFoods/CreateFood")
-    public String addFood(Food food, @RequestParam("id") Long id){
+    public String addFood(Food food, @RequestParam("userId") Long id){
         foodService.createFood(food);
         return "redirect:/ListFoods?id=" + id;
     }

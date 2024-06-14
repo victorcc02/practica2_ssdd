@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Nutrition {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String type;
@@ -19,8 +19,17 @@ public class Nutrition {
     @JoinColumn(name = "user_id")
     private GymUser gymUser;
 
-    @ManyToMany(mappedBy = "listNutritions")
+    @ManyToMany(mappedBy = "listNutritions", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Food> listFoods;
+
+    @PreRemove
+    private void deleteReferences(){
+        for(Food food: listFoods){
+            if(food.getListNutritions() != null){
+                food.getListNutritions().remove(this);
+            }
+        }
+    }
 
     public Nutrition() {
     }

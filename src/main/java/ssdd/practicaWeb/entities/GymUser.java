@@ -18,7 +18,7 @@ public class GymUser {
     * to print the values we want
     * */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(length = 1500000)
     private String userImage;
@@ -32,10 +32,10 @@ public class GymUser {
     private String morphology;
     private String caloricPhase;
 
-    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Nutrition> listNutrition;
 
-    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "gymUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Routine> listRoutine;
 
     //Constructor, getters, setters

@@ -37,6 +37,9 @@ public class FoodService {
         Optional<Food> theFood = foodRepository.findById(id);
         if(theFood.isPresent()) {
             food.setId(id);
+            if(theFood.get().getListNutritions() != null){
+                food.setListNutritions(theFood.get().getListNutritions());
+            }
             foodRepository.save(food);
             return food;
         }

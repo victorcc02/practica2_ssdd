@@ -62,20 +62,6 @@ public class UserService {
         Optional<GymUser> theGymUser = userRepository.findById(id);
         if (theGymUser.isPresent()) {
             GymUser user = theGymUser.get();
-            //Routine cascade delete
-            for(Routine routine: new ArrayList<>(user.getListRoutine())){
-                user.getListRoutine().remove(routine);
-                routineRepository.delete(routine);
-            }
-            //Nutrition cascade delete
-            ArrayList<Food> foods = (ArrayList<Food>) foodRepository.findAll();
-            for(Nutrition nutrition: new ArrayList<>(user.getListNutrition())){
-                for(Food food: foods){
-                        food.getListNutritions().remove(nutrition);
-                }
-                user.getListNutrition().remove(nutrition);
-                nutritionRepository.delete(nutrition);
-            }
             userRepository.delete(user);
             return user;
         }

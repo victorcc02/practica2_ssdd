@@ -8,13 +8,13 @@ import java.util.List;
 @Entity
 public class Food {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
     private String name;
     private int calories;
     private String type;
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "food_nutrition",
             joinColumns = @JoinColumn(name = "food_id"),

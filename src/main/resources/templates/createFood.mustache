@@ -36,7 +36,7 @@
         {{#succesfull}}
             <p>Alimento creado</p>
         {{/succesfull}}
-        <form name="formUpdateFood" action="/ListFoods/CreateFood?id={{userId}}" method="post" onsubmit="return validateForm()">
+        <form name="formUpdateFood" action="/ListFoods/CreateFood?userId={{userId}}" method="post" onsubmit="return validateForm()">
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name"><br><br>
         <label for="type">Tipo:</label>
