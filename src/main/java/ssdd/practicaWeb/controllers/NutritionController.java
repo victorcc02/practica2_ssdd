@@ -26,8 +26,8 @@ public class NutritionController {
 
 
     @GetMapping("/Nutrition")
-    public String InterfaceNutrition(@RequestParam Long id, Model model) {
-        GymUser user = userService.getGymUser(id);
+    public String InterfaceNutrition(@RequestParam("userId") Long userId, Model model) {
+        GymUser user = userService.getGymUser(userId);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "nutrition";
@@ -35,9 +35,9 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @GetMapping("/ListNutrition")
-    public String InterfaceListNutrition(@RequestParam Long id, Model model) {
-        model.addAttribute("nutrition", nutritionService.getAll(id));
-        GymUser user = userService.getGymUser(id);
+    public String InterfaceListNutrition(@RequestParam("userId") Long userId, Model model) {
+        model.addAttribute("nutrition", nutritionService.getAll(userId));
+        GymUser user = userService.getGymUser(userId);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "listNutrition";
@@ -45,9 +45,9 @@ public class NutritionController {
         return "redirect:/Nutrition";
     }
     @GetMapping("/ListNutrition/CreateNutrition")
-    public String InterfaceCreateNutrition(@RequestParam Long id, Model model) {
+    public String InterfaceCreateNutrition(@RequestParam("userId") Long userId, Model model) {
         model.addAttribute("nutricion",new Nutrition());
-        GymUser user = userService.getGymUser(id);
+        GymUser user = userService.getGymUser(userId);
         if (user != null){
             model.addAttribute("userId",user.getId());
             return "createNutrition";
@@ -55,19 +55,19 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @PostMapping("/ListNutrition/CreateNutrition")
-    public String addNutrition(Nutrition nutrition, @RequestParam("id") Long userId){
+    public String addNutrition(Nutrition nutrition, @RequestParam("userId") Long userId){
         GymUser user = userService.getGymUser(userId);
         if (user != null){
             nutrition.setGymUser(user);
             Nutrition nut = nutritionService.createNutrition(nutrition,user);
-            return "redirect:/ListFoods?id=" + nut.getId();
+            return "redirect:/ListFoods?nutritionId=" + nut.getId();
         }
         return "redirect:/FrontPage";
     }
 
-    @GetMapping("/ListNutrition/detailsNutrition/{id}")
-    public String detailsNutrition(@PathVariable Long id, Model model, @RequestParam("id") Long userId){
-        Nutrition nutrition = nutritionService.getNutrition(id);
+    @GetMapping("/ListNutrition/detailsNutrition/{nutritionId}")
+    public String detailsNutrition(@PathVariable Long nutritionId, Model model, @RequestParam("userId") Long userId){
+        Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         if (nutrition == null) {
             return "redirect:/ListNutrition";
         }
@@ -81,7 +81,7 @@ public class NutritionController {
     }
 
     @GetMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String showFormEdit(@PathVariable Long nutritionId, Model model, @RequestParam("id") Long userId) {
+    public String showFormEdit(@PathVariable Long nutritionId, Model model, @RequestParam("userId") Long userId) {
         Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         if(nutrition != null){
             model.addAttribute("nutrition", nutrition);
@@ -91,23 +91,23 @@ public class NutritionController {
     }
 
     @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String editNutrition(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("id") Long userId) {
+    public String editNutrition(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("userId") Long userId) {
         GymUser user = userService.getGymUser(userId);
         nutrition.setGymUser(user);
         nutritionService.updateNutrition(nutritionId, nutrition, user);
-        return "redirect:/ListFoods?id=" + nutritionId;
+        return "redirect:/ListFoods?nutritionId=" + nutrition.getId();
     }
-    @GetMapping("/ListNutrition/DeleteNutrition/{id}")
-    public String deleteNutrition(@PathVariable Long id, @RequestParam("id") Long userId) {
-        nutritionService.deleteNutrition(id);
-        return "redirect:/ListNutrition?id=" + userId;
+    @GetMapping("/ListNutrition/DeleteNutrition/{nutritionId}")
+    public String deleteNutrition(@PathVariable Long nutritionId, @RequestParam("userId") Long userId) {
+        nutritionService.deleteNutrition(nutritionId);
+        return "redirect:/ListNutrition?userId=" + userId;
     }
     @GetMapping("/ListFoods/deleteFoodList")
     public String deleteFoodList(@RequestParam("nutritionId") Long nutritionId, @RequestParam("foodId") Long foodId) {
         Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         Food food = foodService.getFood(foodId);
         nutritionService.deleteListFood(nutrition,food);
-        return "redirect:/ListFoods?id=" +nutritionId;
+        return "redirect:/ListFoods?nutritionId=" + nutritionId;
     }
 
     @GetMapping("/ListFoods/addFood")
@@ -115,15 +115,16 @@ public class NutritionController {
         Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         Food food = foodService.getFood(foodId);
         nutritionService.addFood(nutrition,food);
-        return "redirect:/ListFoods?id=" + nutrition.getId();
+        return "redirect:/ListFoods?nutritionId=" + nutritionId;
     }
 
     @GetMapping("/ListFoods")
-    public String InterfaceListFood(@RequestParam ("id") Long nutritionId, Model model) {
+    public String InterfaceListFood(@RequestParam("nutritionId") Long nutritionId, Model model) {
         model.addAttribute("food", foodService.getAllFood());
         Nutrition nutrition = nutritionService.getNutrition(nutritionId);
         if (nutrition != null) {
             model.addAttribute("nutrition", nutrition);
+            model.addAttribute("nutritionId", nutrition.getId());
             model.addAttribute("userId", nutrition.getGymUser().getId());
             return "foodSearch";
         }

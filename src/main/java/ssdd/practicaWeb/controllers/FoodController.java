@@ -60,20 +60,20 @@ public class FoodController {
     }
 
     @GetMapping("/ListFoods/CreateFood")
-    public String InterfaceCreateFood(@RequestParam("userId") Long userId, Model model) {
+    public String InterfaceCreateFood(@RequestParam("nutritionId") Long nutritionId, Model model) {
         model.addAttribute("food",new Food());
-        model.addAttribute("userId", userId);
+        model.addAttribute("nutritionId", nutritionId);
         return "createFood";
     }
     @PostMapping("/ListFoods/CreateFood")
-    public String addFood(Food food, @RequestParam("userId") Long id){
+    public String addFood(Food food, @RequestParam("nutritionId") Long nutritionId){
         foodService.createFood(food);
-        return "redirect:/ListFoods?id=" + id;
+        return "redirect:/ListFoods?nutritionId=" + nutritionId;
     }
 
-    @GetMapping("/ListFoods/detailsFood/{id}")
-    public String detailsFood(@PathVariable Long id, Model model, @RequestParam("id") Long nutritionId){
-        Food food = foodService.getFood(id);
+    @GetMapping("/ListFoods/detailsFood/{foodId}")
+    public String detailsFood(@PathVariable Long foodId, Model model, @RequestParam("nutritionId") Long nutritionId){
+        Food food = foodService.getFood(foodId);
         if (food == null) {
             return "redirect:/ListFoods";
         }
@@ -83,7 +83,7 @@ public class FoodController {
     }
 
     @GetMapping("/ListFoods/ModifyFood/{foodId}")
-    public String showFormEdit(@PathVariable Long foodId, Model model, @RequestParam("id") Long nutritionId) {
+    public String showFormEdit(@PathVariable Long foodId, Model model, @RequestParam("nutritionId") Long nutritionId) {
         Food food = foodService.getFood(foodId);
         if(food != null){
             model.addAttribute("food", food);
@@ -92,14 +92,14 @@ public class FoodController {
         return "modifyFood";
     }
     @PostMapping("/ListFoods/ModifyFood/{foodId}")
-    public String editFood(Food food,@PathVariable Long foodId,@RequestParam("id") Long id) {
+    public String editFood(Food food,@PathVariable Long foodId,@RequestParam("nutritionId") Long nutritionId) {
         foodService.updateFood(foodId, food);
-        return "redirect:/ListFoods?id=" + id;
+        return "redirect:/ListFoods?nutritionId=" + nutritionId;
     }
-    @GetMapping("/ListFoods/DeleteFood/{id}")
-    public String deleteFood(@PathVariable Long id, @RequestParam("id") Long nutritionId) {
-        foodService.deleteFood(id);
-        return "redirect:/ListFoods?id=" + nutritionId;
+    @GetMapping("/ListFoods/DeleteFood/{foodId}")
+    public String deleteFood(@PathVariable Long foodId, @RequestParam("nutritionId") Long nutritionId) {
+        foodService.deleteFood(foodId);
+        return "redirect:/ListFoods?nutritionId=" + nutritionId;
     }
 
 }

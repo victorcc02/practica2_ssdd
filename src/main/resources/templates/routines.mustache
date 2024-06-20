@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="/css/styleRoutines.css">
     <script>
         function goBackwards(){
-            window.location.href = "/FrontPage?id={{userId}}";
+            window.location.href = "/FrontPage?userId={{userId}}";
         }
         function goToCreate(){
-            window.location.href = "/routines/createRoutine?id={{userId}}";
+            window.location.href = "/routines/createRoutine?userId={{userId}}";
         }
         function getURL(){
             const routineSelected = document.getElementById("selectRoutine").value;
-            window.location.href = routineSelected + "?id={{userId}}";
+            window.location.href = routineSelected + "?userId={{userId}}";
         }
     </script>
 </head>

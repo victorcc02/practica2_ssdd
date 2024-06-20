@@ -20,9 +20,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/users/{id}")
-    public String showProfile(Model model, @PathVariable Long id){
-        GymUser user = userService.getGymUser((id));
+    @GetMapping("/users/{userId}")
+    public String showProfile(Model model, @PathVariable Long userId){
+        GymUser user = userService.getGymUser(userId);
         if(user != null){
             model.addAttribute("user",user);
             return "users";
@@ -30,9 +30,9 @@ public class UserController {
         return "redirect:/FrontPage";
     }
 
-    @GetMapping("/users/edit/{id}")
-    public String editeProfileGet(Model model,@PathVariable Long id){
-        GymUser user = userService.getGymUser((id));
+    @GetMapping("/users/edit/{userId}")
+    public String editeProfileGet(Model model,@PathVariable Long userId){
+        GymUser user = userService.getGymUser(userId);
         if(user != null){
             model.addAttribute("user",user);
             return "edit";
@@ -40,15 +40,15 @@ public class UserController {
         return "redirect:/FrontPage";
     }
 
-    @PostMapping("/users/edit/{id}")
-    public String editProfilePost(GymUser user, @PathVariable Long id){
-        userService.updateGymUser(id, user);
-        return "redirect:/users/{id}";
+    @PostMapping("/users/edit/{userId}")
+    public String editProfilePost(GymUser user, @PathVariable Long userId){
+        userService.updateGymUser(userId, user);
+        return "redirect:/users/{userId}";
     }
 
-    @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable Long id){
-        userService.deleteGymUser(id);
+    @GetMapping("/users/delete/{userId}")
+    public String deleteUser(@PathVariable Long userId){
+        userService.deleteGymUser(userId);
         return "redirect:/Login";
     }
 }

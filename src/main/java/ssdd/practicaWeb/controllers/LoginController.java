@@ -27,14 +27,14 @@ public class LoginController {
         GymUser optionalGymUser = userService.getGymUser(user.getUsername());
         if(optionalGymUser == null){
             userService.createGymUser(user);
-            return "redirect:/FrontPage?id=" + user.getId();
+            return "redirect:/FrontPage?userId=" + user.getId();
         }
-        return "redirect:/FrontPage?id=" + optionalGymUser.getId();
+        return "redirect:/FrontPage?userId=" + optionalGymUser.getId();
     }
   
     @GetMapping("/FrontPage")
-    public String InterfaceFrontPage(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("user",userService.getGymUser(id));
+    public String InterfaceFrontPage(Model model, @RequestParam("userId") Long userId) {
+        model.addAttribute("user",userService.getGymUser(userId));
         return "frontPage";
     }
 

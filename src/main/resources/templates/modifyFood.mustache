@@ -9,7 +9,7 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListFoods/detailsFood/{{food.id}}?id={{nutritionId}}"><li>ATRAS</li></a>
+            <a href="/ListFoods/detailsFood/{{food.id}}?nutritionId={{nutritionId}}"><li>ATRAS</li></a>
         </ul>
     </nav>
 </header>
@@ -17,7 +17,7 @@
     <div class="blackSpace"></div>
     <div class="changes">
         <h1>Editar Food</h1>
-        <form action="/ListFoods/ModifyFood/{{food.id}}?id={{nutritionId}}" method="post">
+        <form action="/ListFoods/ModifyFood/{{food.id}}?nutritionId={{nutritionId}}" method="post">
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" value="{{food.name}}" required><br><br>
         <label for="type">Tipo:</label>

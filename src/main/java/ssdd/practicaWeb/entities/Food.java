@@ -18,7 +18,8 @@ public class Food {
     @JoinTable(
             name = "food_nutrition",
             joinColumns = @JoinColumn(name = "food_id"),
-            inverseJoinColumns = @JoinColumn(name = "nutrition_id")
+            inverseJoinColumns = @JoinColumn(name = "nutrition_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"food_id", "nutrition_id"})
     )
     private List<Nutrition> listNutritions;
 

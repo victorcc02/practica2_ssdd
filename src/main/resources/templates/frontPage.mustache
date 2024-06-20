@@ -10,8 +10,8 @@
         <h2 class="logo"></h2>
         <ul>
             <a href="/users/{{user.id}}"><li>USUARIO</li></a>
-            <a href="/routines?id={{user.id}}"><li>RUTINA</li></a>
-            <a href="/Nutrition?id={{user.id}}"><li>NUTRICION</li></a>
+            <a href="/routines?userId={{user.id}}"><li>RUTINA</li></a>
+            <a href="/Nutrition?userId={{user.id}}"><li>NUTRICION</li></a>
             <a href="/Login"><li>SALIR</li></a>
         </ul>
     </nav>
@@ -36,11 +36,11 @@
         <p>Configura tu perfil</p>
     </div>
     <div class="card" style="color: #d63031;background: white">
-        <li><a href="/routines?id={{user.id}}" style="color: #d63031"><h2>RUTINA</h2></li></a>
+        <li><a href="/routines?userId={{user.id}}" style="color: #d63031"><h2>RUTINA</h2></li></a>
         <p>Añade ejercicios a tu medida</p>
     </div>
     <div class="card" style="color: white;background: #d63031">
-        <li><a href="/Nutrition?id={{user.id}}" style="color: white"><h2>NUTRICION</h2></li></a>
+        <li><a href="/Nutrition?userId={{user.id}}" style="color: white"><h2>NUTRICION</h2></li></a>
         <p>Una buena alimentacion te ayudara</p>
     </div>
 </div>

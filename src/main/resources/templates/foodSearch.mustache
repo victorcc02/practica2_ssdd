@@ -24,7 +24,7 @@
         <ul id="myMenu">
             {{#food}}
                 <li>
-                    <a href="/ListFoods/detailsFood/{{this.id}}?id={{nutrition.id}}">{{this.name}}</a>
+                    <a href="/ListFoods/detailsFood/{{this.id}}?nutritionId={{nutrition.id}}">{{this.name}}</a>
                 </li>
             {{/food}}
         </ul>
@@ -44,8 +44,8 @@
         </ul>
         <br><br>
         <div>
-            <a href="/ListFoods/CreateFood?userId={{userId}}" class="button buttonBlue">Crear alimento</a>
-            <a href="/ListNutrition?id={{userId}}" class="button buttonBlue">Terminar nutricion</a>
+            <a href="/ListFoods/CreateFood?nutritionId={{nutritionId}}" class="button buttonBlue">Crear alimento</a>
+            <a href="/ListNutrition?userId={{userId}}" class="button buttonBlue">Terminar nutricion</a>
         </div>
     </div>
 </div>

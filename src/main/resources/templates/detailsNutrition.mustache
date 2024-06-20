@@ -7,7 +7,7 @@
         function deleteNutrition(){
             let confirmation = confirm('¿Estás seguro de querer eliminar esta nutricion?');
             if(confirmation){
-                window.location.href = "/ListNutrition/DeleteNutrition/{{nutrition.id}}?id={{userId}}";
+                window.location.href = "/ListNutrition/DeleteNutrition/{{nutrition.id}}?userId={{userId}}";
             }
         }
     </script>
@@ -17,9 +17,9 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListNutrition/ModifyNutrition/{{nutrition.id}}?id={{userId}}">Editar Nutricion</a>
+            <a href="/ListNutrition/ModifyNutrition/{{nutrition.id}}?userId={{userId}}">Editar Nutricion</a>
             <a onclick="deleteNutrition()">Eliminar Nutricion</a>
-            <a href="/ListNutrition?id={{userId}}">Volver</a>
+            <a href="/ListNutrition?userId={{userId}}">Volver</a>
         </ul>
     </nav>
 </header>
@@ -36,7 +36,7 @@
             {{/nutrition.listFoods}}
         </ul>
         <br><br>
-        <a href="/ListFoods?id={{nutrition.id}}" class="buttonBlue">Editar alimentos</a>
+        <a href="/ListFoods?nutritionId={{nutrition.id}}" class="buttonBlue">Editar alimentos</a>
         <br><br>
     </div>
     <div class="blackSpace"></div>
