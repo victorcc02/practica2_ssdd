@@ -20,14 +20,19 @@ public class LoginController {
     @GetMapping("/Login")
     public String InterfaceLogin(Model model){
         model.addAttribute("user",new GymUser());
+        model.addAttribute("error", "");
         return "login";
     }
     @PostMapping("/Login")
-    public String goFrontPage(GymUser user) {
+    public String goFrontPage(GymUser user, Model model) {
         GymUser optionalGymUser = userService.getGymUser(user.getUsername());
         if(optionalGymUser == null){
             userService.createGymUser(user);
             return "redirect:/FrontPage?userId=" + user.getId();
+        }
+        if(!optionalGymUser.getPassword().equals(user.getPassword())){
+            model.addAttribute("error", "Credenciales invalidos.");
+            return "login";
         }
         return "redirect:/FrontPage?userId=" + optionalGymUser.getId();
     }
