@@ -8,7 +8,6 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
-import ssdd.practicaWeb.repositories.UserRepository;
 
 import java.util.*;
 

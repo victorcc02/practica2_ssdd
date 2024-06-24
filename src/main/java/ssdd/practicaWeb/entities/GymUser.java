@@ -22,6 +22,7 @@ public class GymUser {
     private Long id;
     @Column(length = 1500000)
     private String userImage;
+    @Column(unique = true)
     private String username;
     private String password;
     private double weight;//Kg

@@ -2,12 +2,16 @@ package ssdd.practicaWeb.entities;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Setter
+@Getter
 @Entity
 public class Nutrition {
     @Id
@@ -18,7 +22,6 @@ public class Nutrition {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private GymUser gymUser;
-
     @ManyToMany(mappedBy = "listNutritions", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Food> listFoods;
 
@@ -40,43 +43,4 @@ public class Nutrition {
         this.listFoods = foods;
     }
 
-    public GymUser getGymUser() {
-        return gymUser;
-    }
-
-    public void setGymUser(GymUser gymUser) {
-        this.gymUser = gymUser;
-    }
-
-    public List<Food> getListFoods() {
-        return listFoods;
-    }
-
-    public void setListFoods(List<Food> listFoods) {
-        this.listFoods = listFoods;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

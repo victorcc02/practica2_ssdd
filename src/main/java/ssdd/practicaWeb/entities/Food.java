@@ -24,8 +24,16 @@ public class Food {
     private List<Nutrition> listNutritions;
 
     public Food(String name, String type, int calories) {
-        this.name = name;
-        this.type = type;
+        if(name == null){
+            this.name = "not specified";
+        }else{
+            this.name = name;
+        }
+        if(type == null){
+            this.type = "not specified";
+        }else{
+            this.type = type;
+        }
         this.calories = calories;
     }
 
