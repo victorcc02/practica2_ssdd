@@ -38,8 +38,16 @@ public class Nutrition {
     }
 
     public Nutrition(String name , String type, List<Food> foods) {
-        this.name = name;
-        this.type = type;
+        if(name != null){
+            this.name = name;
+        }else{
+            this.name = "Not specified";
+        }
+        if(type != null){
+            this.type = type;
+        }else{
+            this.type = "Not specified";
+        }
         this.listFoods = foods;
     }
 

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.FoodDTO;
+import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.service.FoodService;
+import ssdd.practicaWeb.service.NutritionService;
 
 import java.util.ArrayList;
 import java.util.Collection;

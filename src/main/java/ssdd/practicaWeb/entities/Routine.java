@@ -18,11 +18,27 @@ public class Routine {
     private GymUser gymUser;
 
     public Routine(String routineName, String intensity, int duration, String exercises, String goal) {
-        this.routineName = routineName;
-        this.intensity = intensity;
+        if(routineName != null){
+            this.routineName = routineName;
+        }else{
+            this.routineName = "Not specified";
+        }
+        if(intensity != null){
+            this.intensity = intensity;
+        }else{
+            this.intensity = "Not specified";
+        }
         this.duration = duration;
-        this.exercises = exercises;
-        this.goal = goal;
+        if(exercises != null){
+            this.exercises = exercises;
+        }else{
+            this.exercises = "Not specified";
+        }
+        if(goal != null){
+            this.goal = goal;
+        }else{
+            this.goal = "Not specified";
+        }
     }
 
     public Routine() {

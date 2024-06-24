@@ -21,6 +21,15 @@ public class FoodService {
         foodRepository.save(food);
         return food;
     }
+    public Food getFood(String name){
+        Optional<Food> theFood = foodRepository.findByName(name);
+        if (theFood.isPresent()) {
+            Food food = theFood.get();
+            return food;
+        } else {
+            return null;
+        }
+    }
     public Food getFood(Long id){
         Optional<Food> theFood = foodRepository.findById(id);
         if (theFood.isPresent()) {

@@ -6,6 +6,7 @@ import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.repositories.RoutineRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -69,5 +70,21 @@ public class RoutineService {
             return routines.get();
         }
         return null;
+    }
+
+    //Delete from the database all routines that are not in the list
+    public void deleteNotAsociatedRoutines(List<Routine> routines, GymUser user){
+        List<Routine> routinesAsociated = user.getListRoutine();
+        List<Long> routinesToDelete = new ArrayList<>();
+        if(routines != null && routinesAsociated != null){
+            for(Routine routine: routinesAsociated){
+                if(!routines.contains(routine)){
+                    routinesToDelete.add(routine.getId());
+                }
+            }
+            for(Long routineId: routinesToDelete){
+                deleteRoutine(routineId);
+            }
+        }
     }
 }

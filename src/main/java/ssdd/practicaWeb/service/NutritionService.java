@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
 
@@ -29,7 +30,11 @@ public class NutritionService {
             for(Food food: nutrition.getListFoods()){
                 Optional<Food> aux = foodRepository.findByName(food.getName());
                 if(aux.isPresent()){
-                    addFood(newNutrition,aux.get());
+                    if(newNutrition.getListFoods() != null){
+                        if(!newNutrition.getListFoods().contains(aux.get())){
+                            addFood(newNutrition,aux.get());
+                        }
+                    }
                 }else{
                     food = new Food(food.getName(),food.getType(),0);
                     food.setListNutritions(new ArrayList<>());
@@ -126,5 +131,35 @@ public class NutritionService {
             return nutritions.get();
         }
         return null;
+    }
+
+    public void deleteNotAsociatedNutritions(List<Nutrition> nutritions, GymUser user){
+        List<Nutrition> nutritionsAsociated = user.getListNutrition();
+        List<Long> nutritionsToDelete = new ArrayList<>();
+        if(nutritions != null && nutritionsAsociated != null){
+            for(Nutrition nutrition: nutritionsAsociated){
+                if(!nutritions.contains(nutrition)){
+                    nutritionsToDelete.add(nutrition.getId());
+                }
+            }
+            for(Long nutritionId: nutritionsToDelete){
+                deleteNutrition(nutritionId);
+            }
+        }
+    }
+
+    public void deleteNotAsociatedFoods(List<Food> foods, Nutrition nutrition){
+        List<Food> foodsAsociated = nutrition.getListFoods();
+        List<Food> foodsToDelete = new ArrayList<>();
+        if(foods!= null && foodsAsociated != null){
+            for(Food food: foodsAsociated){
+                if(!foods.contains(food)){
+                    foodsToDelete.add(food);
+                }
+            }
+            for(Food f: foodsToDelete){
+                deleteListFood(nutrition, f);
+            }
+        }
     }
 }

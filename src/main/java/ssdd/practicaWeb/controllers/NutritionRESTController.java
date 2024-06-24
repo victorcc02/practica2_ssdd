@@ -4,15 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.entities.NutritionDTO;
+import ssdd.practicaWeb.service.FoodService;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.UserService;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/nutrition")
@@ -22,6 +25,8 @@ public class NutritionRESTController {
     private NutritionService nutritionService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private FoodService foodService;
 
     @PostMapping("/{userId}")
     public ResponseEntity<NutritionDTO> createNutrition(@RequestBody Nutrition nutrition, @PathVariable Long userId) {
@@ -75,6 +80,25 @@ public class NutritionRESTController {
         }
         if (parcialNutrition.getType() != null) {
             existed.setType(parcialNutrition.getType());
+        }
+        if(parcialNutrition.getListFoods() != null){
+            List<Food> foods = new ArrayList<>();
+            for(Food food: parcialNutrition.getListFoods()){
+                Food f = foodService.getFood(food.getName());
+                if(f != null){
+                    if(!existed.getListFoods().contains(f)){
+                        nutritionService.addFood(existed,f);
+                    }
+                    foods.add(f);
+                }else{
+                    food = new Food(food.getName(),food.getType(),0);
+                    food.setListNutritions(new ArrayList<>());
+                    Food newFood = foodService.createFood(food);
+                    foods.add(newFood);
+                    nutritionService.addFood(existed,newFood);
+                }
+            }
+            nutritionService.deleteNotAsociatedFoods(foods, existed);
         }
         nutritionService.updateNutrition(id, existed, user);
         return ResponseEntity.ok(new NutritionDTO(existed));
