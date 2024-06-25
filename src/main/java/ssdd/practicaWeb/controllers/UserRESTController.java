@@ -63,6 +63,10 @@ public class UserRESTController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+        GymUser user = userService.getGymUser(id);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         userService.deleteGymUser(id);
         return ResponseEntity.ok().build();
     }

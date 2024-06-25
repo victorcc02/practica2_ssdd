@@ -31,6 +31,9 @@ public class NutritionRESTController {
     @PostMapping("/{userId}")
     public ResponseEntity<NutritionDTO> createNutrition(@RequestBody Nutrition nutrition, @PathVariable Long userId) {
         GymUser user = userService.getGymUser(userId);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         Nutrition nutritionObt = nutritionService.createNutrition(nutrition,user);
         return ResponseEntity.status(201).body(new NutritionDTO(nutritionObt));
     }
@@ -45,6 +48,10 @@ public class NutritionRESTController {
     }
     @GetMapping("/all/{userId}")
     public ResponseEntity<Collection<NutritionDTO>> allNutritions(@PathVariable Long userId) {
+        GymUser user = userService.getGymUser(userId);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         List<NutritionDTO> list = new ArrayList<>();
         Collection<Nutrition> listNutrition = nutritionService.getAll(userId);
         for(Nutrition nutrition: listNutrition){
@@ -56,6 +63,9 @@ public class NutritionRESTController {
     @PutMapping("/{userId}/{id}")
     public ResponseEntity<NutritionDTO> updateNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition nutrition) {
         GymUser user = userService.getGymUser(userId);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         Nutrition update = nutritionService.updateNutrition(id, nutrition, user);
         if (update == null) {
             return ResponseEntity.notFound().build();
@@ -65,6 +75,10 @@ public class NutritionRESTController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNutrition(@PathVariable Long id) {
+        Nutrition nutrition = nutritionService.getNutrition(id);
+        if(nutrition == null){
+            return ResponseEntity.notFound().build();
+        }
         nutritionService.deleteNutrition(id);
         return ResponseEntity.ok().build();
     }
@@ -72,7 +86,7 @@ public class NutritionRESTController {
     public ResponseEntity<NutritionDTO> updateParcialNutrition(@PathVariable Long id, @PathVariable Long userId, @RequestBody Nutrition parcialNutrition) {
         GymUser user = userService.getGymUser(userId);
         Nutrition existed = nutritionService.getNutrition(id);
-        if (existed == null){
+        if (existed == null || user == null){
             return ResponseEntity.notFound().build();
         }
         if (parcialNutrition.getName() != null) {

@@ -57,6 +57,10 @@ public class FoodRESTController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFood(@PathVariable Long id) {
+        Food food = foodService.getFood(id);
+        if(food == null){
+            return ResponseEntity.notFound().build();
+        }
         foodService.deleteFood(id);
         return ResponseEntity.ok().build();
     }

@@ -49,6 +49,9 @@ public class RoutineRESTController {
     @PutMapping("/{userId}/{id}")
     public ResponseEntity<RoutineDTO> updateRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine routine){
         GymUser user = userService.getGymUser(userId);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         Routine updated = routineService.updateRoutine(id,routine,user);
         if(updated == null){
             return ResponseEntity.notFound().build();
@@ -57,6 +60,10 @@ public class RoutineRESTController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRoutine(@PathVariable Long id){
+        Routine routine = routineService.getRoutine(id);
+        if(routine == null){
+            return ResponseEntity.notFound().build();
+        }
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
     }
@@ -64,7 +71,7 @@ public class RoutineRESTController {
     public ResponseEntity<RoutineDTO> patchRoutine(@PathVariable Long id, @PathVariable Long userId, @RequestBody Routine parcialRoutine){
         GymUser user = userService.getGymUser(userId);
         Routine routine = routineService.getRoutine(id);
-        if (routine == null){
+        if (routine == null || user == null){
             return ResponseEntity.notFound().build();
         }
         if (parcialRoutine.getRoutineName() != null) {
