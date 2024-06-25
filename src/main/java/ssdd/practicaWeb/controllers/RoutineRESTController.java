@@ -32,6 +32,9 @@ public class RoutineRESTController {
     @PostMapping("/{userId}")
     public ResponseEntity<RoutineDTO> createRoutine(@RequestBody Routine routine , @PathVariable Long userId){
         GymUser user = userService.getGymUser(userId);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
         Routine routineObt = routineService.createRoutine(routine,user);
         return ResponseEntity.status(201).body(new RoutineDTO(routineObt));
     }
