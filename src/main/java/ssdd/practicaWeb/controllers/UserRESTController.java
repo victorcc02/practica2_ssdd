@@ -44,21 +44,21 @@ public class UserRESTController {
     @GetMapping("/{id}")
     public ResponseEntity<GymUserDTO> getUser(@PathVariable Long id){
         GymUser user = userService.getGymUser(id);
-        List<Routine> routines = routineService.getRoutinesUser(user);
-        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         if(user == null){
             return ResponseEntity.notFound().build();
         }
+        List<Routine> routines = routineService.getRoutinesUser(user);
+        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         return ResponseEntity.ok(new GymUserDTO(user,nutritions,routines));
     }
     @PutMapping("/{id}")
     public ResponseEntity<GymUserDTO> updateUser(@PathVariable Long id, @RequestBody GymUser user){
         GymUser updated = userService.updateGymUser(id,user);
-        List<Routine> routines = routineService.getRoutinesUser(user);
-        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
+        List<Routine> routines = routineService.getRoutinesUser(user);
+        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
         return ResponseEntity.ok(new GymUserDTO(updated,nutritions,routines));
     }
     @DeleteMapping("/{id}")
@@ -115,10 +115,8 @@ public class UserRESTController {
                    if(r.getGymUser().getId() == user.getId()){
                        newRoutines.add(r);
                    }
-                }else{//Routine creation
-                    Routine newRoutine = new Routine(routine.getRoutineName(), routine.getIntensity(), routine.getDuration(), routine.getExercises(), routine.getGoal());
-                    Routine created = routineService.createRoutine(newRoutine, user);
-                    newRoutines.add(created);
+                }else{//Error not found
+                    return ResponseEntity.notFound().build();
                 }
             }
             routineService.deleteNotAsociatedRoutines(newRoutines, user);
@@ -132,10 +130,8 @@ public class UserRESTController {
                     if(n.getGymUser().getId() == user.getId()){
                         newNutritions.add(n);
                     }
-                }else{//Nutrition creation
-                    Nutrition newNutrition = new Nutrition(nutrition.getName(), nutrition.getType(), nutrition.getListFoods());
-                    Nutrition created = nutritionService.createNutrition(newNutrition, user);
-                    newNutritions.add(created);
+                }else{//Error not found
+                    return ResponseEntity.notFound().build();
                 }
             }
             nutritionService.deleteNotAsociatedNutritions(newNutritions, user);

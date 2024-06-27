@@ -104,12 +104,8 @@ public class NutritionRESTController {
                         nutritionService.addFood(existed,f);
                     }
                     foods.add(f);
-                }else{
-                    food = new Food(food.getName(),food.getType(),0);
-                    food.setListNutritions(new ArrayList<>());
-                    Food newFood = foodService.createFood(food);
-                    foods.add(newFood);
-                    nutritionService.addFood(existed,newFood);
+                }else{//Error not found
+                    return ResponseEntity.notFound().build();
                 }
             }
             nutritionService.deleteNotAsociatedFoods(foods, existed);
