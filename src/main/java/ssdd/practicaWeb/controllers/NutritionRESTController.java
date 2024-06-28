@@ -35,6 +35,9 @@ public class NutritionRESTController {
             return ResponseEntity.notFound().build();
         }
         Nutrition nutritionObt = nutritionService.createNutrition(nutrition,user);
+        if(nutritionObt == null){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.status(201).body(new NutritionDTO(nutritionObt));
     }
 

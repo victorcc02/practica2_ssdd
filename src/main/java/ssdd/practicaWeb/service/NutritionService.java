@@ -36,10 +36,7 @@ public class NutritionService {
                         }
                     }
                 }else{
-                    food = new Food(food.getName(),food.getType(),0);
-                    food.setListNutritions(new ArrayList<>());
-                    Food newFood = foodService.createFood(food);
-                    addFood(newNutrition,newFood);
+                    return null;
                 }
             }
         }
