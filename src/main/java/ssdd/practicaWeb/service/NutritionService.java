@@ -29,14 +29,18 @@ public class NutritionService {
         if(nutrition.getListFoods() != null){
             for(Food food: nutrition.getListFoods()){
                 Optional<Food> aux = foodRepository.findByName(food.getName());
+                if(aux.isEmpty()){
+                    return null;
+                }
+            }
+            for(Food food: nutrition.getListFoods()){
+                Optional<Food> aux = foodRepository.findByName(food.getName());
                 if(aux.isPresent()){
                     if(newNutrition.getListFoods() != null){
                         if(!newNutrition.getListFoods().contains(aux.get())){
                             addFood(newNutrition,aux.get());
                         }
                     }
-                }else{
-                    return null;
                 }
             }
         }
@@ -66,12 +70,38 @@ public class NutritionService {
     public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user) {
         Optional<Nutrition> theNutrition = nutritionRepository.findById(nutritionId);
         if(theNutrition.isPresent()) {
+            resetListFood(theNutrition.get());
             nutrition.setGymUser(user);
             nutrition.setId(nutritionId);
+            List<Food> list = nutrition.getListFoods();
+            for(Food food: list){
+                Food f = foodService.getFood(food.getName());
+                if(f == null){
+                    return null;
+                }
+            }
+            nutrition.setListFoods(new ArrayList<>());
+            for(Food food: list){
+                Food f = foodService.getFood(food.getName());
+                if(!nutrition.getListFoods().contains(f)){
+                    addFood(nutrition, f);
+                }
+            }
             nutritionRepository.save(nutrition);
             return nutrition;
         }
         return null;
+    }
+
+    private void resetListFood(Nutrition nutrition){
+        if(nutrition.getListFoods() != null){
+            List<Food> list = nutrition.getListFoods();
+            List<Food> tempList = new ArrayList<>(list);
+            for (Food food : tempList) {
+                deleteListFood(nutrition, food);
+            }
+            list.clear();
+        }
     }
 
     public Nutrition deleteNutrition(Long id) {
@@ -100,7 +130,7 @@ public class NutritionService {
     public void addFood (Nutrition nutrition, Food food){
         Optional<Food> optionalFood = foodRepository.findByName(food.getName());
         if(optionalFood.isEmpty()){
-            food = new Food(food.getName(),null,0);
+            food = new Food(food.getName(),"Not specified",0);
             food.setListNutritions(new ArrayList<>());
         }
         nutrition.getListFoods().add(food);
