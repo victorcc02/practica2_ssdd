@@ -97,31 +97,8 @@ public class NutritionRESTController {
         if (parcialNutrition.getType() != null) {
             existed.setType(parcialNutrition.getType());
         }
-        if(parcialNutrition.getListFoods() != null){
-            if(!existenceVerification(parcialNutrition.getListFoods())){
-                return ResponseEntity.notFound().build();
-            }
-            List<Food> foods = new ArrayList<>();
-            for(Food food: parcialNutrition.getListFoods()){
-                Food f = foodService.getFood(food.getName());
-                if(!existed.getListFoods().contains(f)){
-                    nutritionService.addFood(existed,f);
-                }
-                foods.add(f);
-            }
-            nutritionService.deleteNotAsociatedFoods(foods, existed);
-        }
         nutritionService.updateNutrition(id, existed, user);
         return ResponseEntity.ok(new NutritionDTO(existed));
     }
 
-    private boolean existenceVerification(List<Food> foods){
-        for(Food food: foods){
-            Food f = foodService.getFood(food.getName());
-            if(f == null){
-                return false;
-            }
-        }
-        return true;
-    }
 }

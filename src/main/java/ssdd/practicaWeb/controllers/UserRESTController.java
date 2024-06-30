@@ -35,35 +35,6 @@ public class UserRESTController {
     @PostMapping
     public ResponseEntity<GymUserDTO> createUser(@RequestBody GymUser user){
         GymUser userObt = userService.createGymUser(user);
-        if(user.getListRoutine() != null){
-            if(!routineExistenceVerification(user.getListRoutine())){
-                return ResponseEntity.notFound().build();
-            }
-            List<Routine> newRoutines = new ArrayList<>();
-            for(Routine routine: user.getListRoutine()){
-                Routine r = routineService.getRoutine(routine.getId());
-                //Routine could be owned by other users
-                if(r.getGymUser().getId() == user.getId()){
-                    newRoutines.add(r);
-                }
-            }
-            routineService.deleteNotAsociatedRoutines(newRoutines, userObt);
-            userObt.setListRoutine(newRoutines);
-        }
-        if(user.getListNutrition() != null){
-            if(!nutritionExistenceVerification(user.getListNutrition())){
-                return ResponseEntity.notFound().build();
-            }
-            List<Nutrition> newNutritions = new ArrayList<>();
-            for(Nutrition nutrition: user.getListNutrition()){
-                Nutrition n = nutritionService.getNutrition(nutrition.getId());
-                if(n.getGymUser().getId() == user.getId()){
-                    newNutritions.add(n);
-                }
-            }
-            nutritionService.deleteNotAsociatedNutritions(newNutritions, userObt);
-            userObt.setListNutrition(newNutritions);
-        }
         return ResponseEntity.status(201).body(new GymUserDTO(userObt));
     }
     @GetMapping("/{id}")
