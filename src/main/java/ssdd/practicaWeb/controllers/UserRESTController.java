@@ -109,7 +109,7 @@ public class UserRESTController {
             List<Routine> newRoutines = new ArrayList<>();
             for(Routine routine: parcialUser.getListRoutine()){
                 Routine r = routineService.getRoutine(routine.getId());
-                //Routine could be owned by other users
+                //Routine can't be owned by other users
                 if(r.getGymUser().getId() == user.getId()){
                     newRoutines.add(r);
                 }

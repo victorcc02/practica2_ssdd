@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
+import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.repositories.NutritionRepository;
 
@@ -94,12 +95,11 @@ public class NutritionService {
 
     private void resetListFood(Nutrition nutrition){
         if(nutrition.getListFoods() != null){
-            List<Food> list = nutrition.getListFoods();
-            List<Food> tempList = new ArrayList<>(list);
-            for (Food food : tempList) {
+            List<Food> list = new ArrayList<>(nutrition.getListFoods());
+            for (Food food : list) {
                 deleteListFood(nutrition, food);
             }
-            list.clear();
+            nutrition.getListFoods().clear();
         }
     }
 
@@ -187,5 +187,16 @@ public class NutritionService {
                 deleteListFood(nutrition, f);
             }
         }
+    }
+
+    public Nutrition save(Long nutritionId, Nutrition nutrition, GymUser user){
+        Optional<Nutrition> optionalNutrition = nutritionRepository.findById(nutritionId);
+        if(optionalNutrition.isPresent()) {
+            nutrition.setId(nutritionId);
+            nutrition.setGymUser(user);
+            nutritionRepository.save(nutrition);
+            return nutrition;
+        }
+        return null;
     }
 }

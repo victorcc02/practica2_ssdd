@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ssdd.practicaWeb.entities.Food;
-import ssdd.practicaWeb.entities.GymUser;
-import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.NutritionDTO;
+import ssdd.practicaWeb.entities.*;
 import ssdd.practicaWeb.service.FoodService;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.UserService;
@@ -91,17 +88,21 @@ public class NutritionRESTController {
         if (existed == null || user == null){
             return ResponseEntity.notFound().build();
         }
+        String typeCopy = existed.getType();
+        String nameCopy = existed.getName();
+        Nutrition updated = nutritionService.updateNutrition(id, parcialNutrition, user);
         if (parcialNutrition.getName() != null) {
-            existed.setName(parcialNutrition.getName());
+            updated.setName(parcialNutrition.getName());
+        }else{
+            updated.setName(nameCopy);
         }
         if (parcialNutrition.getType() != null) {
-            existed.setType(parcialNutrition.getType());
+            updated.setType(parcialNutrition.getType());
+        }else{
+            updated.setType(typeCopy);
         }
-        if(parcialNutrition.getListFoods() != null){
-            existed.setListFoods(parcialNutrition.getListFoods());
-        }
-        nutritionService.updateNutrition(id, existed, user);
-        return ResponseEntity.ok(new NutritionDTO(existed));
+        nutritionService.save(id, updated, user);
+        return ResponseEntity.ok(new NutritionDTO(updated));
     }
 
 }
