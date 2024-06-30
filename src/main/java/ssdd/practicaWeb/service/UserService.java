@@ -2,17 +2,9 @@ package ssdd.practicaWeb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
-
-import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.Routine;
-import ssdd.practicaWeb.repositories.FoodRepository;
-import ssdd.practicaWeb.repositories.NutritionRepository;
-import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.repositories.UserRepository;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -20,12 +12,6 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoutineRepository routineRepository;
-    @Autowired
-    private NutritionRepository nutritionRepository;
-    @Autowired
-    private FoodRepository foodRepository;
 
     public GymUser createGymUser(GymUser gymUser){
         userRepository.save(gymUser);

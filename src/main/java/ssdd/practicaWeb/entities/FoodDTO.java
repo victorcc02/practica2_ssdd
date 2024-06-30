@@ -1,6 +1,5 @@
 package ssdd.practicaWeb.entities;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 

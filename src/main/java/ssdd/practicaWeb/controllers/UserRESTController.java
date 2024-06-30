@@ -1,11 +1,9 @@
 package ssdd.practicaWeb.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssdd.practicaWeb.entities.*;
-import ssdd.practicaWeb.service.FoodService;
 import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
@@ -23,8 +21,6 @@ public class UserRESTController {
     private RoutineService routineService;
     @Autowired
     private NutritionService nutritionService;
-    @Autowired
-    private FoodService foodService;
     @GetMapping
     public ResponseEntity<Collection<GymUserDTO>> getAllUsers(){
         List<GymUserDTO> list = new ArrayList<>();
@@ -39,6 +35,35 @@ public class UserRESTController {
     @PostMapping
     public ResponseEntity<GymUserDTO> createUser(@RequestBody GymUser user){
         GymUser userObt = userService.createGymUser(user);
+        if(user.getListRoutine() != null){
+            if(!routineExistenceVerification(user.getListRoutine())){
+                return ResponseEntity.notFound().build();
+            }
+            List<Routine> newRoutines = new ArrayList<>();
+            for(Routine routine: user.getListRoutine()){
+                Routine r = routineService.getRoutine(routine.getId());
+                //Routine could be owned by other users
+                if(r.getGymUser().getId() == user.getId()){
+                    newRoutines.add(r);
+                }
+            }
+            routineService.deleteNotAsociatedRoutines(newRoutines, userObt);
+            userObt.setListRoutine(newRoutines);
+        }
+        if(user.getListNutrition() != null){
+            if(!nutritionExistenceVerification(user.getListNutrition())){
+                return ResponseEntity.notFound().build();
+            }
+            List<Nutrition> newNutritions = new ArrayList<>();
+            for(Nutrition nutrition: user.getListNutrition()){
+                Nutrition n = nutritionService.getNutrition(nutrition.getId());
+                if(n.getGymUser().getId() == user.getId()){
+                    newNutritions.add(n);
+                }
+            }
+            nutritionService.deleteNotAsociatedNutritions(newNutritions, userObt);
+            userObt.setListNutrition(newNutritions);
+        }
         return ResponseEntity.status(201).body(new GymUserDTO(userObt));
     }
     @GetMapping("/{id}")
@@ -107,31 +132,29 @@ public class UserRESTController {
             user.setCaloricPhase(parcialUser.getCaloricPhase());
         }
         if(parcialUser.getListRoutine() != null){
+            if(!routineExistenceVerification(parcialUser.getListRoutine())){
+                return ResponseEntity.notFound().build();
+            }
             List<Routine> newRoutines = new ArrayList<>();
             for(Routine routine: parcialUser.getListRoutine()){
                 Routine r = routineService.getRoutine(routine.getId());
-                if(r != null){
-                    //Routine's owner has to be the obtained user
-                   if(r.getGymUser().getId() == user.getId()){
-                       newRoutines.add(r);
-                   }
-                }else{//Error not found
-                    return ResponseEntity.notFound().build();
+                //Routine could be owned by other users
+                if(r.getGymUser().getId() == user.getId()){
+                    newRoutines.add(r);
                 }
             }
             routineService.deleteNotAsociatedRoutines(newRoutines, user);
             user.setListRoutine(newRoutines);
         }
         if(parcialUser.getListNutrition() != null){
+            if(!nutritionExistenceVerification(parcialUser.getListNutrition())){
+                return ResponseEntity.notFound().build();
+            }
             List<Nutrition> newNutritions = new ArrayList<>();
             for(Nutrition nutrition: parcialUser.getListNutrition()){
                 Nutrition n = nutritionService.getNutrition(nutrition.getId());
-                if(n != null){
-                    if(n.getGymUser().getId() == user.getId()){
-                        newNutritions.add(n);
-                    }
-                }else{//Error not found
-                    return ResponseEntity.notFound().build();
+                if(n.getGymUser().getId() == user.getId()){
+                    newNutritions.add(n);
                 }
             }
             nutritionService.deleteNotAsociatedNutritions(newNutritions, user);
@@ -139,5 +162,25 @@ public class UserRESTController {
         }
         userService.updateGymUser(id,user);
         return ResponseEntity.ok(new GymUserDTO(user));
+    }
+
+    private boolean routineExistenceVerification(List<Routine> routines){
+        for(Routine routine: routines){
+            Routine r = routineService.getRoutine(routine.getId());
+            if(r == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean nutritionExistenceVerification(List<Nutrition> nutritions){
+        for(Nutrition nutrition: nutritions){
+            Nutrition n = nutritionService.getNutrition(nutrition.getId());
+            if(n == null){
+                return false;
+            }
+        }
+        return true;
     }
 }

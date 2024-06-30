@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.practicaWeb.entities.Food;
-import ssdd.practicaWeb.repositories.FoodRepository;
 import ssdd.practicaWeb.service.FoodService;
-import ssdd.practicaWeb.service.UserService;
 
 
 @Controller
@@ -19,10 +17,6 @@ public class FoodController {
 
     @Autowired
     private FoodService foodService;
-    @Autowired
-    private FoodRepository foodRepository;
-    @Autowired
-    private UserService userService;
 
     @PostConstruct
     public void foodConstructor(){

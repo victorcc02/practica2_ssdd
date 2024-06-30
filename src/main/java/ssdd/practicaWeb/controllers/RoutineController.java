@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.entities.GymUser;
-import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
 
@@ -19,9 +18,6 @@ public class RoutineController {
     private RoutineService routineService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoutineRepository routineRepository;
-
 
     @GetMapping("/routines")
     public String showAllRoutines(Model model, @RequestParam("userId") Long userId){

@@ -15,7 +15,6 @@ import ssdd.practicaWeb.service.UserService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/nutrition")
@@ -99,21 +98,30 @@ public class NutritionRESTController {
             existed.setType(parcialNutrition.getType());
         }
         if(parcialNutrition.getListFoods() != null){
+            if(!existenceVerification(parcialNutrition.getListFoods())){
+                return ResponseEntity.notFound().build();
+            }
             List<Food> foods = new ArrayList<>();
             for(Food food: parcialNutrition.getListFoods()){
                 Food f = foodService.getFood(food.getName());
-                if(f != null){
-                    if(!existed.getListFoods().contains(f)){
-                        nutritionService.addFood(existed,f);
-                    }
-                    foods.add(f);
-                }else{//Error not found
-                    return ResponseEntity.notFound().build();
+                if(!existed.getListFoods().contains(f)){
+                    nutritionService.addFood(existed,f);
                 }
+                foods.add(f);
             }
             nutritionService.deleteNotAsociatedFoods(foods, existed);
         }
         nutritionService.updateNutrition(id, existed, user);
         return ResponseEntity.ok(new NutritionDTO(existed));
+    }
+
+    private boolean existenceVerification(List<Food> foods){
+        for(Food food: foods){
+            Food f = foodService.getFood(food.getName());
+            if(f == null){
+                return false;
+            }
+        }
+        return true;
     }
 }
