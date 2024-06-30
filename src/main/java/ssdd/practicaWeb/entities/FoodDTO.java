@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,9 +44,13 @@ public class FoodDTO {
         this.setCalories(food.getCalories());
         this.setType(food.getType());
         List<NutritionView> list = new ArrayList<>();
+        Set<Nutrition> repeatedNutritions = new HashSet<>();
         if(food.getListNutritions() != null){
             for(Nutrition nutrition: food.getListNutritions()){
-                list.add(new NutritionView(nutrition));
+                if(!repeatedNutritions.contains(nutrition)){
+                    repeatedNutritions.add(nutrition);
+                    list.add(new NutritionView(nutrition));
+                }
             }
         }
         this.setListNutritions(list);

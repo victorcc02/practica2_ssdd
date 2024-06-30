@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -72,16 +74,24 @@ public class GymUserDTO {
         this.setMorphology(user.getMorphology());
         this.setCaloricPhase(user.getCaloricPhase());
         List<RoutineView> listRoutine = new ArrayList<>();
+        Set<Routine> repeatedRoutines = new HashSet<>();
         if(user.getListRoutine() != null){
-            for(Routine routine: user.getListRoutine()){
-                listRoutine.add(new RoutineView(routine));
+            for(Routine routine: user.getListRoutine()) {
+                if(!repeatedRoutines.contains(routine)){
+                    repeatedRoutines.add(routine);
+                    listRoutine.add(new RoutineView(routine));
+                }
             }
         }
         this.setListRoutine(listRoutine);
         List<NutritionView> listNutrition = new ArrayList<>();
+        Set<Nutrition> repeatedNutritions = new HashSet<>();
         if(user.getListNutrition() != null){
             for(Nutrition nutrition: user.getListNutrition()){
-                listNutrition.add(new NutritionView(nutrition));
+                if(!repeatedNutritions.contains(nutrition)){
+                    repeatedNutritions.add(nutrition);
+                    listNutrition.add(new NutritionView(nutrition));
+                }
             }
         }
         this.setListNutrition(listNutrition);
@@ -101,16 +111,24 @@ public class GymUserDTO {
         this.setMorphology(user.getMorphology());
         this.setCaloricPhase(user.getCaloricPhase());
         List<RoutineView> listRoutine = new ArrayList<>();
+        Set<Routine> repeatedRoutines = new HashSet<>();
         if(routines != null){
             for(Routine routine: routines){
-                listRoutine.add(new RoutineView(routine));
+                if(!repeatedRoutines.contains(routine)){
+                    repeatedRoutines.add(routine);
+                    listRoutine.add(new RoutineView(routine));
+                }
             }
         }
         this.setListRoutine(listRoutine);
         List<NutritionView> listNutrition = new ArrayList<>();
+        Set<Nutrition> repeatedNutritions = new HashSet<>();
         if(nutritions != null){
             for(Nutrition nutrition: nutritions){
-                listNutrition.add(new NutritionView(nutrition));
+                if(!repeatedNutritions.contains(nutrition)){
+                    repeatedNutritions.add(nutrition);
+                    listNutrition.add(new NutritionView(nutrition));
+                }
             }
         }
         this.setListNutrition(listNutrition);

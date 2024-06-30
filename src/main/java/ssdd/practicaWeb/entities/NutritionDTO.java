@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 public class NutritionDTO {
@@ -39,9 +42,13 @@ public class NutritionDTO {
         this.setName(nutrition.getName());
         this.setType(nutrition.getType());
         List<FoodView> list = new ArrayList<>();
+        Set<Food> repeatedFoods = new HashSet<>();
         if(nutrition.getListFoods() != null){
             for(Food food: nutrition.getListFoods()){
-                list.add(new FoodView(food));
+                if(!repeatedFoods.contains(food)){
+                    repeatedFoods.add(food);
+                    list.add(new FoodView(food));
+                }
             }
         }
         this.setListFoods(list);
