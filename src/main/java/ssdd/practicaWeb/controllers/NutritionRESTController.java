@@ -97,6 +97,9 @@ public class NutritionRESTController {
         if (parcialNutrition.getType() != null) {
             existed.setType(parcialNutrition.getType());
         }
+        if(parcialNutrition.getListFoods() != null){
+            existed.setListFoods(parcialNutrition.getListFoods());
+        }
         nutritionService.updateNutrition(id, existed, user);
         return ResponseEntity.ok(new NutritionDTO(existed));
     }

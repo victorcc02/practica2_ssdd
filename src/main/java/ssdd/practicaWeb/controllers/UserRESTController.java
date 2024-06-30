@@ -53,8 +53,8 @@ public class UserRESTController {
         if(updated == null){
             return ResponseEntity.notFound().build();
         }
-        List<Routine> routines = routineService.getRoutinesUser(user);
-        List<Nutrition> nutritions = nutritionService.getNutritionsUser(user);
+        List<Routine> routines = routineService.getRoutinesUser(updated);
+        List<Nutrition> nutritions = nutritionService.getNutritionsUser(updated);
         return ResponseEntity.ok(new GymUserDTO(updated,nutritions,routines));
     }
     @DeleteMapping("/{id}")
